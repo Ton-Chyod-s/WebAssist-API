@@ -17,9 +17,9 @@ async function scrap(){
     dia = datetime.toISOString().slice(0,10).split('-')[2]
     
     for (let i = 0; i < countries.length; i++) {
-        
+        info = countries[i]['texto'].split(' – ')[1]
+        console.log(info)
     }
-    
 }
  
 scrap();
