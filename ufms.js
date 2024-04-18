@@ -13,7 +13,6 @@ async function scrap(){
     );
     
     ano = datetime.toISOString().slice(0,10).split('-')[0]
-    
     for (let i = 0; i < countries.length; i++) {
         if (i < 5) {
         Semestre = countries[i]['texto'].split(' – ')[1]
