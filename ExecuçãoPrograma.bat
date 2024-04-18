@@ -1,1 +1,1 @@
-python ufms.py
+node ufms.js
