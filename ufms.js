@@ -44,7 +44,6 @@ async function scrap() {
             }
         }
     }
-
     // Envie o e-mail aqui, depois de processar todas as informações.
     main(`${textoSemestre2}\n\n${textoSemestre1}`);
 }
