@@ -1,27 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const nodemailer = require("nodemailer");
-
+const { main } = require('./mandarEmail');
 let texto = "Aguardando..."
-
-const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    auth: {
-        user: "perindevboot@gmail.com",
-        pass: "gxkqsyymnogquthd",
-      },
-    });
-
-async function main(texto) {
-    await transporter.sendMail({
-        from: "perindevboot@gmail.com",
-        to: "hix_x@hotmail.com",
-        subject: "OTT 9º Região Militar",
-        text: texto
-    });
-    console.log('Email enviado!!')
-}
 
 async function scrap() {
     const response = await axios.get("https://9rm.eb.mil.br/index.php/oficial-tecnico-temporario");
@@ -36,7 +16,7 @@ async function scrap() {
             texto = `De uma olhada\n\n${paragrafo}`
         }
     }
-    main(texto)
+    main(`${texto}`,"E-mail enviado com sucesso","OTT 9º Região Militar");
 }
 
 scrap();
