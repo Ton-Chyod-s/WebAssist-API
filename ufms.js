@@ -2,12 +2,6 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const nodemailer = require("nodemailer");
 
-var datetime = new Date();
-const countries = [];
-let textoSemestre1 = ""
-let textoSemestre2 = "Aguardando..."
-
-
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
@@ -56,4 +50,3 @@ async function scrap() {
 }
 
 scrap();
-
