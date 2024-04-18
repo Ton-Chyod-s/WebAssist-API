@@ -1,26 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const nodemailer = require("nodemailer");
-// const { main } = require('./mandarEmail');
-
-const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    auth: {
-        user: "perindevboot@gmail.com",
-        pass: "gxkqsyymnogquthd",
-      },
-    });
-
-async function main(texto) {
-    await transporter.sendMail({
-        from: "perindevboot@gmail.com",
-        to: "hix_x@hotmail.com",
-        subject: "Mov Interna UFMS",
-        text: texto
-    });
-    console.log('Email sobre a movimentação interna foi enviado!!')
-}
+const { main } = require('./mandarEmail');
 
 async function scrap() {
     const response = await axios.get("https://ingresso.ufms.br/publicacao/movimentacao-interna/");
@@ -46,7 +26,7 @@ async function scrap() {
         }
     }
     // Envie o e-mail aqui, depois de processar todas as informações.
-    main(`${textoSemestre2}\n\n${textoSemestre1}`);
+    main(`${textoSemestre2}\n\n${textoSemestre1}`,"E-mail enviado com sucesso","Mov Interna UFMS");
 }
 
 scrap();
