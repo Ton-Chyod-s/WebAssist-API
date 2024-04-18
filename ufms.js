@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
     });
 
 async function main(texto) {
-    const info = await transporter.sendMail({
+    await transporter.sendMail({
         from: "perindevboot@gmail.com",
         to: "hix_x@hotmail.com",
         subject: "Mov Interna UFMS",
