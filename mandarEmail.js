@@ -19,6 +19,6 @@ async function main(texto,imprimirConsole,assunto) {
     console.log(imprimirConsole)
 }
 
-module.exports = main;
+module.exports = { main };
 
 // main("um texto teste", "E-mail foi enviado", "Um email teste");

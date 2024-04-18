@@ -1,6 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const nodemailer = require("nodemailer");
+// const { main } = require('./mandarEmail');
 
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
