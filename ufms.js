@@ -18,7 +18,6 @@ async function scrap(){
     
     for (let i = 0; i < countries.length; i++) {
         
-        
     }
     
 }
