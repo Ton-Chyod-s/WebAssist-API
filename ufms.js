@@ -17,12 +17,16 @@ async function scrap(){
     dia = datetime.toISOString().slice(0,10).split('-')[2]
     
     for (let i = 0; i < countries.length; i++) {
-        lol = countries[i]['texto'].split(' – ')[1]
-        // countSemestre = countries[i]['texto'].split(' – ')[1].split(' ')
-    
-        console.log(lol)
-        
-        
+        if (i < 5) {
+        Semestre = countries[i]['texto'].split(' – ')[1]
+        countSemestre = countries[i]['texto'].split(' – ')[1].split(' ').length
+        if (countSemestre = 4) {
+            semestre = Semestre.split(' ')[0]
+            anoSemestre = Semestre.split(' ')[countSemestre - 1]
+            if (anoSemestre == ano)
+                console.log(countries[i]['texto'])
+        }
+        }
     }
 }
  
