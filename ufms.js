@@ -28,5 +28,5 @@ async function scrap(){
         }
     }
 }
- 
+
 scrap();
