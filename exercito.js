@@ -2,6 +2,8 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const nodemailer = require("nodemailer");
 
+let texto = "Aguardando..."
+
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
@@ -15,7 +17,7 @@ async function main(texto) {
     await transporter.sendMail({
         from: "perindevboot@gmail.com",
         to: "hix_x@hotmail.com",
-        subject: "Mov Interna UFMS",
+        subject: "OTT 9º Região Militar",
         text: texto
     });
     console.log('Email enviado!!')
@@ -27,7 +29,14 @@ async function scrap() {
     const countries = $('p').map((i, item) => ({
         texto: $(item).text().trim()
     })).get();
-    console.log(countries)
+    for (let i = 0; i < countries.length; i++) {
+        const anoAtual = new Date().getFullYear().toString();
+        const paragrafo = countries[i]['texto']
+        if (paragrafo.includes(anoAtual)) {
+            texto = `De uma olhada\n\n${paragrafo}`
+        }
+    }
+    main(texto)
 }
 
 scrap();
