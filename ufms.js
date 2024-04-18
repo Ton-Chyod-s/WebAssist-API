@@ -13,8 +13,6 @@ async function scrap(){
     );
     
     ano = datetime.toISOString().slice(0,10).split('-')[0]
-    mes = datetime.toISOString().slice(0,10).split('-')[1]
-    dia = datetime.toISOString().slice(0,10).split('-')[2]
     
     for (let i = 0; i < countries.length; i++) {
         if (i < 5) {
@@ -23,8 +21,10 @@ async function scrap(){
         if (countSemestre = 4) {
             semestre = Semestre.split(' ')[0]
             anoSemestre = Semestre.split(' ')[countSemestre - 1]
-            if (anoSemestre == ano)
-                console.log(countries[i]['texto'])
+            if (anoSemestre == ano) {
+                textoSemestre = countries[i]['texto']
+                console.log(textoSemestre)
+            }
         }
         }
     }
