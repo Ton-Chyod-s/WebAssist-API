@@ -9,13 +9,16 @@ const transporter = nodemailer.createTransport({
       },
     });
 
-async function main(texto) {
+async function main(texto,imprimirConsole,assunto) {
     await transporter.sendMail({
         from: "perindevboot@gmail.com",
         to: "hix_x@hotmail.com",
-        subject: "Mov Interna UFMS",
+        subject: assunto,
         text: texto
     });
-    console.log('Email sobre a movimentação interna foi enviado!!')
+    console.log(imprimirConsole)
 }
 
+module.exports = main;
+
+// main("um texto teste", "E-mail foi enviado", "Um email teste");
