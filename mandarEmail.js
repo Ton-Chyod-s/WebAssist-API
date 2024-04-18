@@ -19,4 +19,3 @@ async function main(texto) {
     console.log('Email sobre a movimentação interna foi enviado!!')
 }
 
-export { main }
