@@ -48,7 +48,7 @@ async function scrap(){
                 } else if (semestre.includes("2")) {
                     textoSemestre2 = countries[i]['texto']
                 }  
-                main(`${textoSemestre2}\n${textoSemestre1}`)
+                main(`${textoSemestre2}\n\n${textoSemestre1}`)
             }
         }
         }
