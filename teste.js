@@ -9,15 +9,15 @@ const transporter = nodemailer.createTransport({
       },
     });
 
-
-async function main() {
+async function main(texto) {
     const info = await transporter.sendMail({
         from: "perindevboot@gmail.com",
-        to: "arqkdias@gmail.com",
-        subject: "Hello ✔",
-        text: "teste"
+        to: "hix_x@hotmail.com",
+        subject: "Mov Interna UFMS",
+        text: texto
     });
+    console.log('Email enviado!')
 }
 
 
-main()
+main("um texto qualquer")

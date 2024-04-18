@@ -1,8 +1,28 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const nodemailer = require("nodemailer");
 
 var datetime = new Date();
 const countries = [];
+
+const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    auth: {
+        user: "perindevboot@gmail.com",
+        pass: "gxkqsyymnogquthd",
+      },
+    });
+
+async function main(texto) {
+    const info = await transporter.sendMail({
+        from: "perindevboot@gmail.com",
+        to: "hix_x@hotmail.com",
+        subject: "Mov Interna UFMS",
+        text: texto
+    });
+    console.log('Email enviado!')
+}
 
 async function scrap(){
     const response = await axios.get("https://ingresso.ufms.br/publicacao/movimentacao-interna/");
@@ -22,7 +42,7 @@ async function scrap(){
             anoSemestre = Semestre.split(' ')[countSemestre - 1]
             if (anoSemestre == ano) {
                 textoSemestre = countries[i]['texto']
-                console.log(textoSemestre)
+                main(textoSemestre)
             }
         }
         }
