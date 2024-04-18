@@ -1,9 +1,18 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+const countries = [];
+
 async function scrap(){
-    const response = await axios.get("https://ingresso.ufms.br/publicacao/movimentacao-interna-e-reingresso-1o-semestre-de-2024/");
-    console.log(response.data);
+    const response = await axios.get("https://www.scrapethissite.com/pages/simple/");
+    const $ = cheerio.load(response.data);
+    $('.country-name').each(
+        (i, item) => countries.push({name: $(item).text().trim()
+        })
+    );
+    $('.country-capital').each((i, item) => countries[i].capital = $(item).text().trim()
+    );
+    console.log(countries)
 }
  
 scrap();
