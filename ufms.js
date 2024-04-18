@@ -18,7 +18,7 @@ async function main(texto) {
         subject: "Mov Interna UFMS",
         text: texto
     });
-    console.log('Email enviado!!')
+    console.log('Email sobre a movimentação interna foi enviado!!')
 }
 
 async function scrap() {
