@@ -1,7 +1,4 @@
 const puppeteer = require('puppeteer');
-const { main } = require('./mandarEmail');
-
-let documento = "";
 
 (async () => {
   const browser = await puppeteer.launch({
@@ -28,12 +25,18 @@ let documento = "";
     if (element.includes("Klayton")) {
       const data = element.split(' - ')[0].split('\t')[1]
       const DOE = element.split(' - ')[1]
-      documento += `${data}\t${DOE}\n`
-      
+      console.log(`${data}\t${DOE}`) 
     }
   }
-  // Envie o e-mail aqui, depois de processar todas as informações.
-  main(`${documento}`,"E-mail enviado com sucesso!!","Diario Oficial MS");
+    
+  
 
-  await browser.close();
+
+  
+
+  `
+  // Aguardar um pouco
+  await page.waitForTimeout(2000);
+
+  await browser.close();`
 })();
