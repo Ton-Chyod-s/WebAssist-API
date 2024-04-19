@@ -35,7 +35,7 @@ const minuto = new Date().getMinutes().toString();
       documento += `${data}\t${DOE}\n`;
     }
   if (documento === "") {
-    documento += `Não foi encontrado nenhum DOE com seu nome até o dia de hoje\n${dia}/${mes}/${ano} ${hora}:${minuto}`
+    documento += `Não foi encontrado nenhum DOE com seu nome até o dia de hoje.`
   };
   }
   
