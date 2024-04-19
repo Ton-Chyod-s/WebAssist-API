@@ -5,13 +5,14 @@ const puppeteer = require('puppeteer');
     headless: false,
   });
   const page = await browser.newPage();
-  await page.goto('https://www.google.com/');
+  await page.goto('https://www.spdo.ms.gov.br/diariodoe');
 
-    // Preencher um campo
-  await page.type('[class="gLFyf"]', 'lol');
+  // Preencher um campo
+  await page.locator('input').fill('lol');
 
-  // Clicar em um botão
- await page.click('[class="gNO89b"]');
+
+  // await page.locator('input').click();
+  
 
   `
   // Aguardar um pouco
