@@ -5,16 +5,17 @@ const puppeteer = require('puppeteer');
     headless: false,
   });
   const page = await browser.newPage();
-  await page.goto('https://www.google.com.br/');
+  await page.goto('https://www.google.com/');
+
+    // Preencher um campo
+  await page.type('[class="gLFyf"]', 'lol');
 
   // Clicar em um botão
-  await page.click('#meuBotao');
+ await page.click('[class="gNO89b"]');
 
-  // Preencher um campo
-  await page.type('#meuCampo', 'Texto para preencher o campo');
-
+  `
   // Aguardar um pouco
   await page.waitForTimeout(2000);
 
-  await browser.close();
+  await browser.close();`
 })();
