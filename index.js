@@ -10,9 +10,13 @@ async function run() {
     const documentoGeradoUFMS = await UFMS();
     const documentoGeradoExercito = await Exercito();
 
-    const corpoEmail = `
-    Prezado(a),\n\nAqui estão as análises solicitadas:\n\nMovimentação Interna e Reingresso UFMS ${ano}\n${documentoGeradoUFMS}\n\nOficial Técnico Temporário (OTT) - PROCESSO SELETIVO ${ano}\n${documentoGeradoExercito}\n\n${documentoGeradoDOE}\n\nPor favor, mantenha-se informado sobre possíveis atualizações.\n\nAtenciosamente,\nPerinDevBoot~
-    `
+    const corpoEmail = `Prezado(a),\nAqui estão as análises solicitadas:\n\nMovimentação Interna e Reingresso UFMS ${ano}\n
+${documentoGeradoUFMS}\n\n
+Oficial Técnico Temporário (OTT) - PROCESSO SELETIVO ${ano}\n
+${documentoGeradoExercito}\n\n
+${documentoGeradoDOE}\n\n
+Por favor, mantenha-se informado sobre possíveis atualizações.\n\n
+Atenciosamente,\nPerinDevBoot~`
 
     // Envie o e-mail aqui, após o processamento de todas as informações.
     main(corpoEmail, "E-mail enviado com sucesso!!", "Diario Oficial MS", 'hix_x@hotmail.com', true);

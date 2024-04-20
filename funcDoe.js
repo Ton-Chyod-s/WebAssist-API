@@ -30,7 +30,7 @@ async function DOE(nome) {
         documento += `${data}\t${DOE}\n`;
         }
     };
-    head += `<strong>Diário Oficial do Estado de Mato Grosso do Sul</strong>\n\nNome: ${nome}\nAno: ${ano}\n\n`;
+    head += `Diário Oficial do Estado de Mato Grosso do Sul\n\nNome: ${nome}\nAno: ${ano}\n\n`;
     if (documento.length === 0) {
         documento += `${head}Lamento informar que não foram encontrados Diários Oficiais Eletrônicos (DOEs)\nassociados ao seu nome até a presente data.`;
     } else {
