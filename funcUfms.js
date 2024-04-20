@@ -1,6 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { main } = require('./mandarEmail');
+
 
 async function UFMS() {
     const response = await axios.get("https://ingresso.ufms.br/publicacao/movimentacao-interna/");
@@ -25,8 +25,8 @@ async function UFMS() {
             }
         }
     }
-    // Envie o e-mail aqui, depois de processar todas as informações.
-    main(`${textoSemestre2}\n\n${textoSemestre1}`,"E-mail enviado com sucesso!!","Mov Interna UFMS","hix_x@hotmail.com");
+    return `${textoSemestre2}\n\n${textoSemestre1}`
 }
 
-UFMS();
+module.exports = { UFMS };
+
