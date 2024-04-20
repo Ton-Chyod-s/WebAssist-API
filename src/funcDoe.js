@@ -6,7 +6,7 @@ const ano = new Date().getFullYear().toString();
 async function DOE(nome) {
     let head = "";
     let documento = "";
-    
+
     const primeiroNome =  nome.split(' ')[0];
     const browser = await puppeteer.launch({
         // headless: false,
@@ -29,7 +29,7 @@ async function DOE(nome) {
         if (element.includes(ano) && element.includes(primeiroNome)) {
         const data = element.split(' - ')[0].split('\t')[1];
         const DOE = element.split(' - ')[1];
-        documento += `${data}\t${DOE}\n`;
+        documento += `<p>${data}    ${DOE}</p>`;
         }
     };
     head += `<p>Nome: ${nome}   Ano: ${ano}</p>`;

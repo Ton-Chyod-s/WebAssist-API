@@ -14,7 +14,7 @@ async function Exercito() {
         const anoAtual = new Date().getFullYear().toString();
         const paragrafo = countries[i]['texto']
         if (paragrafo.includes(anoAtual)) {
-            texto = `De uma olhada\n\n${paragrafo}`
+            texto = `<h4>Prepare-se e leia atentamente o edital da convocação. Boa sorte, guerreiro!</h4>\n\n${paragrafo}`
         }
     }
     return texto;
