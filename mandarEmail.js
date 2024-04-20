@@ -9,10 +9,10 @@ const transporter = nodemailer.createTransport({
       },
     });
 
-async function main(texto,imprimirConsole,assunto) {
+async function main(texto,imprimirConsole,assunto,para) {
     await transporter.sendMail({
         from: "perindevboot@gmail.com",
-        to: "hix_x@hotmail.com",
+        to: para,
         subject: assunto,
         text: texto
     });

@@ -40,7 +40,7 @@ const minuto = new Date().getMinutes().toString();
   }
   
   // Envie o e-mail aqui, depois de processar todas as informações.
-  main(`${documento}`,"E-mail enviado com sucesso!!","Diario Oficial MS");
+  main(`${documento}`,"E-mail enviado com sucesso!!","Diario Oficial MS","hix_x@hotmail.com");
 
   await browser.close();
 })();

@@ -16,7 +16,7 @@ async function scrap() {
             texto = `De uma olhada\n\n${paragrafo}`
         }
     }
-    main(`${texto}`,"E-mail enviado com sucesso!!","OTT 9º Região Militar");
+    main(`${texto}`,"E-mail enviado com sucesso!!","OTT 9º Região Militar","hix_x@hotmail.com");
 }
 
 scrap();
