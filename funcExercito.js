@@ -1,10 +1,10 @@
 
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { main } = require('./mandarEmail');
+
 let texto = "Aguardando..."
 
-async function scrap() {
+async function Exercito() {
     const response = await axios.get("https://9rm.eb.mil.br/index.php/oficial-tecnico-temporario");
     const $ = cheerio.load(response.data);
     const countries = $('p').map((i, item) => ({
@@ -17,7 +17,7 @@ async function scrap() {
             texto = `De uma olhada\n\n${paragrafo}`
         }
     }
-    main(`${texto}`,"E-mail enviado com sucesso!!","OTT 9º Região Militar","hix_x@hotmail.com");
+    return texto;
 }
 
-scrap();
+module.exports = { Exercito };
