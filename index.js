@@ -5,8 +5,8 @@ const { Exercito } = require('./src/funcExercito');
 
 const ano = new Date().getFullYear().toString();
 
-async function run() {
-    const documentoGeradoDOE = await DOE('Klayton Chrysthian Oliveira Dias');
+async function run(nome,mail) {
+    const documentoGeradoDOE = await DOE(nome);
     const documentoGeradoUFMS = await UFMS();
     const documentoGeradoExercito = await Exercito();
 
@@ -23,7 +23,8 @@ async function run() {
     <p>PerinDevBoot~</p>`
 
     // Envie o e-mail aqui, após o processamento de todas as informações.
-    main(corpoEmail, "E-mail enviado com sucesso!!", "Atualizações - UFMS, OTT e DOE 2024", 'hix_x@hotmail.com', true);
+    main(corpoEmail, `E-mail enviado com sucesso!!`, `Atualizações - UFMS, OTT e DOE ${ano}`, mail, true);
 }
 
-run();
+run("Klayton Chrysthian Oliveira Dias","hix_x@hotmail.com");
+run('Silvianny Aparecida Faria Camilo','silvianny.faria@ufms.br')
