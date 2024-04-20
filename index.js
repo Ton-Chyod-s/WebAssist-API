@@ -9,7 +9,7 @@ async function run(nome,mail,conteudo=true) {
     const documentoGeradoDOE = await DOE(nome);
     const documentoGeradoUFMS = await UFMS();
     const documentoGeradoExercito = await Exercito();
-
+    
     const corpoEmail = `<p><strong>Prezado(a),</strong></p>
     <p>Aqui estão as análises solicitadas:</p>
     ${conteudo ? `
@@ -23,7 +23,6 @@ async function run(nome,mail,conteudo=true) {
     <p>Por favor, mantenha-se informado sobre possíveis atualizações.</p>
     <p>Atenciosamente,</p>
     <p>PerinDevBoot~</p>`
-
     // Envie o e-mail aqui, após o processamento de todas as informações.
     main(corpoEmail, `E-mail enviado com sucesso!!`, `Atualizações - UFMS, OTT e DOE ${ano}`, mail, true);
 }
