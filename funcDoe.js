@@ -1,7 +1,9 @@
 const puppeteer = require('puppeteer');
 const { main } = require('./mandarEmail');
 
+let head = "";
 let documento = "";
+const ano = new Date().getFullYear().toString();
 
 async  function DOE(nome) {
     const primeiroNome =  nome.split(' ')[0];
@@ -30,17 +32,21 @@ async  function DOE(nome) {
         const DOE = element.split(' - ')[1];
         documento += `${data}\t${DOE}\n`;
         }
-    if (documento === "") {
-        documento += `Não foi encontrado nenhum DOE com seu nome até o dia de hoje.`
     };
+    if (documento.length === 0) {
+        documento += `Lamentamos informar que não foram encontrados Diários Oficiais Eletrônicos (DOEs)\nassociados ao seu nome até a presente data.`;
+    } else {
+        head += `Diário Oficial do Estado de Mato Grosso do Sul\n\nNome: ${nome}\nAno: ${ano}\n\n`;
+        documento = head + documento;
     }
     await browser.close();
+    return documento;
 }
 
 async function run() {
-    await DOE('Silvianny Aparecida Faria Camilo');
+    await DOE('Klayton Chrysthian Oliveira Dias');
     // Envie o e-mail aqui, após o processamento de todas as informações.
-    main(`${documento}`, "E-mail enviado com sucesso!!", "Diario Oficial MS", 'Silviannyfaria@gmail.com');
+    main(`${documento}`, "E-mail enviado com sucesso!!", "Diario Oficial MS", 'hix_x@hotmail.com');
 }
 
 run();
