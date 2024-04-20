@@ -1,0 +1,25 @@
+{
+  "name": "assistente_webscraping",
+  "description": "WebScraping-NodeJS",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "axios": "^1.6.8",
+    "cheerio": "^1.0.0-rc.12",
+    "nodemailer": "^6.9.13",
+    "puppeteer": "^22.6.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ton-Chyod-s/WebScraping-NodeJS.git"
+  },
+  "author": "DevTon-Chyod-s",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ton-Chyod-s/WebScraping-NodeJS/issues"
+  },
+  "homepage": "https://github.com/Ton-Chyod-s/WebScraping-NodeJS#readme"
+}
