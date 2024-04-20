@@ -1,5 +1,3 @@
-
-node_modules/.package-lock.json
 node_modules/asynckit/bench.js
 node_modules/asynckit/index.js
 node_modules/asynckit/lib/abort.js
