@@ -31,10 +31,10 @@ async function DOE(nome) {
         documento += `${data}\t${DOE}\n`;
         }
     };
+    head += `<strong>Diário Oficial do Estado de Mato Grosso do Sul</strong>\n\nNome: ${nome}\nAno: ${ano}\n\n`;
     if (documento.length === 0) {
-        documento += `Lamentamos informar que não foram encontrados Diários Oficiais Eletrônicos (DOEs)\nassociados ao seu nome até a presente data.`;
+        documento += `${head}Lamento informar que não foram encontrados Diários Oficiais Eletrônicos (DOEs)\nassociados ao seu nome até a presente data.`;
     } else {
-        head += `Diário Oficial do Estado de Mato Grosso do Sul\n\nNome: ${nome}\nAno: ${ano}\n\n`;
         documento = head + documento;
     }
     await browser.close();
@@ -43,8 +43,18 @@ async function DOE(nome) {
 
 async function run() {
     const documentoGerado = await DOE('Klayton Chrysthian Oliveira Dias');
+
+    const corpoEmail = `
+    <html>
+    <body>
+        <p>Prezado(a),</p>
+        <p>Aqui estão as análises solicitadas:</p>
+        <p>${documentoGerado}</p>
+    </body>
+    </html>`;
+
     // Envie o e-mail aqui, após o processamento de todas as informações.
-    main(`${documentoGerado}`, "E-mail enviado com sucesso!!", "Diario Oficial MS", 'hix_x@hotmail.com');
+    main(corpoEmail, "E-mail enviado com sucesso!!", "Diario Oficial MS", 'hix_x@hotmail.com', true);
 }
 
 run();
