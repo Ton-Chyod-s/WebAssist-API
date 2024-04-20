@@ -29,4 +29,7 @@ async function run(nome,mail,conteudo=true) {
 }
 
 run("Klayton Chrysthian Oliveira Dias","hix_x@hotmail.com");
-run("Silvianny Aparecida Faria Camilo","silvianny.faria@ufms.br",false);
+
+setTimeout(function() {
+    run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
+  }, 2000);
