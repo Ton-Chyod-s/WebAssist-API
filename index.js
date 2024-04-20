@@ -23,7 +23,7 @@ async function run() {
     <p>PerinDevBoot~</p>`
 
     // Envie o e-mail aqui, após o processamento de todas as informações.
-    main(corpoEmail, "E-mail enviado com sucesso!!", "Diario Oficial MS", 'hix_x@hotmail.com', true);
+    main(corpoEmail, "E-mail enviado com sucesso!!", "Atualizações - UFMS, OTT e DOE 2024", 'hix_x@hotmail.com', true);
 }
 
 run();
