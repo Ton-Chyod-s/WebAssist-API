@@ -27,7 +27,7 @@ async function DOE(nome) {
     const planilhaHTML = await page.$$eval('table[id="tbDiarios"] > tbody > tr ',rows => rows.map(element => element.innerText));
     for (let i = 0; i < planilhaHTML.length; i++) {
         const element = planilhaHTML[i];
-        if (element.includes(2024) & element.includes(primeiroNome)) {
+        if (element.includes(ano) & element.includes(primeiroNome)) {
         const data = element.split(' - ')[0].split('\t')[1];
         const DOE = element.split(' - ')[1];
         documento += `${data}\t${DOE}\n`;
