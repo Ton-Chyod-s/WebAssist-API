@@ -20,5 +20,3 @@ async function main(texto,imprimirConsole,assunto,para) {
 }
 
 module.exports = { main };
-
-// main("um texto teste", "E-mail foi enviado", "Um email teste");
