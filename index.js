@@ -6,9 +6,9 @@ const { Exercito } = require('./src/funcExercito');
 const ano = new Date().getFullYear().toString();
 
 async function run(nome,mail,conteudo=true) {
-    const documentoGeradoDOE = await DOE(nome);
-    const documentoGeradoUFMS = await UFMS();
-    const documentoGeradoExercito = await Exercito();
+    let documentoGeradoDOE = await DOE(nome);
+    let documentoGeradoUFMS = await UFMS();
+    let documentoGeradoExercito = await Exercito();
 
     const corpoEmail = `<p>Prezado(a),</p>
     <p>Aqui estão as análises solicitadas:</p>
@@ -24,11 +24,13 @@ async function run(nome,mail,conteudo=true) {
     Atenciosamente,</i></p>
     <p><i>PerinDevBoot~</i></p>`
     // Envie o e-mail aqui, após o processamento de todas as informações.
-    main(corpoEmail, `E-mail enviado com sucesso!!`, `Atualizações - UFMS, OTT e DOE ${ano}`, mail, true);
+    await main(corpoEmail, `E-mail enviado com sucesso!!`, `Atualizações - UFMS, OTT e DOE ${ano}`, mail, true);
+
+    // Limpar ou redefinir as variáveis utilizadas
+    documentoGeradoDOE = null;
+    documentoGeradoUFMS = null;
+    documentoGeradoExercito = null;
 }
 
-run("Klayton Chrysthian Oliveira Dias","hix_x@hotmail.com");
-
-setTimeout(function() {
-    run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
-  }, 2000);
+run("Klayton Chrysthian Oliveira Dias", "hix_x@hotmail.com");
+run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);

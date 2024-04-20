@@ -1,10 +1,12 @@
 const puppeteer = require('puppeteer');
 
-let head = "";
-let documento = "";
+
 const ano = new Date().getFullYear().toString();
 
 async function DOE(nome) {
+    let head = "";
+    let documento = "";
+    
     const primeiroNome =  nome.split(' ')[0];
     const browser = await puppeteer.launch({
         // headless: false,
