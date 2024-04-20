@@ -25,7 +25,7 @@ async function UFMS() {
             }
         }
     }
-    return `${textoSemestre2}\n\n${textoSemestre1}`
+    return `<p>${textoSemestre2}</p><p>${textoSemestre1}</p>`
 }
 
 module.exports = { UFMS };

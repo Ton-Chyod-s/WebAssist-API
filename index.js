@@ -9,8 +9,8 @@ async function run(nome,mail,conteudo=true) {
     const documentoGeradoDOE = await DOE(nome);
     const documentoGeradoUFMS = await UFMS();
     const documentoGeradoExercito = await Exercito();
-    
-    const corpoEmail = `<p><strong>Prezado(a),</strong></p>
+
+    const corpoEmail = `<p>Prezado(a),</p>
     <p>Aqui estão as análises solicitadas:</p>
     ${conteudo ? `
     <p><strong>Movimentação Interna e Reingresso UFMS ${ano}</strong></p>
@@ -20,9 +20,9 @@ async function run(nome,mail,conteudo=true) {
     ` : ''}
     <p><strong>Diário Oficial do Estado de Mato Grosso do Sul (DOE)</strong></p>
     <p>${documentoGeradoDOE}</p>
-    <p>Por favor, mantenha-se informado sobre possíveis atualizações.</p>
-    <p>Atenciosamente,</p>
-    <p>PerinDevBoot~</p>`
+    <p><i>Por favor, mantenha-se informado sobre possíveis atualizações.<br>
+    Atenciosamente,</i></p>
+    <p><i>PerinDevBoot~</i></p>`
     // Envie o e-mail aqui, após o processamento de todas as informações.
     main(corpoEmail, `E-mail enviado com sucesso!!`, `Atualizações - UFMS, OTT e DOE ${ano}`, mail, true);
 }
