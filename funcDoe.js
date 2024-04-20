@@ -17,17 +17,15 @@ async function DOE(nome) {
     await page.type('[id="Filter_Texto"]', nome);
     // clicar
     await page.locator('button').click();
-    
-    // 'tbody'
+    // esperando até encontrar o selector
     await page.waitForSelector('table[id="tbDiarios"]');
-
     // Aguardar um pouco
     await new Promise(resolve => setTimeout(resolve, 500));
 
     const planilhaHTML = await page.$$eval('table[id="tbDiarios"] > tbody > tr ',rows => rows.map(element => element.innerText));
     for (let i = 0; i < planilhaHTML.length; i++) {
         const element = planilhaHTML[i];
-        if (element.includes(ano) & element.includes(primeiroNome)) {
+        if (element.includes(ano) && element.includes(primeiroNome)) {
         const data = element.split(' - ')[0].split('\t')[1];
         const DOE = element.split(' - ')[1];
         documento += `${data}\t${DOE}\n`;
@@ -44,9 +42,9 @@ async function DOE(nome) {
 }
 
 async function run() {
-    await DOE('Klayton Chrysthian Oliveira Dias');
+    const documentoGerado = await DOE('Klayton Chrysthian Oliveira Dias');
     // Envie o e-mail aqui, após o processamento de todas as informações.
-    main(`${documento}`, "E-mail enviado com sucesso!!", "Diario Oficial MS", 'hix_x@hotmail.com');
+    main(`${documentoGerado}`, "E-mail enviado com sucesso!!", "Diario Oficial MS", 'hix_x@hotmail.com');
 }
 
 run();
