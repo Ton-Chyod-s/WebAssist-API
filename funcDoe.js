@@ -2,16 +2,11 @@ const puppeteer = require('puppeteer');
 const { main } = require('./mandarEmail');
 
 let documento = "";
-const dia = new Date().getDay().toString();
-const mes = new Date().getMonth().toString();
-const ano = new Date().getFullYear().toString();
-const hora = new Date().getHours().toString();
-const minuto = new Date().getMinutes().toString();
 
 async  function DOE(nome) {
     const primeiroNome =  nome.split(' ')[0];
     const browser = await puppeteer.launch({
-        // headless: false,
+        headless: false,
     });
     const page = await browser.newPage();
     await page.goto('https://www.spdo.ms.gov.br/diariodoe');
@@ -42,6 +37,10 @@ async  function DOE(nome) {
     await browser.close();
 }
 
-DOE('Silvianny Aparecida Faria Camilo')
-// Envie o e-mail aqui, depois de processar todas as informações.
-main(`${documento}`,"E-mail enviado com sucesso!!","Diario Oficial MS",'Silviannyfaria@gmail.com');
+async function run() {
+    await DOE('Silvianny Aparecida Faria Camilo');
+    // Envie o e-mail aqui, após o processamento de todas as informações.
+    main(`${documento}`, "E-mail enviado com sucesso!!", "Diario Oficial MS", 'Silviannyfaria@gmail.com');
+}
+
+run();
