@@ -8,15 +8,17 @@ async function run() {
     const documentoGeradoDOE = await DOE('Klayton Chrysthian Oliveira Dias');
     const documentoGeradoUFMS = await UFMS();
 
-
     const corpoEmail = `
     <html>
     <body>
         <p>Prezado(a),</p>
         <p>Aqui estão as análises solicitadas:</p>
-        <p>Movimentação Interna e Reingresso UFMS ${ano}</p>
+        <p><strong>Movimentação Interna e Reingresso UFMS ${ano}</strong></p>
         <p>${documentoGeradoUFMS}</p>
         <p>${documentoGeradoDOE}</p>
+        <p>Por favor, mantenha-se informado sobre possíveis atualizações.</p>
+        <p>Atenciosamente,</p>
+        <p>PerinDevBoot~</p>
     </body>
     </html>
     `;
