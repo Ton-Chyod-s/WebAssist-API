@@ -51,7 +51,8 @@ async function run() {
         <p>Aqui estão as análises solicitadas:</p>
         <p>${documentoGerado}</p>
     </body>
-    </html>`;
+    </html>
+    `;
 
     // Envie o e-mail aqui, após o processamento de todas as informações.
     main(corpoEmail, "E-mail enviado com sucesso!!", "Diario Oficial MS", 'hix_x@hotmail.com', true);
