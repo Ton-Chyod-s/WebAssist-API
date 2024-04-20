@@ -1,7 +1,7 @@
-const { main } = require('./mandarEmail');
-const { DOE } = require('./funcDoe');
-const { UFMS } = require('./funcUfms');
-const { Exercito } = require('./funcExercito');
+const { main } = require('./src/mandarEmail');
+const { DOE } = require('./src/funcDoe');
+const { UFMS } = require('./src/funcUfms');
+const { Exercito } = require('./src/funcExercito');
 
 const ano = new Date().getFullYear().toString();
 
