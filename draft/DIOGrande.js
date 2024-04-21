@@ -18,7 +18,7 @@ async function DIOGrande() {
     await botaoBuscar.click();
     
     while (true) {
-        const elementosTabela = await page.waitForSelector('#SearchTableDiogrande tbody > tr > td');
+        const elementosTabela = await page.$$('#SearchTableDiogrande tbody > tr > td');
         if (elementosTabela.length > 0) {
             // Se os elementos estiverem prontos, extrair o texto
             const planilhaHTML = await page.$$eval('#SearchTableDiogrande tbody > tr > td', rows => rows.map(row => row.innerText));
