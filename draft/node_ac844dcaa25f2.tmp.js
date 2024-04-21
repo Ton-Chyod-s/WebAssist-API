@@ -27,8 +27,8 @@ async function DIOGrande() {
             }
             break; // Sai do loop
         }
-        // Aguardar um pouco
-        await new Promise(resolve => setTimeout(resolve, 100));
+        
+    
     }
 }   
     
