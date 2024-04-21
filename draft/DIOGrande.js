@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 
 async function DIOGrande() {
     const browser = await puppeteer.launch({
-        // headless: false,
+        headless: false,
     });
     const page = await browser.newPage();
     await page.goto('https://diogrande.campogrande.ms.gov.br/');
@@ -18,7 +18,12 @@ async function DIOGrande() {
     await botaoBuscar.click();
     
     while (true) {
+        await page.waitForFunction(() => !document.querySelector('span:contains("Aguarde, carregando edições ...")'));
+        
+        await page.waitForNavigation({ waitUntil: 'load' })
+        
         const elementosTabela = await page.$$('#SearchTableDiogrande tbody > tr ');
+        
         if (elementosTabela.length > 0) {
             // Se os elementos estiverem prontos, extrair o texto
             const planilhaHTML = await page.$$eval('#SearchTableDiogrande tbody > tr > td', rows => rows.map(row => row.innerText));
