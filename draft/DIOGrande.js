@@ -20,14 +20,14 @@ async function DIOGrande() {
     await page.waitForNavigation({ waitUntil: 'domcontentloaded' })
     
     while (true) {
-        await page.waitForSelector('span');
-        const spansText = await page.$$eval('span', spans => spans.map(span => span.innerText));
+        await page.waitForSelector('div');
+        const spansText = await page.$$eval('div', spans => spans.map(span => span.innerText));
     
-        if (spansText.includes('Aguarde, carregando edições ...')) {
-            console.log("Aguarde, carregando edições ... encontrado!");
-        } else {
-            console.log("Aguarde, carregando edições ... não encontrado!");
+        if (spansText.includes('Exibindo página 1 de 4 ...')) {
+            console.log("Exibindo página 1 de 4 ... encontrado!");
             break;
+        } else {
+            console.log("Exibindo página 1 de 4 ... não encontrado!");
         }
     }
     
