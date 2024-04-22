@@ -26,8 +26,10 @@ async function fapec() {
 
 module.exports = { fapec }
 
-async function lol () {
-    const haha = await fapec()
-    console.log(haha)
+if (require.main === module) {
+    async function lol () {
+        const haha = await fapec()
+        console.log(haha)
+    }
+    lol()
 }
-
