@@ -41,7 +41,7 @@ async function DIOGrande(nome) {
             const anoDiario = planilhaSeparada[2].split('/')[2];
             if (anoDiario == ano) {
                 const DIO = `${planilhaSeparada[0]} ${planilhaSeparada[1]} ${planilhaSeparada[2]}<br>`
-                diarioOficial += `Nome:  ${nome} Ano:    ${ano}<br>`
+                diarioOficial += `<p>Nome:  ${nome} Ano:    ${ano}</p>`
                 diarioOficial += DIO;
             } else if (diarioOficial === "") {
                 diarioOficial += `Nome:  ${nome} Ano:    ${ano}<br>`
