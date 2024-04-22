@@ -1,6 +1,5 @@
 const puppeteer = require('puppeteer');
 
-
 const ano = new Date().getFullYear().toString();
 
 async function DOE(nome) {

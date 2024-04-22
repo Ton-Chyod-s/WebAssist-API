@@ -1,5 +1,7 @@
 const puppeteer = require('puppeteer');
 
+const ano = new Date().getFullYear().toString();
+
 async function DIOGrande(nome) {
     let diarioOficial = ""
     const browser = await puppeteer.launch({
@@ -36,9 +38,13 @@ async function DIOGrande(nome) {
     for (let i = 0; i < planilhaHTML.length; i++) {
         if (i !== "DOWLOAD") {
             const planilhaSeparada = planilhaHTML[i].split("\t");
-            const DIO = `${planilhaSeparada[0]} ${planilhaSeparada[1]} ${planilhaSeparada[2]}<br>`
-            diarioOficial += DIO;
-        }
+            if (planilhaSeparada[2] === ano) {
+                const DIO = `${planilhaSeparada[0]} ${planilhaSeparada[1]} ${planilhaSeparada[2]}<br>`
+                diarioOficial += DIO;
+            } else {
+                diarioOficial = "Lamento informar que não foram encontrados Diário Oficial de Campo Grande – MS associados ao seu nome até a presente data.";
+            }             
+        } 
     }
     await browser.close();
     return diarioOficial;

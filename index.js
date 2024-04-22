@@ -22,7 +22,7 @@ async function run(nome,mail,conteudo=true) {
     ` : ''}
     <p><strong>Diário Oficial do Estado de Mato Grosso do Sul (DOE)</strong></p>
     <p>${documentoGeradoDOE}</p>
-    <p><strong>Diário Oficial de Campo Grande – MS (DioGrande Digital) </strong></p>
+    <p><strong>Diário Oficial de Campo Grande – MS (DIOGRANDE Digital) </strong></p>
     <p>${documentoGeradoDIOGrande}</p>
     <p><i>Por favor, mantenha-se informado sobre possíveis atualizações.<br>
     Atenciosamente,</i></p>
