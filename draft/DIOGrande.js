@@ -25,7 +25,7 @@ async function DIOGrande(nome) {
         const spansText = await page.$$eval('table > tbody > tr', spans => spans.map(span => span.innerText));
     
         if (spansText.length > 1) {
-            console.log("Tabela ... encontrado!");
+            console.log("Tabela encontrada, analisando dados...");
             break;
         }
     }
