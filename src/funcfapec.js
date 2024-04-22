@@ -1,7 +1,9 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-async function scrap() {
+const ano = new Date().getFullYear().toString();
+
+async function fapec() {
     let conteudo = "";
     let novaListaConteudo = []
     const response = await axios.get("https://fapec.org/processo-seletivo/");
@@ -22,4 +24,4 @@ async function scrap() {
         return novaListaConteudo.unshift()
     }
 
-scrap()
+module.exports = { fapec }
