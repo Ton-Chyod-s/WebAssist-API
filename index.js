@@ -4,6 +4,7 @@ const { UFMS } = require('./src/funcUfms');
 const { Exercito } = require('./src/funcExercito');
 const { DIOGrande } = require('./src/funcDioGrande');
 const { fapec } = require('./src/funcfapec')
+
 const ano = new Date().getFullYear().toString();
 
 async function run(nome,mail,conteudo=true) {
