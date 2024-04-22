@@ -6,6 +6,8 @@ const ano = new Date().getFullYear().toString();
 async function fapec() {
     let conteudo = "";
     let novaListaConteudo = []
+    let listaFormatada = ""
+
     const response = await axios.get("https://fapec.org/processo-seletivo/");
         const $ = cheerio.load(response.data);
         const cards = $('div[class="card"]').map((i, item) => ({
@@ -21,7 +23,13 @@ async function fapec() {
                 novaListaConteudo.push(listaConteudo[i])
             }
         }
-        return novaListaConteudo
+        for (let i = 0; i < novaListaConteudo.length; i++) {
+            const itemSplitada = novaListaConteudo[i].split('-')
+
+            listaFormatada += `${itemSplitada[itemSplitada.length - 1]}<br><br>`
+            
+        }
+        return listaFormatada
     }
 
 module.exports = { fapec }
