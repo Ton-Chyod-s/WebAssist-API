@@ -51,5 +51,10 @@ async function run(nome,mail,conteudo=true) {
     documentoGeradoDIOGrande = null;
 }
 
-run("Klayton Chrysthian Oliveira Dias", "hix_x@hotmail.com");
-// run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
+module.exports = { run }
+
+if (require.main === module) {
+    run("Klayton Chrysthian Oliveira Dias", "hix_x@hotmail.com");
+    // run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
+}
+
