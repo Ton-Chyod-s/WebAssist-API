@@ -39,7 +39,7 @@ async function DIOGrande(nome) {
         if (i !== "DOWLOAD") {
             const planilhaSeparada = planilhaHTML[i].split("\t");
             const anoDiario = planilhaSeparada[2].split('/')[2];
-            if (anoDiario == 2023) {
+            if (anoDiario == ano) {
                 const DIO = `${planilhaSeparada[0]} ${planilhaSeparada[1]} ${planilhaSeparada[2]}<br>`
                 diarioOficial += DIO;
             } else if (diarioOficial === "") {
