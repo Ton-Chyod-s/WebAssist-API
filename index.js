@@ -30,9 +30,9 @@ async function run(nome,mail,conteudo=true) {
 
     let headCorpo = (() => {
          if (conteudo) {
-             return `Atualizações - UFMS, OTT e DOE ${ano}`;
+             return `Atualizações - UFMS, OTT, DOE, DIOGrande MS ${ano}`;
          } else {
-             return `Atualizações - DOE ${ano}`;
+             return `Atualizações - DOE, DIOGRANDE MS ${ano}`;
          }
      })();
 
