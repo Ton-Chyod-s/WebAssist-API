@@ -3,7 +3,7 @@ const { DOE } = require('./src/funcDoe');
 const { UFMS } = require('./src/funcUfms');
 const { Exercito } = require('./src/funcExercito');
 const { DIOGrande } = require('./src/funcDioGrande');
-
+const { fapec } = require('./src/funcfapec')
 const ano = new Date().getFullYear().toString();
 
 async function run(nome,mail,conteudo=true) {
@@ -11,6 +11,7 @@ async function run(nome,mail,conteudo=true) {
     let documentoGeradoUFMS = await UFMS();
     let documentoGeradoExercito = await Exercito();
     let documentoGeradoDIOGrande = await DIOGrande(nome);
+    let documentoGeradofapec = await fapec()
 
     const corpoEmail = `<p>Prezado(a),</p>
     <p>Aqui estão as análises solicitadas:</p>
@@ -25,7 +26,8 @@ async function run(nome,mail,conteudo=true) {
     <p><strong>Diário Oficial de Campo Grande – MS (DIOGRANDE Digital)</strong></p>
     <p>${documentoGeradoDIOGrande}</p>
     <h3>Ofertas de concursos</h3>
-    <p> </p>
+    <h4>FAPEC</h4>
+    <p>${documentoGeradofapec}</p>
     <p><i>Por favor, mantenha-se informado sobre possíveis atualizações.<br>
     Atenciosamente,</i></p>
     <p><i>PerinDevBoot~</i></p>`

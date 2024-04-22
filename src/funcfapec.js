@@ -16,12 +16,18 @@ async function fapec() {
             conteudo += card.texto + '\n';
         });
         const listaConteudo = conteudo.split("\n")
-        for (let i = 0; i < 200; i++) {
+        for (let i = 0; i < 70; i++) {
             if (listaConteudo[i].includes('Processo Seletivo') & !listaConteudo[i].includes('Processo Seletivo - Abertura')) {
-                novaListaConteudo.unshift(listaConteudo[i])
+                novaListaConteudo.push(listaConteudo[i])
             }
         }
-        return novaListaConteudo.unshift()
+        return novaListaConteudo
     }
 
 module.exports = { fapec }
+
+async function lol () {
+    const haha = await fapec()
+    console.log(haha)
+}
+
