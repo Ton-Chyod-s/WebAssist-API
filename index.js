@@ -47,4 +47,4 @@ async function run(nome,mail,conteudo=true) {
 }
 
 run("Klayton Chrysthian Oliveira Dias", "hix_x@hotmail.com");
-run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
+// run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
