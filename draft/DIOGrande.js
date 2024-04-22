@@ -1,13 +1,14 @@
 const puppeteer = require('puppeteer');
 
-async function DIOGrande() {
+async function DIOGrande(nome) {
+    let diarioOficial = ""
     const browser = await puppeteer.launch({
-        headless: false,
+        // headless: false,
     });
     const page = await browser.newPage();
     await page.goto('https://diogrande.campogrande.ms.gov.br/');
 
-    await page.type('[id="searchPalavra"]', 'Klayton Chrysthian Oliveira Dias');
+    await page.type('[id="searchPalavra"]', nome);
 
     const botaoBuscar = await page.evaluateHandle(() => {
         const xpath = '//*[@id="BotaoBuscarForm"]/span/span[2]';
@@ -24,21 +25,25 @@ async function DIOGrande() {
         const spansText = await page.$$eval('table > tbody > tr', spans => spans.map(span => span.innerText));
     
         if (spansText.length > 1) {
-            console.log("DOWNLOAD ... encontrado!");
+            console.log("Tabela ... encontrado!");
             break;
         }
     }
     
-    const elementosTabela = await page.$$('#SearchTableDiogrande tbody > tr');
+    await page.$$('#SearchTableDiogrande tbody > tr');
         
-    const planilhaHTML = await page.$$eval('#SearchTableDiogrande tbody > tr > td', rows => rows.map(row => row.innerText));
+    const planilhaHTML = await page.$$eval('#SearchTableDiogrande tbody > tr', rows => rows.map(row => row.innerText));
     for (let i = 0; i < planilhaHTML.length; i++) {
-        console.log(planilhaHTML[i]);
+        if (i !== "DOWLOAD") {
+            const planilhaSeparada = planilhaHTML[i].split("\t");
+            const DIO = `${planilhaSeparada[0]} ${planilhaSeparada[1]} ${planilhaSeparada[2]}\n`
+            diarioOficial += DIO;
+        }
     }
-
-    await browser.close();  
+    await browser.close();
+    return console.log(diarioOficial);
 }
     
 module.exports = { DIOGrande };
 
-DIOGrande();
+DIOGrande('Klayton Chrysthian Oliveira Dias');
