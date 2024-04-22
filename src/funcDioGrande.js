@@ -38,12 +38,13 @@ async function DIOGrande(nome) {
     for (let i = 0; i < planilhaHTML.length; i++) {
         if (i !== "DOWLOAD") {
             const planilhaSeparada = planilhaHTML[i].split("\t");
-            if (planilhaSeparada[2] === ano) {
+            const anoDiario = planilhaSeparada[2].split('/')[2];
+            if (anoDiario == 2023) {
                 const DIO = `${planilhaSeparada[0]} ${planilhaSeparada[1]} ${planilhaSeparada[2]}<br>`
                 diarioOficial += DIO;
-            } else {
-                diarioOficial = "Lamento informar que não foram encontrados Diário Oficial de Campo Grande – MS associados ao seu nome até a presente data.";
-            }             
+            } else if (diarioOficial === "") {
+                diarioOficial += `Nenhum Diário Oficial encontrado para o ano de ${ano}.<br>`;
+            }         
         } 
     }
     await browser.close();
