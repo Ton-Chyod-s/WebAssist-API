@@ -26,11 +26,20 @@ async function DIOGrande() {
         if (spansText.length > 1) {
             console.log("DOWNLOAD ... encontrado!");
             break;
+        } else {
+            console.log("DOWNLOAD ... não encontrado!");
         }
     }
     
+   
+    
     const elementosTabela = await page.$$('#SearchTableDiogrande tbody > tr');
-        
+    if (elementosTabela.length > 0) {
+        console.log('Encontrado');
+    };
+    
+    
+    
     const planilhaHTML = await page.$$eval('#SearchTableDiogrande tbody > tr > td', rows => rows.map(row => row.innerText));
     for (let i = 0; i < planilhaHTML.length; i++) {
         console.log(planilhaHTML[i]);
@@ -38,6 +47,7 @@ async function DIOGrande() {
         
 }
     
+ 
 module.exports = { DIOGrande };
 
 DIOGrande();
