@@ -35,7 +35,8 @@ async function DIOGrande() {
     for (let i = 0; i < planilhaHTML.length; i++) {
         console.log(planilhaHTML[i]);
     }
-        
+
+    await browser.close();  
 }
     
 module.exports = { DIOGrande };
