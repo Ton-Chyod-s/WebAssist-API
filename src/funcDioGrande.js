@@ -43,7 +43,7 @@ async function DIOGrande(nome) {
                 const DIO = `${planilhaSeparada[0]} ${planilhaSeparada[1]} ${planilhaSeparada[2]}<br>`
                 diarioOficial += DIO;
             } else if (diarioOficial === "") {
-                diarioOficial += `Nenhum Diário Oficial encontrado para o ano de ${ano}.<br>`;
+                diarioOficial += `Lamento informar que não foram encontrados Diários Oficiais Digitais <br>associados ao seu nome até a presente data.<br>`;
             }         
         } 
     }
