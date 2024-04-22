@@ -36,14 +36,18 @@ async function DIOGrande(nome) {
     for (let i = 0; i < planilhaHTML.length; i++) {
         if (i !== "DOWLOAD") {
             const planilhaSeparada = planilhaHTML[i].split("\t");
-            const DIO = `${planilhaSeparada[0]} ${planilhaSeparada[1]} ${planilhaSeparada[2]}\n`
+            const DIO = `${planilhaSeparada[0]} ${planilhaSeparada[1]} ${planilhaSeparada[2]}<br>`
             diarioOficial += DIO;
         }
     }
     await browser.close();
-    return console.log(diarioOficial);
+    return diarioOficial;
 }
     
 module.exports = { DIOGrande };
 
-DIOGrande('Klayton Chrysthian Oliveira Dias');
+// async function run() {
+//     const documentoDIO = await DIOGrande('Klayton Chrysthian Oliveira Dias');
+//     console.log(documentoDIO);
+// }
+// run()
