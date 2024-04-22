@@ -2,7 +2,7 @@ const { main } = require('./src/mandarEmail');
 const { DOE } = require('./src/funcDoe');
 const { UFMS } = require('./src/funcUfms');
 const { Exercito } = require('./src/funcExercito');
-const { DIOGrande } = require('./draft/DIOGrande');
+const { DIOGrande } = require('./src/DIOGrande');
 
 const ano = new Date().getFullYear().toString();
 

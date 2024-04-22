@@ -5,7 +5,7 @@ const ano = new Date().getFullYear().toString();
 async function DIOGrande(nome) {
     let diarioOficial = ""
     const browser = await puppeteer.launch({
-        headless: false,
+        // headless: false,
     });
     const page = await browser.newPage();
     await page.goto('https://diogrande.campogrande.ms.gov.br/');
@@ -51,9 +51,3 @@ async function DIOGrande(nome) {
 }
     
 module.exports = { DIOGrande };
-
-// async function run() {
-//     const documentoDIO = await DIOGrande('Klayton Chrysthian Oliveira Dias');
-//     console.log(documentoDIO);
-// }
-// run()
