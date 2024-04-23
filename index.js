@@ -34,7 +34,7 @@ async function run(nome,mail,conteudo=true) {
     <p>${documentoGeradofapec}</p>
     <h4>SEGES</h4>
     <p>${documentoGeradoSeges}</p>
-    <h4>CONCURSOS PÚBLICOS E PROCESSOS SELETIVOS - Estado</h4>
+    <h4>CONCURSOS PÚBLICOS E PROCESSOS SELETIVOS - ESTADO</h4>
     <p>${documentoGeradoConcursoEstado}</p>
     <p><i>Por favor, mantenha-se informado sobre possíveis atualizações.<br>
     Atenciosamente,</i></p>
