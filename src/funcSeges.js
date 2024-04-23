@@ -27,11 +27,3 @@ async function seges() {
 }
 
 module.exports = { seges }
-
-if (require.main === module) {
-    async function lol () {
-        const haha = await seges()
-        console.log(haha)
-    }
-    lol()
-}

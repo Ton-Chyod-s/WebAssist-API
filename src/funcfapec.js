@@ -46,10 +46,3 @@ async function fapec() {
 
 module.exports = { fapec }
 
-if (require.main === module) {
-    async function lol () {
-        const haha = await fapec()
-        console.log(haha)
-    }
-    lol()
-}
