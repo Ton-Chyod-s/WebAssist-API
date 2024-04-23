@@ -52,8 +52,10 @@ async function DIOGrande(nome) {
     
 module.exports = { DIOGrande };
 
-// async function run() {
-//     const documentoDIO = await DIOGrande('Klayton Chrysthian Oliveira Dias');
-//     console.log(documentoDIO);
-// }
-// run()
+if (require.main === module) {
+    async function Testando () {
+        const haha = await DIOGrande()
+        console.log(haha)
+    }
+    Testando()
+}

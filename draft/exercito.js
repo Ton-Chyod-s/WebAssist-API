@@ -19,4 +19,10 @@ async function scrap() {
     main(`${texto}`,"E-mail enviado com sucesso!!","OTT 9º Região Militar","hix_x@hotmail.com");
 }
 
-scrap();
+if (require.main === module) {
+    async function Testando () {
+        const haha = await scrap()
+        console.log(haha)
+    }
+    Testando()
+}

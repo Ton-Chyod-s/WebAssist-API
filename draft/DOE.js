@@ -44,3 +44,4 @@ const minuto = new Date().getMinutes().toString();
 
   await browser.close();
 })();
+

@@ -14,12 +14,12 @@ async function concursoEstado() {
     }
 }
 
-module.exports = {concursoEstado }
+module.exports = { concursoEstado }
 
 if (require.main === module) {
-    async function lol () {
+    async function Testando () {
         const haha = await concursoEstado()
         console.log(haha)
     }
-    lol()
+    Testando()
 }

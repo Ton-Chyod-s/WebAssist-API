@@ -25,11 +25,10 @@ async function seges() {
 
 module.exports = { seges }
 
-
 if (require.main === module) {
-    async function documentoSeges () {
-        const documentoSeges = await seges()
-        console.log(documentoSeges)
+    async function Testando () {
+        const haha = await seges()
+        console.log(haha)
     }
-    documentoSeges ()
+    Testando()
 }

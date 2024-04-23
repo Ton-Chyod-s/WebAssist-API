@@ -22,4 +22,10 @@ async function scrap() {
         return novaListaConteudo.unshift()
     }
 
-scrap()
+    if (require.main === module) {
+        async function Testando () {
+            const haha = await scrap()
+            console.log(haha)
+        }
+        Testando()
+    }

@@ -29,4 +29,10 @@ async function scrap() {
     main(`${textoSemestre2}\n\n${textoSemestre1}`,"E-mail enviado com sucesso!!","Mov Interna UFMS","hix_x@hotmail.com");
 }
 
-scrap();
+if (require.main === module) {
+    async function Testando () {
+        const haha = await scrap()
+        console.log(haha)
+    }
+    Testando()
+}

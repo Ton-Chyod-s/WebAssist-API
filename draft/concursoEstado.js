@@ -15,9 +15,9 @@ async function seges() {
 }
 
 if (require.main === module) {
-    async function lol () {
+    async function Testando () {
         const haha = await seges()
         console.log(haha)
     }
-    lol()
+    Testando()
 }
