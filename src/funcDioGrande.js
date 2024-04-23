@@ -45,7 +45,7 @@ async function DIOGrande(nome) {
                 diarioOficial += DIO;
             } else if (diarioOficial === "") {
                 diarioOficial += `Nome:  ${nome} Ano:    ${ano}<br>`
-                diarioOficial += `<p>Lamento informar que não foram encontrados Diários Oficiais Digitais <br>associados ao seu nome até a presente data.</p>`;
+                diarioOficial += `<p>Lamento informar que não foram encontrados Diários Oficiais Digitais associados ao seu nome até a presente data.</p>`;
             }         
         } 
     }
