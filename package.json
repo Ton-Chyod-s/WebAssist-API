@@ -21,8 +21,5 @@
   "bugs": {
     "url": "https://github.com/Ton-Chyod-s/WebScraping-NodeJS/issues"
   },
-  "homepage": "https://github.com/Ton-Chyod-s/WebScraping-NodeJS#readme",
-  "dependencies": {
-    "express": "^4.19.2"
-  }
+  "homepage": "https://github.com/Ton-Chyod-s/WebScraping-NodeJS#readme"
 }
