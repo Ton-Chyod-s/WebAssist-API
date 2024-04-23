@@ -11,9 +11,9 @@ server.get('/DOE/:id', async (req, res) => {
     try {
         let documentoGeradoDOE = await DOE(id);
         if (documentoGeradoDOE.includes('Lamento informar que não foram encontrados Diários Oficiais Eletrônicos (DOEs)')) {
-            return { 
-                error: 'Não encontrado' 
-            }
+            return res.json({ 
+                error: 'Nenhum Diário Oficial Eletrônico (DOE) encontrado' 
+            })
         }
     } catch (error) {
         // Handle any errors that may occur during the asynchronous operation
