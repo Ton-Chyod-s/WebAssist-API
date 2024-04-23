@@ -9,8 +9,8 @@ async function fapec() {
     let novaListaConteudo = []
     let listaFormatada = ""
 
-    listaFormatada += site + "<br>"
-    
+    listaFormatada += "<strong>Site: </strong>" + site + "<br><br>"
+
     const response = await axios.get(site);
         const $ = cheerio.load(response.data);
         const cards = $('div[class="card"]').map((i, item) => ({
