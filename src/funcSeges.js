@@ -3,6 +3,8 @@ const cheerio = require('cheerio');
 
 async function seges() {
     let resposta = "";
+    const site = 'https://fapec.org/processo-seletivo/ <br><br>'
+
     const response = await axios.get("https://www.campogrande.ms.gov.br/seges/processoseletivo/");
     const $ = cheerio.load(response.data);
     const cards = $('h4').map((i, item) => ({
@@ -23,7 +25,7 @@ async function seges() {
     if (resposta === "") {
         resposta += `Infelizmente, após minhas buscas, não foram encontradas ofertas.`
     }
-    return resposta
+    return `<strong>Site:</strong> ${site + resposta}`
 }
 
 module.exports = { seges }
