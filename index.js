@@ -12,4 +12,4 @@ server.get('/', (req,res) => {
 
 server.listen(PORT, () => {
     console.log('Servidor está funcionando!')
-}) 
+})
