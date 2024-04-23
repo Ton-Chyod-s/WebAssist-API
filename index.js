@@ -55,6 +55,8 @@ async function run(nome,mail,conteudo=true) {
     documentoGeradoUFMS = null;
     documentoGeradoExercito = null;
     documentoGeradoDIOGrande = null;
+    documentoGeradofapec = null;
+    documentoGeradoSeges = null;
 }
 
 module.exports = { run }

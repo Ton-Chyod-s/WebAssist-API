@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 
 async function seges() {
     let resposta = "";
-    const site = 'https://fapec.org/processo-seletivo/ <br><br>'
+    const site = 'https://www.campogrande.ms.gov.br/seges/processoseletivo/ <br><br>'
 
     const response = await axios.get("https://www.campogrande.ms.gov.br/seges/processoseletivo/");
     const $ = cheerio.load(response.data);
