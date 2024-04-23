@@ -36,6 +36,9 @@ async function run(nome,mail,conteudo=true) {
     <p>${documentoGeradoSeges}</p>
     <h4>CONCURSOS PÚBLICOS E PROCESSOS SELETIVOS - ESTADO</h4>
     <p>${documentoGeradoConcursoEstado}</p>
+    
+    <h3>Ofertas de estágio</h3>
+    <p></p>
     <p><i>Por favor, mantenha-se informado sobre possíveis atualizações.<br>
     Atenciosamente,</i></p>
     <p><i>PerinDevBoot~</i></p>`
