@@ -4,6 +4,7 @@ const { UFMS } = require('./src/funcUfms');
 const { Exercito } = require('./src/funcExercito');
 const { DIOGrande } = require('./src/funcDioGrande');
 const { fapec } = require('./src/funcfapec')
+const { seges } = require('./src/funcSeges')
 
 const ano = new Date().getFullYear().toString();
 
@@ -13,6 +14,7 @@ async function run(nome,mail,conteudo=true) {
     let documentoGeradoExercito = await Exercito();
     let documentoGeradoDIOGrande = await DIOGrande(nome);
     let documentoGeradofapec = await fapec()
+    let documentoGeradoSeges = await seges()
 
     const corpoEmail = `<p>Prezado(a),</p>
     <p>Aqui estão as análises solicitadas:</p>
@@ -29,6 +31,8 @@ async function run(nome,mail,conteudo=true) {
     <h3>Ofertas de concursos</h3>
     <h4>FAPEC</h4>
     <p>${documentoGeradofapec}</p>
+    <h4>SEGES</h4>
+    <p>${documentoGeradoSeges}</p>
     <p><i>Por favor, mantenha-se informado sobre possíveis atualizações.<br>
     Atenciosamente,</i></p>
     <p><i>PerinDevBoot~</i></p>`
@@ -55,6 +59,6 @@ module.exports = { run }
 
 if (require.main === module) {
     run("Klayton Chrysthian Oliveira Dias", "hix_x@hotmail.com");
-    run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
+    // run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
 }
 
