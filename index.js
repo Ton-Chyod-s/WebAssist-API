@@ -11,10 +11,17 @@ server.get('/DOE/:id', async (req, res) => {
     try {
         let documentoGeradoDOE = await DOE(id);
         if (documentoGeradoDOE.includes('Lamento informar que não foram encontrados Diários Oficiais Eletrônicos (DOEs)')) {
-            return res.json({ 
+            return res.json({
+                'Nome': id, 
                 error: 'Nenhum Diário Oficial Eletrônico (DOE) encontrado' 
-            })
-        }
+            })} else {
+                const startIndex = documentoGeradoDOE.indexOf('</p>') + '</p>'.length;
+                const diarioOficialEletronico = documentoGeradoDOE.substring(startIndex);
+                return res.json({
+                    'Nome': id, 
+                    'Diário Oficial Eletrônico': diarioOficialEletronico
+                })
+            }
     } catch (error) {
         // Handle any errors that may occur during the asynchronous operation
         return res.status(500).json({ error: 'An error occurred while fetching data' });
@@ -25,8 +32,19 @@ server.get('/DOE/:id', async (req, res) => {
 server.get('/DIOGRANDE/:id', async (req, res) => {
     const id = req.params.id;
     try {
-        let documentoGeradoDOE = await DIOGrande(id);
-        return res.json(documentoGeradoDOE);
+        let documentoGeradoDIOGrande = await DIOGrande(id);
+        if (documentoGeradoDIOGrande.includes('Lamento informar que não foram encontrados Diários Oficiais Digitais')) {
+            return res.json({
+                'Nome': id, 
+                error: 'Nenhum Diário Oficial Digital foi encontrado' 
+            })} else {
+                const startIndex = documentoGeradoDIOGrande.indexOf('</p>') + '</p>'.length;
+                const diarioOficialDigital = documentoGeradoDIOGrande.substring(startIndex);
+                return res.json({
+                    'Nome': id, 
+                    'Diário Oficial Digital': diarioOficialDigital
+                })
+            }
     } catch (error) {
         // Handle any errors that may occur during the asynchronous operation
         return res.status(500).json({ error: 'An error occurred while fetching data' });
