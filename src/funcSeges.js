@@ -20,7 +20,18 @@ async function seges() {
             } 
         }
     }
+    if (resposta === "") {
+        resposta += `Infelizmente, após minhas buscas, não foram encontradas ofertas.`
+    }
     return resposta
 }
 
 module.exports = { seges }
+
+if (require.main === module) {
+    async function lol () {
+        const haha = await seges()
+        console.log(haha)
+    }
+    lol()
+}
