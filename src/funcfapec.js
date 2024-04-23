@@ -28,7 +28,7 @@ async function fapec() {
         }
         for (let i = 0; i < novaListaConteudo.length; i++) {
             const itemSplitada = novaListaConteudo[i].split('-')
-            listaFormatada += `${itemSplitada[itemSplitada.length - 1]}<br><br>`
+            listaFormatada += `${itemSplitada[itemSplitada.length - 1]}<br>`
             
         }
         
