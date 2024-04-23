@@ -33,7 +33,7 @@ async function DOE(nome) {
     };
     head += `<p>Nome: ${nome}   Ano: ${ano}</p>`;
     if (documento.length === 0) {
-        documento += `${head}Lamento informar que não foram encontrados Diários Oficiais Eletrônicos (DOEs)\nassociados ao seu nome até a presente data.`;
+        documento += `${head}Lamento informar que não foram encontrados Diários Oficiais Eletrônicos (DOEs) associados ao seu nome até a presente data.`;
     } else {
         documento = head + documento;
     }
