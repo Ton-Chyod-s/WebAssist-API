@@ -5,7 +5,7 @@ const { Exercito } = require('./src/funcExercito');
 const { DIOGrande } = require('./src/funcDioGrande');
 const { fapec } = require('./src/funcfapec')
 const { seges } = require('./src/funcSeges')
-
+const { concursoEstado } = require('./src/funcConcursoEstado')
 const ano = new Date().getFullYear().toString();
 
 async function run(nome,mail,conteudo=true) {
@@ -15,6 +15,7 @@ async function run(nome,mail,conteudo=true) {
     let documentoGeradoDIOGrande = await DIOGrande(nome);
     let documentoGeradofapec = await fapec()
     let documentoGeradoSeges = await seges()
+    let documentoGeradoConcursoEstado = await concursoEstado()
 
     const corpoEmail = `<p>Prezado(a),</p>
     <p>Aqui estão as análises solicitadas:</p>
@@ -34,7 +35,7 @@ async function run(nome,mail,conteudo=true) {
     <h4>SEGES</h4>
     <p>${documentoGeradoSeges}</p>
     <h4>CONCURSOS PÚBLICOS E PROCESSOS SELETIVOS - Estado</h4>
-    <p></p>
+    <p>${documentoGeradoConcursoEstado}</p>
     <p><i>Por favor, mantenha-se informado sobre possíveis atualizações.<br>
     Atenciosamente,</i></p>
     <p><i>PerinDevBoot~</i></p>`
