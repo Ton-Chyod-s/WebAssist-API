@@ -1,7 +1,5 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
-const axios = require('axios');
-const cheerio = require('cheerio');
 
 async function estagio() {
     try {
