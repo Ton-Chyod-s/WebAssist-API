@@ -50,7 +50,7 @@ Após a instalação, você pode começar a usar o projeto com os seguintes pass
 1. Para realizar o webscraping com as bibliotecas instaladas, você pode criar um script como o exemplo abaixo:
    - **Exemplo axios e cheerio**
   
-        ```bash
+    ```bash
         const axios = require('axios');
         const cheerio = require('cheerio');
 
@@ -67,7 +67,7 @@ Após a instalação, você pode começar a usar o projeto com os seguintes pass
         }
     - **Exemplo puppeteer** 
     
-        ```bash
+    ```bash
         const puppeteer = require('puppeteer');
         const ano = new Date().getFullYear().toString();
 
@@ -110,8 +110,11 @@ Após a instalação, você pode começar a usar o projeto com os seguintes pass
             return documento;
         }
 
+1. Execute os scripts conforme necessário para realizar o webscraping ou gerar capturas de tela das páginas web.
+
 - **config  envio de e-mail**
-  
+
+    ```bash
         const nodemailer = require("nodemailer");
 
         const transporter = nodemailer.createTransport({
@@ -135,6 +138,5 @@ Após a instalação, você pode começar a usar o projeto com os seguintes pass
         }
 
         module.exports = { main };
-
-2. Execute os scripts conforme necessário para realizar o webscraping ou gerar capturas de tela das páginas web.
+        }
 
