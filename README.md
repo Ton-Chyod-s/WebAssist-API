@@ -50,10 +50,66 @@ Após a instalação, você pode começar a usar o projeto com os seguintes pass
 1. --------
 2. Para realizar o webscraping com as bibliotecas instaladas, você pode criar um script como o exemplo abaixo:
    - **Exemplo axios e cheerio**
+  
         ```bash
         const axios = require('axios');
         const cheerio = require('cheerio');
-    
 
-2. Execute os scripts conforme necessário para realizar o webscraping ou gerar capturas de tela das páginas web.
+        async function concursoEstado() {
+            const site = 'http://www2.concursos.ms.gov.br/?location=editais'
+        
+            const response = await axios.get(site);
+
+            const $ = cheerio.load(response.data);
+
+            const cards = $('a').map((i, item) => ({
+                texto: $(item).text().trim()
+            })).get();
+        }
+    - **Exemplo puppeteer** 
+    
+        ```bash
+        const puppeteer = require('puppeteer');
+        const ano = new Date().getFullYear().toString();
+
+        async function DOE(nome) {
+            let head = "";
+            let documento = "";
+
+            const primeiroNome =  nome.split(' ')[0];
+            const browser = await puppeteer.launch({
+                // headless: false,
+            });
+            const page = await browser.newPage();
+            await page.goto('https://www.spdo.ms.gov.br/diariodoe');
+
+            // Preencher um campo
+            await page.type('[id="Filter_Texto"]', nome);
+            // clicar
+            await page.locator('button').click();
+            // esperando até encontrar o selector
+            await page.waitForSelector('table[id="tbDiarios"]');
+            // Aguardar um pouco
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            const planilhaHTML = await page.$$eval('table[id="tbDiarios"] > tbody > tr ',rows => rows.map(element => element.innerText));
+            for (let i = 0; i < planilhaHTML.length; i++) {
+                const element = planilhaHTML[i];
+                if (element.includes(ano) && element.includes(primeiroNome)) {
+                const data = element.split(' - ')[0].split('\t')[1];
+                const DOE = element.split(' - ')[1];
+                documento += `<p>${data}    ${DOE}</p>`;
+                }
+            };
+            head += `<p>Nome: ${nome}   Ano: ${ano}</p>`;
+            if (documento.length === 0) {
+                documento += `${head}Lamento informar que não foram encontrados Diários Oficiais Eletrônicos (DOEs) associados ao seu nome até a presente data.`;
+            } else {
+                documento = head + documento;
+            }
+            await browser.close();
+            return documento;
+        }
+
+3. Execute os scripts conforme necessário para realizar o webscraping ou gerar capturas de tela das páginas web.
 
