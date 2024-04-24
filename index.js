@@ -10,21 +10,24 @@ server.get('/DOE/:id', async (req, res) => {
     const id = req.params.id;
     try {
         let documentoGeradoDOE = await DOE(id);
-        if (documentoGeradoDOE.includes('Lamento informar que não foram encontrados Diários Oficiais Eletrônicos (DOEs)')) {
-            return res.json({
+        if (!documentoGeradoDOE) {
+            return res.status(404).json({
                 'Nome': id, 
                 error: 'Nenhum Diário Oficial Eletrônico (DOE) encontrado' 
-            })} else {
-                const startIndex = documentoGeradoDOE.indexOf('</p>') + '</p>'.length;
-                const diarioOficialEletronico = documentoGeradoDOE.substring(startIndex);
-                return res.json({
-                    'Nome': id, 
-                    'Diário Oficial Eletrônico': diarioOficialEletronico
-                })
-            }
+            });
+        }
+        
+        const startIndex = documentoGeradoDOE.indexOf('</p>') + 4;
+        const diarioOficialEletronico = documentoGeradoDOE.substring(startIndex);
+        
+        return res.json({
+            'Nome': id, 
+            'Diário Oficial Eletrônico': diarioOficialEletronico
+        });
+        
     } catch (error) {
-        // Handle any errors that may occur during the asynchronous operation
-        return res.status(500).json({ error: 'An error occurred while fetching data' });
+        console.error(error); // Log the error for debugging purposes
+        return res.status(500).json({ error: 'Ocorreu um erro ao buscar os dados' });
     }
 });
 
