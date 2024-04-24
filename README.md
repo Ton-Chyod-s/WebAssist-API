@@ -47,8 +47,7 @@ npm install axios cheerio puppeteer
 ## Uso
 Após a instalação, você pode começar a usar o projeto com os seguintes passos:
 
-1. --------
-2. Para realizar o webscraping com as bibliotecas instaladas, você pode criar um script como o exemplo abaixo:
+1. Para realizar o webscraping com as bibliotecas instaladas, você pode criar um script como o exemplo abaixo:
    - **Exemplo axios e cheerio**
   
         ```bash
