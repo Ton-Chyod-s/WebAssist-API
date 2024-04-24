@@ -110,5 +110,31 @@ Após a instalação, você pode começar a usar o projeto com os seguintes pass
             return documento;
         }
 
-3. Execute os scripts conforme necessário para realizar o webscraping ou gerar capturas de tela das páginas web.
+- **config  envio de e-mail**
+  
+        const nodemailer = require("nodemailer");
+
+        const transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 465,
+            secure: true,
+            auth: {
+                user: "email a ser utilizado@gmail.com",
+                pass: "senha de aplicativo",
+            },
+            });
+
+        async function main(texto,imprimirConsole,assunto,para) {
+            await transporter.sendMail({
+                from: "Remetente",
+                to: para,
+                subject: assunto,
+                html: texto
+            });
+            console.log(imprimirConsole)
+        }
+
+        module.exports = { main };
+
+2. Execute os scripts conforme necessário para realizar o webscraping ou gerar capturas de tela das páginas web.
 
