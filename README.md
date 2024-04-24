@@ -46,11 +46,12 @@ npm install axios cheerio puppeteer
 ## Uso
 Após a instalação, você pode começar a usar o projeto com os seguintes passos:
 
-Inicie o servidor de desenvolvimento:
+Inicie o algoritmo:
+
 node email.js
 
-1. Acesse http://localhost:3000 no seu navegador para ver o projeto em execução.
-1. Para realizar o webscraping com as bibliotecas instaladas, você pode criar um script como o exemplo abaixo:
+1. --------
+2. Para realizar o webscraping com as bibliotecas instaladas, você pode criar um script como o exemplo abaixo:
    - **Exemplo axios e cheerio**
         ```bash
         const axios = require('axios');
