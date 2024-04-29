@@ -32,9 +32,9 @@ async function fapec() {
         for (let i = 0; i < novaListaConteudo.length; i++) {
             const itemSplitada = novaListaConteudo[i].split('-')
             const tamanhoItemSplitada = itemSplitada.length
-            const itemSplitadaData = itemSplitada[tamanhoItemSplitada - 1].split(' – ')[1].split(' ')[4]
+            const itemSplitadaData = itemSplitada[tamanhoItemSplitada - 1]
             
-            if (itemSplitadaData != hojeData) {
+            if (itemSplitadaData.includes(hojeData)) {
                 listaFormatada += `<s>${itemSplitada[itemSplitada.length - 1]}<br></s>`
             } else {
                 listaFormatada += `${itemSplitada[itemSplitada.length - 1]}<br>`
@@ -46,3 +46,10 @@ async function fapec() {
 
 module.exports = { fapec }
 
+if (require.main === module) {
+    async function Testando () {
+        const haha = await fapec()
+        console.log(haha)
+    }
+    Testando()
+}
