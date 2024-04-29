@@ -24,7 +24,7 @@ async function fapec() {
             conteudo += card.texto + '\n';
         });
         const listaConteudo = conteudo.split("\n")
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 60; i++) {
             if (listaConteudo[i].includes('Processo Seletivo') & !listaConteudo[i].includes('Processo Seletivo - Abertura')) {
                 novaListaConteudo.push(listaConteudo[i])
             }
