@@ -2,8 +2,8 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 const ano = new Date().getFullYear().toString();
-const mes = new Date().getMonth().toString();
-const dia = new Date().getDay().toString();
+const mes = '0' + (new Date().getMonth() + 1).toString();
+const dia = new Date().getDate().toString();
 const hojeData = `${dia}/${mes}/${ano}`
 
 async function fapec() {
@@ -35,9 +35,10 @@ async function fapec() {
             const itemSplitadaData = itemSplitada[tamanhoItemSplitada - 1]
             
             if (itemSplitadaData.includes(hojeData)) {
-                listaFormatada += `<s>${itemSplitada[itemSplitada.length - 1]}<br></s>`
+                listaFormatada += `${itemSplitada[itemSplitada.length - 1]}${itemSplitada[tamanhoItemSplitada - 2]}<br>`
             } else {
-                listaFormatada += `${itemSplitada[itemSplitada.length - 1]}<br>`
+                listaFormatada += `<s>${itemSplitada[itemSplitada.length - 1]}<br></s>`
+                
             } 
         }
         
