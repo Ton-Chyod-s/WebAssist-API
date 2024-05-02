@@ -35,9 +35,9 @@ async function fapec() {
             const itemSplitadaData = itemSplitada[tamanhoItemSplitada - 1]
             
             if (itemSplitadaData.includes(hojeData)) {
-                listaFormatada += `${itemSplitada[itemSplitada.length - 1]}${itemSplitada[tamanhoItemSplitada - 2]}<br>`
+                listaFormatada += `${itemSplitada[itemSplitada.length - 1]}${itemSplitada[tamanhoItemSplitada - 2]}<br><br>`
             } else {
-                listaFormatada += `<s>${itemSplitada[itemSplitada.length - 1]}<br></s>`
+                listaFormatada += `<s>${itemSplitada[itemSplitada.length - 1]}${itemSplitada[tamanhoItemSplitada - 2]}<br><br></s>`
                 
             } 
         }
