@@ -1,4 +1,4 @@
-// const { DOE } = require('./src/funcDoe');
+const { DOE } = require('./src/funcDoe');
 const { DIOGrande } = require('./src/funcDioGrande');
 const { fapec } = require('./src/funcFapec');
 const { concursoEstado } = require('./src/funcConcursoEstado');
