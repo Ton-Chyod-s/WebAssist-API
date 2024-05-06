@@ -8,7 +8,8 @@ async function DOE(nome) {
 
     const primeiroNome =  nome.split(' ')[0];
     const browser = await puppeteer.launch({
-        // headless: false,
+        headless: false,
+        product: 'firefox'
     });
     const page = await browser.newPage();
     await page.goto('https://www.spdo.ms.gov.br/diariodoe');
