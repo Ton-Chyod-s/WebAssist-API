@@ -8,7 +8,7 @@ const PORT = 3000;
 
 server.get('/', (req, res) => {
     return res.json({
-        "": "Welcome to the GitHub Followers Checker API",
+        "": "Welcome to the Web Assist API! Here are the available endpoints:",
         "DOE": " /DOE/:id {nome do usuario}",
         "DIOGRANDE": " /DIOGRANDE/:id {nome do usuario}",
     });
