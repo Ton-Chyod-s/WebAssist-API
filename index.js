@@ -9,8 +9,6 @@ const express = require('express');
 const server = express();
 const PORT = 3000;
 
-// nodemon index.js
-
 server.get('/', (req, res) => {
     return res.json({
         "": "Welcome to the Web Assist API! Here are the available endpoints:",
