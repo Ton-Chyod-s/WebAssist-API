@@ -14,6 +14,11 @@ server.get('/', (req, res) => {
         "": "Welcome to the Web Assist API! Here are the available endpoints:",
         "DOE": " /DOE/:id {nome do usuario}",
         "DIOGRANDE": " /DIOGRANDE/:id {nome do usuario}",
+        'FAPEC': '/fapec',
+        'CONCURSOESTADO': '/concursoEstado',
+        'EXERCITO': '/Exercito',
+        'UFMS': '/UFMS',
+        'SEGES': '/seges'
     });
 });
 
