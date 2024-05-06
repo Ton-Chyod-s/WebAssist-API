@@ -1,4 +1,4 @@
-// const { DOE } = require('./src/funcDoe');
+const { DOE } = require('./src/funcDoe');
 const { DIOGrande } = require('./src/funcDioGrande');
 const { fapec } = require('./src/funcFapec');
 const { concursoEstado } = require('./src/funcConcursoEstado');
@@ -22,30 +22,30 @@ server.get('/', (req, res) => {
     });
 });
 
-// server.get('/DOE/:id', async (req, res) => {
-//     const id = req.params.id;
-//     try {
-//         let documentoGeradoDOE = await DOE(id);
-//         if (!documentoGeradoDOE) {
-//             return res.status(404).json({
-//                 'Nome': id, 
-//                 error: 'Nenhum Diário Oficial Eletrônico (DOE) encontrado' 
-//             });
-//         }
+server.get('/DOE/:id', async (req, res) => {
+    const id = req.params.id;
+    try {
+        let documentoGeradoDOE = await DOE(id);
+        if (!documentoGeradoDOE) {
+            return res.status(404).json({
+                'Nome': id, 
+                error: 'Nenhum Diário Oficial Eletrônico (DOE) encontrado' 
+            });
+        }
         
-//         const startIndex = documentoGeradoDOE.indexOf('</p>') + 4;
-//         const diarioOficialEletronico = documentoGeradoDOE.substring(startIndex);
+        const startIndex = documentoGeradoDOE.indexOf('</p>') + 4;
+        const diarioOficialEletronico = documentoGeradoDOE.substring(startIndex);
         
-//         return res.json({
-//             'Nome': id, 
-//             'Diário Oficial Eletrônico': diarioOficialEletronico
-//         });
+        return res.json({
+            'Nome': id, 
+            'Diário Oficial Eletrônico': diarioOficialEletronico
+        });
         
-//     } catch (error) {
-//         console.error(error); // Log the error for debugging purposes
-//         return res.status(500).json({ error: 'Ocorreu um erro ao buscar os dados' });
-//     }
-// });
+    } catch (error) {
+        console.error(error); // Log the error for debugging purposes
+        return res.status(500).json({ error: 'Ocorreu um erro ao buscar os dados' });
+    }
+});
 
 server.get('/DIOGRANDE/:id', async (req, res) => {
     const id = req.params.id;
