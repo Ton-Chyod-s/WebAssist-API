@@ -1,6 +1,10 @@
 const { DOE } = require('./src/funcDoe');
 const { DIOGrande } = require('./src/funcDioGrande');
 const { fapec } = require('./src/funcFapec');
+const { concursoEstado } = require('./src/funcConcursoEstado');
+const { Exercito } = require('./src/funcExercito');
+const { UFMS } = require('./src/funcUfms');
+
 const express = require('express');
 const server = express();
 const PORT = 3000;
@@ -64,9 +68,43 @@ server.get('/DIOGRANDE/:id', async (req, res) => {
 });
 
 server.get('/fapec', async (req, res) => {
+    const fapecLista = await fapec();
+    const startIndex = fapecLista.split('<br><br>');
+    const dicionario = new Object();
 
-    return res.json(await fapec());
+    for (let i = 0; i < startIndex.length; i++) {
+        const start = startIndex[i].replace('\u003C/s\u003E\u003Cs\u003E', '').replace('\u003C/s\u003E', '').replace('\u003Cstrong\u003E', '').replace('\u003C/strong\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cs\u003E', '').replace('Site:','');
+        
+        if (start !== '') {
+            dicionario[`index ${i}`] = start;
+        }
+    }
+    return res.json(dicionario);
+});
+
+server.get('/concursoEstado', async (req, res) => {
+    const concursoEstadoLista = await concursoEstado();
+    const startIndex = concursoEstadoLista.split('<br><br>');
+    const dicionario = new Object();
     
+    for (let i = 0; i < startIndex.length; i++) {
+        const start = startIndex[i].replace('\u003Cstrong\u003E','').replace('\u003C/strong\u003E','').replace('Site:','')
+        if (start !== '') {
+            dicionario[`index ${i}`] = start;
+        }}
+    return res.json(dicionario);
+});
+
+server.get('/Exercito', async (req, res) => {
+    const texto = await Exercito();
+    return res.json({ "Exercito": texto });
+});
+
+server.get('/UFMS', async (req, res) => {
+    const texto = await UFMS();
+
+    
+    return res.json({ "UFMS": texto });
 });
 
 server.get('*', (req, res) => {
