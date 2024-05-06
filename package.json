@@ -189,7 +189,11 @@
     "yargs": "^17.7.2",
     "yargs-parser": "^21.1.1",
     "yauzl": "^2.10.0",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "Chrome DevTools Protocol": "^0.0.1262051",
+    "chrome-launcher": "1.1.1",
+    "chrome-remote-interface": "^0.26.0"
+    
   },
   "devDependencies": {},
   "scripts": {
