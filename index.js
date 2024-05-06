@@ -1,5 +1,6 @@
 const { DOE } = require('./src/funcDoe');
 const { DIOGrande } = require('./src/funcDioGrande');
+const { fapec } = require('./src/funcFapec');
 const express = require('express');
 const server = express();
 const PORT = 3000;
@@ -60,6 +61,23 @@ server.get('/DIOGRANDE/:id', async (req, res) => {
         // Handle any errors that may occur during the asynchronous operation
         return res.status(500).json({ error: 'An error occurred while fetching data' });
     }
+});
+
+server.get('/fapec', async (req, res) => {
+    
+    return res.json(await fapec());
+});
+
+server.get('*', (req, res) => {
+    return res.status(404).json({ error: 'Endpoint não encontrado' });
+});
+
+server.get('/DOE', (req, res) => {
+    return res.status(400).json({ error: 'Por favor, insira um nome para a busca' });
+});
+
+server.get('/DIOGRANDE', (req, res) => {
+    return res.status(400).json({ error: 'Por favor, insira um nome para a busca' });
 });
 
 
