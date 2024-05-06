@@ -140,7 +140,6 @@ server.get('/seges', async (req, res) => {
 });
 
 
-
 server.get('*', (req, res) => {
     return res.status(404).json({ error: 'Endpoint não encontrado' });
 });
