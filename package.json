@@ -198,7 +198,6 @@
   "devDependencies": {},
   "scripts": {
     "start": "node index.js",
-    "install-chrome": "npx puppeteer@latest install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
