@@ -1,11 +1,11 @@
-const { main } = require('./src/mandarEmail');
-const { DOE } = require('./src/funcDoe');
-const { UFMS } = require('./src/funcUfms');
-const { Exercito } = require('./src/funcExercito');
-const { DIOGrande } = require('./src/funcDioGrande');
-const { fapec } = require('./src/funcfapec')
-const { seges } = require('./src/funcSeges')
-const { concursoEstado } = require('./src/funcConcursoEstado')
+const { main } = require('./mandarEmail');
+const { DOE } = require('./funcDoe');
+const { UFMS } = require('./funcUfms');
+const { Exercito } = require('./funcExercito');
+const { DIOGrande } = require('.//funcDioGrande');
+const { fapec } = require('./funcFapec')
+const { seges } = require('./funcSeges')
+const { concursoEstado } = require('./funcConcursoEstado')
 const ano = new Date().getFullYear().toString();
 
 async function run(nome,mail,conteudo=true) {
