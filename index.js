@@ -4,6 +4,7 @@ const { fapec } = require('./src/funcFapec');
 const { concursoEstado } = require('./src/funcConcursoEstado');
 const { Exercito } = require('./src/funcExercito');
 const { UFMS } = require('./src/funcUfms');
+const { seges } = require('./src/funcSeges');
 
 const express = require('express');
 const server = express();
@@ -102,10 +103,25 @@ server.get('/Exercito', async (req, res) => {
 
 server.get('/UFMS', async (req, res) => {
     const texto = await UFMS();
+    const startIndex = texto.split('\u003C/p\u003E\u003Cp\u003E');
+    const dicionario = new Object();
 
-    
-    return res.json({ "UFMS": texto });
+    for (let i = 0; i < startIndex.length; i++) {
+        const elemento = startIndex[i].replace('\u003Cp\u003E','').replace('\u003C/p\u003E','');
+        if (elemento !== '') {
+            dicionario[`index ${i}`] = elemento;
+        }
+    }
+    return res.json(dicionario);
 });
+
+server.get('/seges', async (req, res) => {
+    const texto = await seges();
+
+    return res.json(texto);
+});
+
+
 
 server.get('*', (req, res) => {
     return res.status(404).json({ error: 'Endpoint não encontrado' });
@@ -118,7 +134,6 @@ server.get('/DOE', (req, res) => {
 server.get('/DIOGRANDE', (req, res) => {
     return res.status(400).json({ error: 'Por favor, insira um nome para a busca' });
 });
-
 
 server.listen(PORT, () => {
     console.log('Servidor está funcionando!')
