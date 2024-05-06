@@ -25,7 +25,7 @@ async function fapec() {
         });
         const listaConteudo = conteudo.split("\n")
         for (let i = 0; i < 60; i++) {
-            if (listaConteudo[i].includes('Processo Seletivo') & !listaConteudo[i].includes('Processo Seletivo - Abertura')) {
+            if (listaConteudo[i].includes('Processo Seletivo Simplificado') || listaConteudo[i].includes('CONCURSO PÚBLICO DE PROVAS')) {
                 novaListaConteudo.push(listaConteudo[i])
             }
         }
@@ -37,7 +37,12 @@ async function fapec() {
             if (itemSplitadaData.includes(hojeData)) {
                 listaFormatada += `${itemSplitada[itemSplitada.length - 1]}${itemSplitada[tamanhoItemSplitada - 2]}<br><br>`
             } else {
-                listaFormatada += `<s>${itemSplitada[itemSplitada.length - 1]}${itemSplitada[tamanhoItemSplitada - 2]}<br><br></s>`
+                if (itemSplitada.length === 3) {
+                    listaFormatada += `<s>${itemSplitada[itemSplitada.length - 2]} - ${itemSplitada[itemSplitada.length - 1]}<br><br></s>`
+                } else {
+                    listaFormatada += `<s>${itemSplitada[itemSplitada.length - 1]}<br><br></s>`
+                }
+                
                 
             } 
         }

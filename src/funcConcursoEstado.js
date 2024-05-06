@@ -10,9 +10,9 @@ async function concursoEstado() {
     const cards = $('a').map((i, item) => ({
         texto: $(item).text().trim()
     })).get();
-    for (let i = 0; i < 14; i++) {
-        if (cards[i].texto.includes('PROCESSO SELETIVO SIMPLIFICADO') || cards[i].texto.includes('Processo Seletivo Simplificado')) {
-            resposta += `${cards[i].texto}<br>`
+    for (let i = 0; i < 13; i++) {
+        if (cards[i].texto.includes('PROCESSO SELETIVO SIMPLIFICADO') || cards[i].texto.includes('Processo Seletivo Simplificado') || cards[i].texto.includes('CONCURSO') || cards[i].texto.includes('Concurso')) {
+            resposta += `${cards[i].texto}<br><br>`
         }
     }
     return `<strong>Site: </strong>${site + resposta}`
