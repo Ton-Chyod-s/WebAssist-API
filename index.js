@@ -22,7 +22,6 @@ server.get('/', (req, res) => {
     });
 });
 
-
 server.get('/DOE/:id', async (req, res) => {
     const id = req.params.id;
     try {
