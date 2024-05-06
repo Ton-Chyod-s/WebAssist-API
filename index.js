@@ -64,8 +64,9 @@ server.get('/DIOGRANDE/:id', async (req, res) => {
 });
 
 server.get('/fapec', async (req, res) => {
-    
+
     return res.json(await fapec());
+    
 });
 
 server.get('*', (req, res) => {
