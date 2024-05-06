@@ -65,7 +65,7 @@ server.get('/DIOGRANDE/:id', async (req, res) => {
             }
     } catch (error) {
         // Handle any errors that may occur during the asynchronous operation
-        return res.status(500).json({ error: 'An error occurred while fetching data' });
+        return res.status(500).json({ error: 'Ocorreu um erro ao buscar os dados' });
     }
 });
 
