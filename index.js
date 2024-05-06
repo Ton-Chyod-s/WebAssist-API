@@ -5,7 +5,6 @@ const { concursoEstado } = require('./src/funcConcursoEstado');
 const { Exercito } = require('./src/funcExercito');
 const { UFMS } = require('./src/funcUfms');
 const { seges } = require('./src/funcSeges');
-
 const express = require('express');
 const server = express();
 const PORT = 3000;
@@ -89,7 +88,7 @@ server.get('/concursoEstado', async (req, res) => {
     const dicionario = new Object();
     
     for (let i = 0; i < startIndex.length; i++) {
-        const start = startIndex[i].replace('\u003Cstrong\u003E','').replace('\u003C/strong\u003E','').replace('Site:','')
+        const start = startIndex[i].replace('\u003Cstrong\u003E','').replace('\u003C/strong\u003E','').replace('Site:','').replace(' ','');
         if (start !== '') {
             dicionario[`index ${i}`] = start;
         }}
@@ -98,7 +97,16 @@ server.get('/concursoEstado', async (req, res) => {
 
 server.get('/Exercito', async (req, res) => {
     const texto = await Exercito();
-    return res.json({ "Exercito": texto });
+    const startIndex = texto.split('<br><br>');
+    const dicionario = new Object();
+
+    for (let i = 0; i < startIndex.length; i++) {
+        const elemento = startIndex[i].replace('\u003Cbr\u003E','').replace('\u003Cstrong\u003E','').replace('\u003C/strong\u003E','').replace('Site: ','').replace(' ','');
+        if (elemento !== '') {
+            dicionario[`index ${i}`] = elemento;
+        }
+    }
+    return res.json(dicionario);
 });
 
 server.get('/UFMS', async (req, res) => {
@@ -117,8 +125,16 @@ server.get('/UFMS', async (req, res) => {
 
 server.get('/seges', async (req, res) => {
     const texto = await seges();
+    const startIndex = texto.split('<br><br>');
+    const dicionario = new Object();
 
-    return res.json(texto);
+    for (let i = 0; i < startIndex.length; i++) {
+        const elemento = startIndex[i].replace('\u003Cbr\u003E','').replace('\u003Cstrong\u003E','').replace('\u003C/strong\u003E','').replace('Site: ','').replace(' ','');
+        if (elemento !== '') {
+            dicionario[`index ${i}`] = elemento;
+        }
+    }
+    return res.json(dicionario);
 });
 
 
