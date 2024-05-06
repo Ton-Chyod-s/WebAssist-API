@@ -10,8 +10,7 @@
     "puppeteer": "^22.6.5"
   },
   "scripts": {
-    "start": "node index.js",
-    "build": "tsc -p ."
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
