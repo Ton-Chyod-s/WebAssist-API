@@ -8,7 +8,7 @@ async function DOE(nome) {
 
     const primeiroNome =  nome.split(' ')[0];
     const browser = await puppeteer.launch({
-        // headless: false,
+         headless: false,
     });
     const page = await browser.newPage();
     await page.goto('https://www.spdo.ms.gov.br/diariodoe');
@@ -23,6 +23,7 @@ async function DOE(nome) {
     await new Promise(resolve => setTimeout(resolve, 500));
 
     const planilhaHTML = await page.$$eval('table[id="tbDiarios"] > tbody > tr ',rows => rows.map(element => element.innerText));
+
     for (let i = 0; i < planilhaHTML.length; i++) {
         const element = planilhaHTML[i];
         if (element.includes(ano) && element.includes(primeiroNome)) {
@@ -42,3 +43,11 @@ async function DOE(nome) {
 }
 
 module.exports = { DOE };
+
+if (require.main === module) {
+    async function Testando () {
+        const haha = await DOE('hahahaha')
+        console.log(haha)
+    }
+    Testando()
+}

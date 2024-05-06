@@ -6,6 +6,15 @@ const PORT = 3000;
 
 // nodemon index.js
 
+server.get('/', (req, res) => {
+    return res.json({
+        "": "Welcome to the GitHub Followers Checker API",
+        "DOE": " /DOE/:id {nome do usuario}",
+        "DIOGRANDE": " /DIOGRANDE/:id {nome do usuario}",
+    });
+});
+
+
 server.get('/DOE/:id', async (req, res) => {
     const id = req.params.id;
     try {
