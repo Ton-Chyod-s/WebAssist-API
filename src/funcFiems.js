@@ -69,9 +69,9 @@ async function fiems() {
                             const { day, month, year } = formatDate(publicationDate);
                             if (month === mes) {
                                 if (day != dia) {
-                                    resposta += `<s>${cargo}<br>${cidade}, ${local}<br>${publicationDate}</s><br><br>`;
+                                    resposta += `<s>${cargo}, ${cidade}, ${local}<br>${publicationDate}</s><br><br>`;
                                 } else {
-                                    resposta += `${cargo}<br>${cidade}, ${local}<br>${publicationDate}<br><br>`;
+                                    resposta += `${cargo}, ${cidade}, ${local}<br>${publicationDate}<br><br>`;
                                 }
                             }
                             break;
