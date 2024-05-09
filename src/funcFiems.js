@@ -9,8 +9,7 @@ const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
 
 const mes = meses[new Date().getMonth()];
 const dia = new Date().getDate().toString();
-const data = dia + '/' + mes + '/' + ano
-
+const data = dia + '/' + mes + '/' + ano;
 // não recomendado em produção por falha de segurança
 const httpsAgent = new https.Agent({ rejectUnauthorized: false });
 
@@ -18,61 +17,75 @@ async function fiems() {
     let resposta = "";
     let url = "";
     try {
-        const response = await axios.get('https://www.fiems.com.br/trabalhe-conosco', { httpsAgent });
-        const $ = cheerio.load(response.data);
-        const jobDetails = $('div[class="col-md-4"]').map((i, item) => ({
-          texto: $(item).text().trim()
-        })).get();
-        
-        for (let i = 0; i < jobDetails.length; i++) {
-            const dicionario = jobDetails[i].texto.split('\n');
-            let cargoDicionario = new Array();
-            for (let i = 0; i < dicionario.length; i++) {
-                cargoDicionario.push(dicionario[i].trim())
-                }
-
-            const href = $('a[class="btn btn-primary btn-lg btn-block"]').map((i, item) => ({
-                texto: $(item).attr('href') 
-            })).get();
-            
-            for (let i = 0; i < href.length; i++) {
-                const cargoComp = cargoDicionario[0].split(' ')[1].replace('/','');
-                const apSite = href[i].texto.split('-')[2];
-                if (cargoComp === apSite) {
-                    url = href[i].texto;
-                    break;
-                }
-            }
-            const hrefURL = await axios.get(url, { httpsAgent });
-            const $Cheerio = cheerio.load(hrefURL.data);
-            const dataPubli = $Cheerio('h3[class="subtitle mt-2"]').map((i, item) => ({
+        async function getJobDetails() {
+            const response = await axios.get('https://www.fiems.com.br/trabalhe-conosco', { httpsAgent });
+            const $ = cheerio.load(response.data);
+            return $('div[class="col-md-4"]').map((i, item) => ({
                 texto: $(item).text().trim()
-              })).get();
-              
-            const diaPublicado = dataPubli[0].texto.split(' ')[2]
-            const mesPublicado = dataPubli[0].texto.split(' ')[4]
-            const anoPublicado = dataPubli[0].texto.split(' ')[6]
-
-            if (dataPubli[0].texto.includes(anoPublicado) && mes === mesPublicado) {
-                const cargo =  cargoDicionario[0]
-                const cidade =  cargoDicionario[1]
-                const local = cargoDicionario[2]
-                const dataPublicado = dataPubli[0].texto
+            })).get();
+        }
+        
+        async function getHref(url) {
+            const response = await axios.get(url, { httpsAgent });
+            const $ = cheerio.load(response.data);
+            return $('a[class="btn btn-primary btn-lg btn-block"]').map((i, item) => ({
+                texto: $(item).attr('href')
+            })).get();
+        }
+        
+        async function getJobPublicationDate(url) {
+            const response = await axios.get(url, { httpsAgent });
+            const $ = cheerio.load(response.data);
+            const dataPubli = $('h3[class="subtitle mt-2"]').map((i, item) => ({
+                texto: $(item).text().trim()
+            })).get();
+            return dataPubli[0].texto;
+        }
+        
+        function formatDate(dateString) {
+            const parts = dateString.split(' ');
+            return {
+                day: parts[2],
+                month: parts[4],
+                year: parts[6]
+            };
+        }
+        
+        async function processJobDetails(jobDetails) {
+            let resposta = '';
+            for (const detail of jobDetails) {
+                const dicionario = detail.texto.split('\n').map(line => line.trim());
+                const cargo = dicionario[0];
+                const cidade = dicionario[1];
+                const local = dicionario[2];
                 
                 if (cidade.includes('Campo Grande')) {
-                    if (diaPublicado != dia) {
-                        resposta += `<s>${cargo}<br>${cidade}, ${local}<br>${dataPublicado}</s><br><br>`
-                        
-                    } else {
-                        resposta += `${cargo}<br>${cidade}, ${local}<br>${dataPublicado}<br><br>`
-                        
+                    const href = await getHref('https://www.fiems.com.br/trabalhe-conosco');
+                    for (const link of href) {
+                        const cargoComp = cargo.split(' ')[1].replace('/', '');
+                        const apSite = link.texto.split('-')[2];
+                        if (cargoComp === apSite) {
+                            const publicationDate = await getJobPublicationDate(link.texto);
+                            const { day, month, year } = formatDate(publicationDate);
+                            if (month === mes) {
+                                if (day != dia) {
+                                    resposta += `<s>${cargo}<br>${cidade}, ${local}<br>${publicationDate}</s><br><br>`;
+                                } else {
+                                    resposta += `${cargo}<br>${cidade}, ${local}<br>${publicationDate}<br><br>`;
+                                }
+                            }
+                            break;
+                        }
                     }
-                    
                 }
             }
-        } 
-
-        return resposta
+            return resposta;
+        }
+        
+        const jobDetails = await getJobDetails();
+        const resposta = await processJobDetails(jobDetails);
+        return resposta;
+        
       } catch (error) {
         return 'Ocorreu um erro ao fazer a solicitação:', error;
       }
