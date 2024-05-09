@@ -7,7 +7,8 @@ const ano = new Date().getFullYear().toString();
 const httpsAgent = new https.Agent({ rejectUnauthorized: false });
 
 async function fiems() {
-    let resposta = ""
+    let resposta = "";
+    const url = "";
     try {
         const response = await axios.get('https://www.fiems.com.br/trabalhe-conosco', { httpsAgent });
         const $ = cheerio.load(response.data);
@@ -20,12 +21,32 @@ async function fiems() {
             let cargoDicionario = new Array();
             for (let i = 0; i < dicionario.length; i++) {
                 cargoDicionario.push(dicionario[i].trim())
+
+                const lol = $('a[class="btn btn-primary btn-lg btn-block"]').map((i, item) => ({
+                    texto: $(item).attr('href') 
+                })).get();
+                
+                for (let i = 0; i < lol.length; i++) {
+                    const cargoComp = cargoDicionario[0].split(' ')[1].replace('/','');
+                    const apSite = lol[i].texto.split('-')[2];
+                    if (cargoComp === apSite) {
+                        cargoDicionario.push(lol[i].texto)
+                        break;
+                    }
+
+                }
             }
             
             const cargo =  cargoDicionario[0]
             const cidade =  cargoDicionario[1]
             const local = cargoDicionario[2]
             
+            
+
+
+
+
+
             if (cidade.includes('Campo Grande')) {
                 resposta += `${cargo}<br>${cidade}<br>${local}<br><br>`
             }
