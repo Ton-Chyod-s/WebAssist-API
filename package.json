@@ -96,6 +96,7 @@
     "htmlparser2": "^8.0.2",
     "http-errors": "^2.0.0",
     "http-proxy-agent": "^7.0.2",
+    "https": "^1.0.0",
     "https-proxy-agent": "^7.0.4",
     "iconv-lite": "^0.4.24",
     "ieee754": "^1.2.1",
