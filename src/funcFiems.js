@@ -13,3 +13,11 @@ async function fiems() {
 }
 
 module.exports = { fiems };
+
+if (require.main === module) {
+    async function Testando () {
+        const haha = await fiems()
+        console.log(haha)
+    }
+    Testando()
+}
