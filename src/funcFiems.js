@@ -3,12 +3,20 @@ const cheerio = require('cheerio');
 const https = require('https');
 
 const ano = new Date().getFullYear().toString();
+const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+  "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+];
+
+const mes = meses[new Date().getMonth()];
+const dia = new Date().getDate().toString();
+const data = dia + '/' + mes + '/' + ano
+
 // não recomendado em produção por falha de segurança
 const httpsAgent = new https.Agent({ rejectUnauthorized: false });
 
 async function fiems() {
     let resposta = "";
-    const url = "";
+    let url = "";
     try {
         const response = await axios.get('https://www.fiems.com.br/trabalhe-conosco', { httpsAgent });
         const $ = cheerio.load(response.data);
@@ -40,15 +48,20 @@ async function fiems() {
             const dataPubli = $Cheerio('h3[class="subtitle mt-2"]').map((i, item) => ({
                 texto: $(item).text().trim()
               })).get();
-            
-            
-            const cargo =  cargoDicionario[0]
-            const cidade =  cargoDicionario[1]
-            const local = cargoDicionario[2]
-            const dataPublicado = dataPubli[0].texto
-            
-            if (cidade.includes('Campo Grande')) {
-                resposta += `${cargo}<br>${cidade}, ${local}<br>${dataPublicado}<br><br>`
+              
+            const diaPublicado = dataPubli[0].texto.split(' ')[2]
+            const mesPublicado = dataPubli[0].texto.split(' ')[4]
+            const anoPublicado = dataPubli[0].texto.split(' ')[6]
+
+            if (dataPubli[0].texto.includes(anoPublicado) && mes === mesPublicado) {
+                const cargo =  cargoDicionario[0]
+                const cidade =  cargoDicionario[1]
+                const local = cargoDicionario[2]
+                const dataPublicado = dataPubli[0].texto
+                
+                if (cidade.includes('Campo Grande')) {
+                    resposta += `${cargo}<br>${cidade}, ${local}<br>${dataPublicado}<br><br>`
+                }
             }
         } 
 
