@@ -189,9 +189,8 @@
     "yargs": "^17.7.2",
     "yargs-parser": "^21.1.1",
     "yauzl": "^2.10.0",
-    "zod": "^3.22.4"    
+    "zod": "^3.22.4"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
