@@ -41,8 +41,8 @@ async function run(nome,mail,conteudo=true) {
     <p>${documentoGeradoConcursoEstado}</p>
     <h3>FIEMS</h3>
     <p>${documentoGeradoFiems}</p>
-    <h3>Ofertas de estágio</h3>
     <p></p>
+    <h3>Ofertas de estágio</h3>
     
     <p><i>Por favor, mantenha-se informado sobre possíveis atualizações.<br>
     Atenciosamente,</i></p>
@@ -72,5 +72,5 @@ module.exports = { run }
 
 if (require.main === module) {
     run("Klayton Chrysthian Oliveira Dias", "hix_x@hotmail.com");
-    //run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
+    run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
 }

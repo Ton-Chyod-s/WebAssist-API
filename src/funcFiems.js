@@ -60,7 +60,12 @@ async function fiems() {
                 const dataPublicado = dataPubli[0].texto
                 
                 if (cidade.includes('Campo Grande')) {
-                    resposta += `${cargo}<br>${cidade}, ${local}<br>${dataPublicado}<br><br>`
+                    if (diaPublicado <= data) {
+                        resposta += `<s>${cargo}<br>${cidade}, ${local}<br>${dataPublicado}</s><br><br>`
+                    } else {
+                        resposta += `${cargo}<br>${cidade}, ${local}<br>${dataPublicado}<br><br>`
+                    }
+                    
                 }
             }
         } 
