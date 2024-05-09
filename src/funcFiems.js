@@ -21,36 +21,37 @@ async function fiems() {
             let cargoDicionario = new Array();
             for (let i = 0; i < dicionario.length; i++) {
                 cargoDicionario.push(dicionario[i].trim())
+                }
 
-                const lol = $('a[class="btn btn-primary btn-lg btn-block"]').map((i, item) => ({
-                    texto: $(item).attr('href') 
-                })).get();
-                
-                for (let i = 0; i < lol.length; i++) {
-                    const cargoComp = cargoDicionario[0].split(' ')[1].replace('/','');
-                    const apSite = lol[i].texto.split('-')[2];
-                    if (cargoComp === apSite) {
-                        cargoDicionario.push(lol[i].texto)
-                        break;
-                    }
-
+            const href = $('a[class="btn btn-primary btn-lg btn-block"]').map((i, item) => ({
+                texto: $(item).attr('href') 
+            })).get();
+            
+            for (let i = 0; i < href.length; i++) {
+                const cargoComp = cargoDicionario[0].split(' ')[1].replace('/','');
+                const apSite = href[i].texto.split('-')[2];
+                if (cargoComp === apSite) {
+                    url = href[i].texto;
+                    break;
                 }
             }
+            const hrefURL = await axios.get(url, { httpsAgent });
+            const $Cheerio = cheerio.load(hrefURL.data);
+            const dataPubli = $Cheerio('h3[class="subtitle mt-2"]').map((i, item) => ({
+                texto: $(item).text().trim()
+              })).get();
+            
             
             const cargo =  cargoDicionario[0]
             const cidade =  cargoDicionario[1]
             const local = cargoDicionario[2]
+            const dataPublicado = dataPubli[0].texto
             
-            
-
-
-
-
-
             if (cidade.includes('Campo Grande')) {
-                resposta += `${cargo}<br>${cidade}<br>${local}<br><br>`
+                resposta += `${cargo}<br>${cidade}, ${local}<br>${dataPublicado}<br><br>`
             }
-        }   
+        } 
+
         return resposta
       } catch (error) {
         return 'Ocorreu um erro ao fazer a solicitação:', error;
