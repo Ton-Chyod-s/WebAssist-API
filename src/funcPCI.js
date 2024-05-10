@@ -4,7 +4,8 @@ const cheerio = require('cheerio');
 const funcPCI = async () => {
     let concurso = "";
     const siteUrl = 'https://www.pciconcursos.com.br/concursos/centrooeste/';
-    const { data } = await axios.get(siteUrl);
+    const data = await axios.get(siteUrl);
+
     const $ = cheerio.load(data);
     let title = $('div[id="concursos"]').text();
     title = title.split('\n').map(line => line.trim()).filter(line => line !== '');
