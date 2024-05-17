@@ -35,14 +35,14 @@ async function UFMS() {
                 if (condicao === "CONCLUÍDO") {
                     textoSemestre1 = dictCountries2[0];
                 } else {
-                    textoSemestre1 = `${dictCountries2[0]}<br><br> ${textoSemestre3}`  
+                    textoSemestre1 = `${dictCountries2[0]}<br><br><i>${textoSemestre3}</i>`  
                 }
                 
             } else if (semestre.includes("2")) {
                 if (condicao === "CONCLUÍDO") {
                     textoSemestre2 = dictCountries2[0];
                 } else {
-                    textoSemestre2 = `${dictCountries2[0]}<br><br> ${textoSemestre3}` 
+                    textoSemestre2 = `${dictCountries2[0]}<br><br><i>${textoSemestre3}</i>` 
                 }
             }
         }
