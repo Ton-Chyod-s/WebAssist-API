@@ -30,3 +30,10 @@ async function UFMS() {
 
 module.exports = { UFMS };
 
+if (require.main === module) {
+    async function test() {
+        const result = await UFMS();
+        console.log(result);
+    }
+    test()
+}
