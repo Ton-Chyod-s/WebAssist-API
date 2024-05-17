@@ -72,5 +72,5 @@ module.exports = { run }
 
 if (require.main === module) {
     run("Klayton Chrysthian Oliveira Dias", "hix_x@hotmail.com");
-    run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
+    //run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
 }

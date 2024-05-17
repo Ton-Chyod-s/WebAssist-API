@@ -13,30 +13,37 @@ async function UFMS() {
     let textoSemestre1 = "";
     let textoSemestre2 = "Aguardando...";
     let textoSemestre3 = "";
-
+    
     for (let i = 1; i < countries.length && i < 5; i++) {
-        const dictCountries = countries[i].texto.split('\n');
+        const limpo = countries[i].texto.replace(/\t/g, '').replace(/\n/, '').split('\n');
+        const dictCountries2 = limpo.filter((item) => item !== '');
         const semestre = countries[i].texto.split(' – ')[1].split(' ')[0];
         const anoSemestre = countries[i].texto.split(' – ')[1].split('\n')[0].split(' ')[3];
-        const condicao = dictCountries[2].replace(/\s+/g, ' ').trim();
-        for (let i = 0; i < dictCountries.length; i++) {
-            if (dictCountries[i].includes('Edital')) {
-                textoSemestre3 += dictCountries[i].replace(/\s+/g, ' ').trim() + '\n';
-            }
-        if (textoSemestre3.length === 0) {
-            textoSemestre3 = dictCountries[3].replace(/\s+/g, ' ').trim();
-        }   
-        }
-        const conteudoPublicado = dictCountries[3].replace(/\s+/g, ' ').trim();
+        const condicao = dictCountries2[1];
 
+        for (let i = 0; i < dictCountries2.length; i++) {
+            if (dictCountries2[i].includes('Edital')) {
+                textoSemestre3 += dictCountries2[i] + '<br><br>';
+            }
+        }
+        if (textoSemestre3.length === 0) {
+            textoSemestre3 = dictCountries2[2].trim();
+        }   
+        
         if (anoSemestre === ano) {
             if (semestre.includes("1")) {
-                textoSemestre1 = countries[i].texto;
+                if (condicao === "CONCLUÍDO") {
+                    textoSemestre1 = dictCountries2[0];
+                } else {
+                    textoSemestre1 = `${dictCountries2[0]}<br><br> ${textoSemestre3}`  
+                }
+                
             } else if (semestre.includes("2")) {
-                textoSemestre2 = countries[i].texto;
-            }
-            if ( condicao.includes('EM ANDAMENTO') ) {
-                const lol = 'lol'
+                if (condicao === "CONCLUÍDO") {
+                    textoSemestre2 = dictCountries2[0];
+                } else {
+                    textoSemestre2 = `${dictCountries2[0]}<br><br> ${textoSemestre3}` 
+                }
             }
         }
     }
