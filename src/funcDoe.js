@@ -14,13 +14,9 @@ async function DOE(nome) {
     const page = await browser.newPage();
     await page.goto('https://www.spdo.ms.gov.br/diariodoe');
 
-    // Preencher um campo
     await page.type('[id="Filter_Texto"]', nome);
-    // clicar
     await page.locator('button').click();
-    // esperando até encontrar o selector
     await page.waitForSelector('table[id="tbDiarios"]');
-    // Aguardar um pouco
     await new Promise(resolve => setTimeout(resolve, 500));
 
     const planilhaHTML = await page.$$eval('table[id="tbDiarios"] > tbody > tr ',rows => rows.map(element => element.innerText));
