@@ -19,15 +19,7 @@ async function UFMS() {
         const semestre = countries[i].texto.split(' – ')[1].split(' ')[0];
         const anoSemestre = countries[i].texto.split(' – ')[1].split('\n')[0].split(' ')[3];
         const condicao = dictCountries2[1];
-
-        function condicaoConcluido(condicao) {
-            if (condicao === "CONCLUÍDO") {
-                textoSemestre2 = dictCountries2[0];
-            } else {
-                textoSemestre2 = `${dictCountries2[0]}<br><br><i>${textoSemestre3}</i>` 
-            }
-        }
-        
+     
         for (let i = 0; i < dictCountries2.length; i++) {
             if (dictCountries2[i].includes('Edital')) {
                 textoSemestre3 += dictCountries2[i] + '<br><br>';
