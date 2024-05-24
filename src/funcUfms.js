@@ -27,7 +27,7 @@ async function UFMS() {
                 textoSemestre2 = `${dictCountries2[0]}<br><br><i>${textoSemestre3}</i>` 
             }
         }
-
+        
         for (let i = 0; i < dictCountries2.length; i++) {
             if (dictCountries2[i].includes('Edital')) {
                 textoSemestre3 += dictCountries2[i] + '<br><br>';
@@ -39,13 +39,21 @@ async function UFMS() {
         
         if (anoSemestre === ano) {
             if (semestre.includes("1")) {
-                condicaoConcluido(condicao); 
+                if (condicao === "CONCLUÍDO") {
+                    textoSemestre1 = dictCountries2[0];
+                } else {
+                    textoSemestre1 = `${dictCountries2[0]}<br><br><i>${textoSemestre3}</i>`  
+                }
             } else if (semestre.includes("2")) {
-                condicaoConcluido(condicao);
+                if (condicao === "CONCLUÍDO") {
+                    textoSemestre2 = dictCountries2[0];
+                } else {
+                    textoSemestre2 = `${dictCountries2[0]}<br><br><i>${textoSemestre3}</i>` 
+                }
             }
         }
-    return `<p>${textoSemestre2}</p><p>${textoSemestre1}</p>`
     }
+    return `<p>${textoSemestre2}</p><p>${textoSemestre1}</p>`
 }
 
 module.exports = { UFMS };
