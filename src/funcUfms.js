@@ -1,7 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-
 async function UFMS() {
     const response = await axios.get("https://ingresso.ufms.br/publicacao/movimentacao-interna/");
     const $ = cheerio.load(response.data);
