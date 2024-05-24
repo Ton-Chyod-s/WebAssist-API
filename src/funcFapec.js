@@ -19,7 +19,6 @@ async function fapec() {
         const cards = $('div[class="card"]').map((i, item) => ({
             texto: $(item).text().trim()
         })).get();
-        // Loop through each selected element
         cards.forEach(card => {
             conteudo += card.texto + '\n';
         });
