@@ -33,8 +33,23 @@ async function fapec() {
             const itemSplitada = novaListaConteudo[i].split('-')
             const tamanhoItemSplitada = itemSplitada.length
             const itemSplitadaData = itemSplitada[tamanhoItemSplitada - 1]
-            
-            if (itemSplitadaData.includes(hojeData)) {
+            const itemSplitadaCompData = itemSplitada[tamanhoItemSplitada - 1].split(' ')
+            let itemDataAbertura = 0
+            let itemDataFechamento = 0
+
+            for (let i = 0; i < itemSplitadaCompData.length; i++) {
+                const element = itemSplitadaCompData[i];
+                if (element.includes('/')) {
+                    if (itemDataAbertura === 0) {
+                        itemDataAbertura = element
+                    } else {
+                        itemDataFechamento = element
+                    }
+                }
+                
+            }
+
+            if (itemSplitadaData.includes(hojeData) && hojeData >= itemDataAbertura || hojeData <= itemDataFechamento) {
                 listaFormatada += `${itemSplitada[itemSplitada.length - 1]}${itemSplitada[tamanhoItemSplitada - 2]}<br><br>`
             } else {
                 if (itemSplitada.length === 3) {
