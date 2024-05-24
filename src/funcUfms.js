@@ -20,6 +20,14 @@ async function UFMS() {
         const anoSemestre = countries[i].texto.split(' – ')[1].split('\n')[0].split(' ')[3];
         const condicao = dictCountries2[1];
 
+        function condicaoConcluido(condicao) {
+            if (condicao === "CONCLUÍDO") {
+                textoSemestre2 = dictCountries2[0];
+            } else {
+                textoSemestre2 = `${dictCountries2[0]}<br><br><i>${textoSemestre3}</i>` 
+            }
+        }
+
         for (let i = 0; i < dictCountries2.length; i++) {
             if (dictCountries2[i].includes('Edital')) {
                 textoSemestre3 += dictCountries2[i] + '<br><br>';
@@ -31,22 +39,13 @@ async function UFMS() {
         
         if (anoSemestre === ano) {
             if (semestre.includes("1")) {
-                if (condicao === "CONCLUÍDO") {
-                    textoSemestre1 = dictCountries2[0];
-                } else {
-                    textoSemestre1 = `${dictCountries2[0]}<br><br><i>${textoSemestre3}</i>`  
-                }
-                
+                condicaoConcluido(condicao); 
             } else if (semestre.includes("2")) {
-                if (condicao === "CONCLUÍDO") {
-                    textoSemestre2 = dictCountries2[0];
-                } else {
-                    textoSemestre2 = `${dictCountries2[0]}<br><br><i>${textoSemestre3}</i>` 
-                }
+                condicaoConcluido(condicao);
             }
         }
-    }
     return `<p>${textoSemestre2}</p><p>${textoSemestre1}</p>`
+    }
 }
 
 module.exports = { UFMS };
