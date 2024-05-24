@@ -56,10 +56,8 @@ async function run(nome,mail,conteudo=true) {
          }
      })();
 
-    // Envie o e-mail aqui, após o processamento de todas as informações.
     await main(corpoEmail, `E-mail enviado com sucesso!!`, headCorpo, mail, true);
 
-    // Limpar ou redefinir as variáveis utilizadas
     documentoGeradoDOE = null;
     documentoGeradoUFMS = null;
     documentoGeradoExercito = null;
