@@ -21,3 +21,9 @@ async function Exercito() {
 }
 
 module.exports = { Exercito };
+
+if (require.main === module) {
+    (async () => {
+        console.log(await Exercito());
+    })();
+}

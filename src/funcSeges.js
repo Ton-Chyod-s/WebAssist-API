@@ -29,3 +29,9 @@ async function seges() {
 }
 
 module.exports = { seges }
+
+if (require.main === module) {
+    (async () => {
+        console.log(await seges());
+    })();
+}

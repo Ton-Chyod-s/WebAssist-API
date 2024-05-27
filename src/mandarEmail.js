@@ -21,3 +21,9 @@ async function main(texto,imprimirConsole,assunto,para) {
 }
 
 module.exports = { main };
+
+if (require.main === module) {
+    (async () => {
+        await main("Teste de envio de e-mail","E-mail enviado com sucesso!!","Teste","hix_x@hotmail.com");
+    })();
+}
