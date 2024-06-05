@@ -13,7 +13,7 @@ const ano = new Date().getFullYear().toString();
 async function run(nome,mail,conteudo=true) {
     let documentoGeradoDOE = await DOE(nome);
     let documentoGeradoUFMS = await UFMS();
-    // let documentoGeradoExercito = await Exercito();
+    let documentoGeradoExercito = await Exercito();
     let documentoGeradoDIOGrande = await DIOGrande(nome);
     let documentoGeradofapec = await fapec()
     let documentoGeradoSeges = await seges()
@@ -26,7 +26,7 @@ async function run(nome,mail,conteudo=true) {
     <p><strong>Movimentação Interna e Reingresso UFMS ${ano}</strong></p>
     <p>${documentoGeradoUFMS}</p>
     <p><strong>Oficial Técnico Temporário (OTT) - PROCESSO SELETIVO ${ano}</strong></p>
-    <p>${'documentoGeradoExercito'}</p>
+    <p>${documentoGeradoExercito}</p>
     ` : ''}
     <p><strong>Diário Oficial do Estado de Mato Grosso do Sul (DOE)</strong></p>
     <p>${documentoGeradoDOE}</p>
