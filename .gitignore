@@ -9279,3 +9279,4 @@ ConcursosAtivos.csv
 .venv/Lib/site-packages/beautifulsoup4-4.12.3.dist-info/licenses/LICENSE
 .venv/Lib/site-packages/beautifulsoup4-4.12.3.dist-info/licenses/AUTHORS
 .venv/Lib/site-packages/beautifulsoup4-4.12.3.dist-info/INSTALLER
+__pycache__/api.cpython-312.pyc
