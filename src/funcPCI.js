@@ -30,4 +30,3 @@ if (require.main === module) {
     }
     test()
 }
-
