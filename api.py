@@ -3,6 +3,7 @@ from datetime import date
 import requests
 import re
 from fastapi import FastAPI
+from typing import Dict, Any
 
 json = dict()
 analysis = dict()
@@ -148,19 +149,27 @@ LINK = "https://www.pciconcursos.com.br/concursos/"
 response = requests.get(LINK)
 soup = BeautifulSoup(response.text, "html.parser")
 
-# Extract one state
-state = exam_region(soup, 'MS')
-
-for key, value in enumerate(state):
-    if ( key != 0 ):
-        name = state[key][0]
-        for i in range(1, len(value)):
-            analysis[state[0][i]] = state[key][i]
-        json[name] = analysis
-        analysis = dict()
-
 app = FastAPI()
 
 @app.get("/")
 def concursos_root():
+    return {"/{Estado}": "exemplo: /MS"}     
+
+
+@app.get("/estado/{item_id}")
+def estado(item_id: str) -> Dict[str, Any]:
+    json = dict()
+    
+    # Extract one state
+    state = exam_region(soup, item_id)
+
+    for key, value in enumerate(state):
+        if ( key != 0 ):
+            name = state[key][0]
+            for i in range(1, len(value)):
+                analysis[state[0][i]] = state[key][i]
+            json[name] = analysis
+        analysis = dict()
+
+    
     return json 
