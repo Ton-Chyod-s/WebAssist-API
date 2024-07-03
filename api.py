@@ -152,20 +152,15 @@ soup = BeautifulSoup(response.text, "html.parser")
 state = exam_region(soup, 'MS')
 
 for key, value in enumerate(state):
-    if key == 0:
-        for i in range(1, len(state) -1):
-            for j in range(len(value) -1):
-                analysis[value[j]] = state[i][j]
-                
-            json.update({i: analysis})
-            analysis = dict()
+    if ( key != 0 ):
+        name = state[key][0]
+        for i in range(1, len(value)):
+            analysis[state[0][i]] = state[key][i]
+        json[name] = analysis
+        analysis = dict()
 
+app = FastAPI()
 
-
-
-
-# app = FastAPI()
-
-# @app.get("/")
-# def concursos_root():
-#     return json 
+@app.get("/")
+def concursos_root():
+    return json 
