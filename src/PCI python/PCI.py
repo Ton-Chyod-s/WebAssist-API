@@ -3,6 +3,9 @@ from datetime import date
 import requests
 import re
 
+json = dict()
+analysis = dict()
+
 def exam_region(source_code, region):
     # Convert source code to string
     source_code_str = str(source_code)
@@ -135,29 +138,25 @@ def exam_region(source_code, region):
 
     return combinacao_concursos
 
-if __name__ == '__main__':
-    # Date
-    today = date.today()
-    date_now = today.strftime("%d%m%Y")
+# Date
+today = date.today()
+date_now = today.strftime("%d%m%Y")
 
-    # Get source code
-    LINK = "https://www.pciconcursos.com.br/concursos/"
-    response = requests.get(LINK)
-    soup = BeautifulSoup(response.text, "html.parser")
+# Get source code
+LINK = "https://www.pciconcursos.com.br/concursos/"
+response = requests.get(LINK)
+soup = BeautifulSoup(response.text, "html.parser")
 
-    # Extract one state
-    state = exam_region(soup, 'MS')
+# Extract one state
+state = exam_region(soup, 'MS')
 
-    def to_bytes(s):
-        if type(s) == str:
-            return s.encode('utf-8')
-        return s
+for key, value in enumerate(state):
+    if key == 0:
+        for i in range(1, len(state) -1):
+            for j in range(len(value) -1):
+                analysis[value[j]] = state[i][j]
+                
+            json.update({i: analysis})
+            analysis = dict()
 
-    for lin in state:
-        for elem in lin:
-            to_bytes(elem)   
-    
-    print(state)
-   
- 
-    lol = 'oll'
+
