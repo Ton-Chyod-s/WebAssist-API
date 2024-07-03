@@ -7,10 +7,13 @@ const { fapec } = require('./funcFapec')
 const { seges } = require('./funcSeges')
 const { concursoEstado } = require('./funcConcursoEstado')
 const { fiems } = require('./funcFiems');
+const { funcPCI } = require('./funcPCI');
+
 
 const ano = new Date().getFullYear().toString();
 
 async function run(nome,mail,conteudo=true) {
+    let listaConcursos = '';
     let documentoGeradoDOE = await DOE(nome);
     let documentoGeradoUFMS = await UFMS();
     let documentoGeradoExercito = await Exercito();
@@ -19,7 +22,18 @@ async function run(nome,mail,conteudo=true) {
     let documentoGeradoSeges = await seges()
     let documentoGeradoConcursoEstado = await concursoEstado()
     let documentoGeradoFiems = await fiems()
+    let documentoGeradoPCI = await funcPCI('ms');
 
+    for ( linha in documentoGeradoPCI ) {
+        const vagas = documentoGeradoPCI[linha]['Vagas']
+        const link = documentoGeradoPCI[linha]['Link']
+        const inscricao = documentoGeradoPCI[linha]['Inscrição Até']
+        const nivel = documentoGeradoPCI[linha]['Nível']
+        const salario = documentoGeradoPCI[linha]['Salário Até']
+    
+        listaConcursos += `${linha}, Vagas: ${vagas}, Inscrição Até: ${inscricao}, Nível: ${nivel}, Salário Até: ${salario}<p>Link: ${link}<p><br>`
+    }
+    
     const corpoEmail = `<p>Prezado(a),</p>
     <p>Aqui estão as análises solicitadas:</p>
     ${conteudo ? `
@@ -41,6 +55,8 @@ async function run(nome,mail,conteudo=true) {
     <p>${documentoGeradoConcursoEstado}</p>
     <h3>FIEMS</h3>
     <p>${documentoGeradoFiems}</p>
+    <h3>PCI Concursos</h3>
+    <p>${listaConcursos}</p>
     <p></p>
     <h3>Ofertas de estágio</h3>
     
