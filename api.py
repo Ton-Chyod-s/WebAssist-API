@@ -130,10 +130,10 @@ def exam_region(source_code, region):
     for line in concursos_tag.findAll(class_='ca'):
         name.append(line.find('a').text.strip())  # Institution's name
         link.append(line.find('a', href=True)['href'])  # Link
-        vagas.append(''.join(re.findall('(\d*) vaga', str(line.find(class_='cd')))))  # Jobs
-        nivel.append('/'.join(re.findall('Superior|Médio', str(line.find(class_='cd')))))  # Education
-        salario.append(''.join(re.findall('R\$ *\d*\.*\d*\,*\d*', str(line.find(class_='cd')))))  # Salary
-        inscricao.append(''.join(re.findall('\d+/\d+/\d+', str(line.find(class_='ce'))))) # Subscription date
+        vagas.append(''.join(re.findall(r'(\d*) vaga', str(line.find(class_='cd')))))  # Jobs
+        nivel.append('/'.join(re.findall(r'Superior|Médio', str(line.find(class_='cd')))))  # Education
+        salario.append(''.join(re.findall(r'(R\$ *\d*\.*\d*\,*\d*)', str(line.find(class_='cd')))))  # Salary
+        inscricao.append(''.join(re.findall(r'(\d+/\d+/\d+)', str(line.find(class_='ce'))))) # Subscription date
 
     # Merge lists
     combinacao_concursos.extend([list(i) for i in zip(name, vagas, nivel, salario, inscricao, link)])
@@ -153,15 +153,14 @@ app = FastAPI()
 
 @app.get("/")
 def concursos_root():
-    return {"/{Estado}": "exemplo: /MS"}     
-
+    return {"/estado/{Estado}": "exemplo: /estado/MS"}     
 
 @app.get("/estado/{item_id}")
 def estado(item_id: str) -> Dict[str, Any]:
     json = dict()
-    
+
     # Extract one state
-    state = exam_region(soup, item_id)
+    state = exam_region(soup, item_id.upper())
 
     for key, value in enumerate(state):
         if ( key != 0 ):
@@ -171,5 +170,4 @@ def estado(item_id: str) -> Dict[str, Any]:
             json[name] = analysis
         analysis = dict()
 
-    
     return json 
