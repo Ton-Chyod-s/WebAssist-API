@@ -1,32 +1,17 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
 
-const funcPCI = async () => {
-    let concurso = "";
-    // const siteUrl = 'https://www.pciconcursos.com.br/concursos/centrooeste/';
-    const siteUrl = 'https://www.pciconcursos.com.br';
-    const data = await axios.get(siteUrl);
-    const $ = cheerio.load(data);
-    
-    console.log('Buscando concursos...');
-    console.log($);
-
-    let title = $('div[id="concursos"]').text();
-    title = title.split('\n').map(line => line.trim()).filter(line => line !== '');
-    for (let i = 0; i < title.length; i++) {
-        if (title[i] == 'MS') {
-            concurso += `${title[i - 1]} - ${title[i]} - ${title[i + 1]} - ${title[i + 2]}\n`
-        }
+async function funcPCI(estado) {
+    while (true) {
+        const  data  = await fetch(`https://api-pci.vercel.app/estado/${estado}`);
+        const dataJson = await data.json();
+       
+        return dataJson
     }
-    return concurso;
 }
-
-module.exports = { funcPCI };
-
+    
+// Código de exemplo para testar a função follow
 if (require.main === module) {
-    async function test() {
-        const result = await funcPCI();
+    (async () => {
+        const result = await funcPCI('ms');
         console.log(result);
-    }
-    test()
+    })();
 }
