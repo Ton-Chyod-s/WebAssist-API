@@ -1,12 +1,7 @@
 from bs4 import BeautifulSoup
-import ctypes
 from datetime import date
-import filecmp
-import os
-import pandas as pd
 import requests
 import re
-
 
 def exam_region(source_code, region):
     # Convert source code to string
@@ -140,37 +135,6 @@ def exam_region(source_code, region):
 
     return combinacao_concursos
 
-
-
-def new_exam():
-    novos_concursos = ['Concursos novos disponíveis: ']
-
-    # Check if there is an old 'ConcursosAtivos.csv' file
-    if os.path.isfile('ConcursosAtivos.csv') is False:
-        os.rename('ConcursosAtivos' + date_now + '.csv', 'ConcursosAtivos.csv')
-
-    else:
-        if filecmp.cmp('ConcursosAtivos.csv', 'ConcursosAtivos' + date_now + '.csv') is False:
-            antigo = pd.read_csv('ConcursosAtivos.csv', encoding='utf-16', header=None, sep = "\t")
-            novo = pd.read_csv('ConcursosAtivos' + date_now + '.csv', encoding='utf-16', header=None, sep = "\t")
-
-            # Find the new exam name
-            for contador in range(1, novo.shape[0]):
-                encontrou = 0
-                for contador2 in range(1, antigo.shape[0]):
-                    if novo.iloc[contador, 0] == antigo.iloc[contador2, 0] and novo.iloc[contador, 1] == antigo.iloc[contador2, 1]:
-                        encontrou = 1
-                if encontrou == 0:
-                    print(novo.iloc[contador,0])
-                    novos_concursos.append(str(novo.iloc[contador,0])+' - '+str(novo.iloc[contador,2]))
-
-        os.remove('ConcursosAtivos.csv')
-        os.rename('ConcursosAtivos' + date_now + '.csv', 'ConcursosAtivos.csv')
-
-    if len(novos_concursos) > 1:
-        ctypes.windll.user32.MessageBoxW(0, '\n'.join(novos_concursos), "Novo Concurso", 1)
-
-
 if __name__ == '__main__':
     # Date
     today = date.today()
@@ -181,19 +145,19 @@ if __name__ == '__main__':
     response = requests.get(LINK)
     soup = BeautifulSoup(response.text, "html.parser")
 
-    # Extract multiple states
-    # state1 = exam_region(soup, 'CE')
-    # state2 = exam_region(soup, 'SE')
-    # state = state1 + state2[1:]
-
     # Extract one state
     state = exam_region(soup, 'MS')
 
-    # Save as CSV
-    df = pd.DataFrame(state)
-    df = df.replace(r'^\s*$', '-', regex=True)
-    with open('ConcursosAtivos' + date_now + '.csv', 'a', encoding='utf-16', newline='') as f:
-        df.to_csv(f, encoding = 'utf-16', header = False, sep = "\t", index = False)
+    def to_bytes(s):
+        if type(s) == str:
+            return s.encode('utf-8')
+        return s
 
-    # Check for new exam
-    new_exam()
+    for lin in state:
+        for elem in lin:
+            to_bytes(elem)   
+    
+    print(state)
+   
+ 
+    lol = 'oll'
