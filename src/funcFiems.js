@@ -57,13 +57,14 @@ async function fiems() {
             if ( href !== '' ) {
                 const responseHref = await axios.get(href, { httpsAgent });
                 const $Href = cheerio.load(responseHref.data);
-                const dataPubli = $Href('h3[class="subtitle mt-2"]').map((i, item) => ({
+                const dataPubli = $Href('div[class="title"]').map((i, item) => ({
                     texto: $(item).text().trim()
-                })).get();
+                })).get()[0];
 
-                const dataPubliTXT = dataPubli.map(item => item.texto).toString()
+                const dataPubliTXT = dataPubli.texto;
+                const dataSplit = dataPubliTXT.split(' ')[4];
 
-                if (dataPubliTXT.includes(dia) && dataPubliTXT.includes(mes)) {
+                if (dataPubliTXT.includes(dia) || dataSplit > dia && dataPubliTXT.includes(mes)) {
                     dictFapec['site'] = site
 
                     dictFapecConteudo['cargo'] = conteudo[0]
