@@ -64,10 +64,11 @@ async function fiems() {
                 const dataPubliTXT = dataPubli.map(item => item.texto).toString()
 
                 if (dataPubliTXT.includes(dia) && dataPubliTXT.includes(mes)) {
+                    dictFapec['site'] = site
+
                     dictFapecConteudo['cargo'] = conteudo[0]
                     dictFapecConteudo['dataPubli'] = dataPubliTXT
 
-                    dictFapec['site'] = site    
                     dictFapec[concurso] = dictFapecConteudo
 
                     dictFapecConteudo = {};
