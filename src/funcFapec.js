@@ -13,11 +13,8 @@ async function fapec() {
     const site = "https://fapec.org/processo-seletivo/";
     let conteudo = "";
     let novaListaConteudo = []
-    let listaFormatada = ""
 
     dictFapec['site'] = site
-
-    listaFormatada += "<strong>Site: </strong>" + site + "<br><br>"
 
     const response = await axios.get(site);
         const $ = cheerio.load(response.data);
@@ -42,7 +39,6 @@ async function fapec() {
             const numProcesso = itemSplitada[0].split(' ')
             let numProcessoTexto = "";
 
-
             for (let i = 0; i < numProcesso.length; i++) {
                 if ( numProcesso[i].includes('/') ) {
                     if ( numProcessoTexto.length > 0 ) {
@@ -52,7 +48,6 @@ async function fapec() {
                 }
             }
 
-            
             let itemDataAbertura = 0
             let itemDataFechamento = 0
 
