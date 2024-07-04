@@ -46,7 +46,7 @@ async function run(nome,mail,conteudo=true) {
                 listaExercito += `<p>${item[linha]}</p>`
             }
         } else {
-            listaExercito += `<p>${item}</p>`
+            listaExercito += `<h3>${item}</h3>`
         }
         
     }
@@ -75,7 +75,7 @@ async function run(nome,mail,conteudo=true) {
     <p>${documentoGeradoFiems}</p>
     <h3>PCI Concursos</h3>
     <p>${listaConcursos}</p>
-    <p></p>
+   
     <h3>Ofertas de estágio</h3>
     
     <p><i>Por favor, mantenha-se informado sobre possíveis atualizações.<br>
