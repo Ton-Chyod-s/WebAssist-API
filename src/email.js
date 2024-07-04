@@ -14,6 +14,9 @@ const ano = new Date().getFullYear().toString();
 
 async function run(nome,mail,conteudo=true) {
     let listaConcursos = '';
+
+    let listaExercito = '';
+
     let documentoGeradoDOE = await DOE(nome);
     let documentoGeradoUFMS = await UFMS();
     let documentoGeradoExercito = await Exercito();
@@ -34,13 +37,28 @@ async function run(nome,mail,conteudo=true) {
         listaConcursos += `${linha}, Vagas: ${vagas}, Inscrição Até: ${inscricao}, Nível: ${nivel}, Salário Até: ${salario}<p>Link: ${link}<p><br>`
     }
     
+
+    for ( let i in documentoGeradoExercito ) {
+        const item = documentoGeradoExercito[i]
+        
+        if (typeof(item) !== 'string') {
+            for ( let linha in item ) {
+                listaExercito += `<p>${item[linha]}</p>`
+            }
+        } else {
+            listaExercito += `<p>${item}</p>`
+        }
+        
+    }
+
+
     const corpoEmail = `<p>Prezado(a),</p>
     <p>Aqui estão as análises solicitadas:</p>
     ${conteudo ? `
     <p><strong>Movimentação Interna e Reingresso UFMS ${ano}</strong></p>
     <p>${documentoGeradoUFMS}</p>
     <p><strong>Oficial Técnico Temporário (OTT) - PROCESSO SELETIVO ${ano}</strong></p>
-    <p>${documentoGeradoExercito}</p>
+    <p>${listaExercito}</p>
     ` : ''}
     <p><strong>Diário Oficial do Estado de Mato Grosso do Sul (DOE)</strong></p>
     <p>${documentoGeradoDOE}</p>
@@ -86,6 +104,6 @@ module.exports = { run }
 
 if (require.main === module) {
     run("Klayton Chrysthian Oliveira Dias", "hix_x@hotmail.com");
-    run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
-    run("Ronaldo dos Santos","ronaldo.stst@gmail.com",false)
+    // run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
+    // run("Ronaldo dos Santos","ronaldo.stst@gmail.com",false)
 }
