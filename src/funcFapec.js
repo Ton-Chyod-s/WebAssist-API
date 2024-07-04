@@ -33,6 +33,7 @@ async function fapec() {
                 novaListaConteudo.push(listaConteudo[i])
             }
         }
+
         for (let i = 0; i < novaListaConteudo.length; i++) {
             const itemSplitada = novaListaConteudo[i].split('-')
             const tamanhoItemSplitada = itemSplitada.length
@@ -43,9 +44,12 @@ async function fapec() {
 
 
             for (let i = 0; i < numProcesso.length; i++) {
-                if (numProcesso[i].includes('/')) {
+                if ( numProcesso[i].includes('/') ) {
+                    if ( numProcessoTexto.length > 0 ) {
+                        break;
+                    }
                     numProcessoTexto += numProcesso[i]
-                } 
+                }
             }
 
             
