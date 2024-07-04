@@ -99,6 +99,7 @@ server.get('/concursoEstado', async (req, res) => {
 
 server.get('/Exercito', async (req, res) => {
     const texto = await Exercito();
+    
     return res.json(texto);
 });
 
