@@ -19,7 +19,7 @@ async function Exercito() {
             const paragrafo = countries[i]['texto']
             if (paragrafo.includes(anoAtual)) {
 
-                dictAnalise[anoAtual] = `Prepare-se e leia atentamente o edital da convocação. Boa sorte, guerreiro!`
+                dictAnalise['Encontrei'] = `Prepare-se e leia atentamente o edital da convocação. Boa sorte, guerreiro!`
                 
                 const tituloAno = `ott-${anoAtual}`
                 const site = `https://9rm.eb.mil.br/index.php/${tituloAno}`

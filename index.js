@@ -99,16 +99,7 @@ server.get('/concursoEstado', async (req, res) => {
 
 server.get('/Exercito', async (req, res) => {
     const texto = await Exercito();
-    const startIndex = texto.split('<br><br>');
-    const dicionario = new Object();
-
-    for (let i = 0; i < startIndex.length; i++) {
-        const elemento = startIndex[i].replace('\u003Cbr\u003E','').replace('\u003Cstrong\u003E','').replace('\u003C/strong\u003E','').replace('Site: ','').replace(' ','');
-        if (elemento !== '') {
-            dicionario[`index ${i}`] = elemento;
-        }
-    }
-    return res.json(dicionario);
+    return res.json(texto);
 });
 
 server.get('/UFMS', async (req, res) => {
