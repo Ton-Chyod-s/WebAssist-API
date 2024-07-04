@@ -37,6 +37,19 @@ async function Exercito() {
                     }
                 }
 
+                const countrieData = $Corpo('span').map((i, item) => ({
+                    texto: $(item).text().trim()
+                })).get();
+
+                for (let i = 0; i < countrieData.length; i++) {
+                    const texto = countrieData[i]['texto']
+                    if (texto.includes('Última atualização')) {
+                        dictCorpo['Atualizacao'] = texto.replace('Última atualização em','').trim();
+                        
+                    }
+                    
+                }
+                
                 dictAnalise[paragrafo] = dictCorpo
 
             }
