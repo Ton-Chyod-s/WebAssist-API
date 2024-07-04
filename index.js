@@ -5,6 +5,7 @@ const { concursoEstado } = require('./src/funcConcursoEstado');
 const { Exercito } = require('./src/funcExercito');
 const { UFMS } = require('./src/funcUfms');
 const { seges } = require('./src/funcSeges');
+const { fiems } = require('./src/funcFiems');
 const express = require('express');
 const server = express();
 const PORT = 3000;
@@ -18,7 +19,8 @@ server.get('/', (req, res) => {
         'CONCURSOESTADO': '/concursoEstado',
         'EXERCITO': '/Exercito',
         'UFMS': '/UFMS',
-        'SEGES': '/seges'
+        'SEGES': '/seges',
+        'FIEMS': '/fiems'
     });
 });
 
@@ -122,6 +124,11 @@ server.get('/seges', async (req, res) => {
     return res.json(dicionario);
 });
 
+server.get('/fiems', async (req, res) => {
+    const texto = await fiems();
+
+    return res.json(texto);
+});
 
 server.get('*', (req, res) => {
     return res.status(404).json({ error: 'Endpoint não encontrado' });
