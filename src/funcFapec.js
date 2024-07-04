@@ -67,13 +67,7 @@ async function fapec() {
                 dictConteudo[`${numProcessoTexto}`] = `${itemSplitada[itemSplitada.length - 1]}${itemSplitada[tamanhoItemSplitada - 2]}`.trim()
 
             } else {
-                if (itemSplitada.length === 3) {
-
-                    dictConteudo[`${numProcessoTexto}`] = `${itemSplitada[itemSplitada.length - 2]} - ${itemSplitada[itemSplitada.length - 1]}`.trim()
-
-                } else {
-                    dictConteudo[`${numProcessoTexto}`] = `${itemSplitada[itemSplitada.length - 1]}`.trim()
-                }
+                dictConteudo['Error'] = 'Não há processos seletivos ou concursos públicos disponíveis no momento.'
             } 
         }
         dictFapec['conteudo'] = dictConteudo
