@@ -6,11 +6,16 @@ const mes = '0' + (new Date().getMonth() + 1).toString();
 const dia = new Date().getDate().toString();
 const hojeData = `${dia}/${mes}/${ano}`
 
+let dictFapec = {};
+let dictConteudo = {};
+
 async function fapec() {
     const site = "https://fapec.org/processo-seletivo/";
     let conteudo = "";
     let novaListaConteudo = []
     let listaFormatada = ""
+
+    dictFapec['site'] = site
 
     listaFormatada += "<strong>Site: </strong>" + site + "<br><br>"
 
@@ -33,6 +38,17 @@ async function fapec() {
             const tamanhoItemSplitada = itemSplitada.length
             const itemSplitadaData = itemSplitada[tamanhoItemSplitada - 1]
             const itemSplitadaCompData = itemSplitada[tamanhoItemSplitada - 1].split(' ')
+            const numProcesso = itemSplitada[0].split(' ')
+            let numProcessoTexto = "";
+
+
+            for (let i = 0; i < numProcesso.length; i++) {
+                if (numProcesso[i].includes('/')) {
+                    numProcessoTexto += numProcesso[i]
+                } 
+            }
+
+            
             let itemDataAbertura = 0
             let itemDataFechamento = 0
 
@@ -50,18 +66,23 @@ async function fapec() {
 
             if (itemSplitadaData.includes(hojeData) && hojeData >= itemDataAbertura || hojeData <= itemDataFechamento) {
                 listaFormatada += `${itemSplitada[itemSplitada.length - 1]}${itemSplitada[tamanhoItemSplitada - 2]}<br><br>`
+
+                dictConteudo[`${numProcessoTexto}`] = `${itemSplitada[itemSplitada.length - 1]}${itemSplitada[tamanhoItemSplitada - 2]}`.trim()
+
             } else {
                 if (itemSplitada.length === 3) {
                     listaFormatada += `<s>${itemSplitada[itemSplitada.length - 2]} - ${itemSplitada[itemSplitada.length - 1]}<br><br></s>`
+
+                    dictConteudo[`${numProcessoTexto}`] = `${itemSplitada[itemSplitada.length - 2]} - ${itemSplitada[itemSplitada.length - 1]}`.trim()
+
                 } else {
-                    listaFormatada += `<s>${itemSplitada[itemSplitada.length - 1]}<br><br></s>`
+                    dictConteudo[`${numProcessoTexto}`] = `${itemSplitada[itemSplitada.length - 1]}`.trim()
                 }
-                
-                
             } 
         }
-        
-        return listaFormatada
+        dictFapec['conteudo'] = dictConteudo
+
+        return dictFapec
     }
 
 module.exports = { fapec }

@@ -71,17 +71,8 @@ server.get('/DIOGRANDE/:id', async (req, res) => {
 
 server.get('/fapec', async (req, res) => {
     const fapecLista = await fapec();
-    const startIndex = fapecLista.split('<br><br>');
-    const dicionario = new Object();
-
-    for (let i = 0; i < startIndex.length; i++) {
-        const start = startIndex[i].replace('\u003C/s\u003E\u003Cs\u003E', '').replace('\u003C/s\u003E', '').replace('\u003Cstrong\u003E', '').replace('\u003C/strong\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cbr\u003E', '').replace('\u003Cbr /\u003E', '').replace('\u003Cs\u003E', '').replace('Site:','');
-        
-        if (start !== '') {
-            dicionario[`index ${i}`] = start;
-        }
-    }
-    return res.json(dicionario);
+    
+    return res.json(fapecLista);
 });
 
 server.get('/concursoEstado', async (req, res) => {
