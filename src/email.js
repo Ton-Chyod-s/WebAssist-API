@@ -19,6 +19,8 @@ async function run(nome,mail,conteudo=true) {
 
     let listaFapec = '';
 
+    let listaFiems = '';
+
     let documentoGeradoDOE = await DOE(nome);
     let documentoGeradoUFMS = await UFMS();
     let documentoGeradoExercito = await Exercito();
@@ -64,6 +66,17 @@ async function run(nome,mail,conteudo=true) {
         }
     }
 
+    for ( let i in documentoGeradoFiems ) {
+        const item = documentoGeradoFiems[i]
+        if (typeof(item) !== 'string') {
+            for ( let linha in item ) {
+                listaFiems += `<p>${item[linha]}</p>`
+            }
+        } else {
+            listaFiems += `<h4>${item}</h4>`
+        }
+    }
+
     const corpoEmail = `<p>Prezado(a),</p>
     <p>Aqui estão as análises solicitadas:</p>
     ${conteudo ? `
@@ -84,7 +97,7 @@ async function run(nome,mail,conteudo=true) {
     <h4>CONCURSOS PÚBLICOS E PROCESSOS SELETIVOS - ESTADO</h4>
     <p>${documentoGeradoConcursoEstado}</p>
     <h3>FIEMS</h3>
-    <p>${documentoGeradoFiems}</p>
+    <p>${listaFiems}</p>
     <h3>PCI Concursos</h3>
     <p>${listaConcursos}</p>
    
