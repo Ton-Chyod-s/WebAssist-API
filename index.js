@@ -98,16 +98,8 @@ server.get('/Exercito', async (req, res) => {
 
 server.get('/UFMS', async (req, res) => {
     const texto = await UFMS();
-    const startIndex = texto.split('\u003C/p\u003E\u003Cp\u003E');
-    const dicionario = new Object();
-
-    for (let i = 0; i < startIndex.length; i++) {
-        const elemento = startIndex[i].replace('\u003Cp\u003E','').replace('\u003C/p\u003E','');
-        if (elemento !== '') {
-            dicionario[`index ${i}`] = elemento;
-        }
-    }
-    return res.json(dicionario);
+    
+    return res.json(texto);
 });
 
 server.get('/seges', async (req, res) => {

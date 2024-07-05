@@ -1,5 +1,11 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const { date } = require('zod');
+
+let dictUfms = new Object();
+
+let dictUfms1Sem = new Object();
+let dictUfms2Sem = new Object();
 
 async function UFMS() {
     try {
@@ -18,38 +24,65 @@ async function UFMS() {
             const limpo = countries[i].texto.replace(/\t/g, '').replace(/\n/, '').split('\n');
             const dictCountries2 = limpo.filter((item) => item !== '');
             const semestre = countries[i].texto.split(' – ')[1].split(' ')[0];
+
+            if (semestre.includes("1")) {
+                console.log('1º semestre')
+            }
+
             const anoSemestre = countries[i].texto.split(' – ')[1].split('\n')[0].split(' ')[3];
             const condicao = dictCountries2[1];
         
-            for (let i = 0; i < dictCountries2.length; i++) {
-                if (dictCountries2[i].includes('Edital')) {
-                    textoSemestre3 += dictCountries2[i] + '<br><br>';
-                }
-            }
-            if (textoSemestre3.length === 0) {
-                textoSemestre3 = dictCountries2[2].trim();
-            }   
-            
+
             if (anoSemestre === ano) {
                 if (semestre.includes("1")) {
                     if (condicao === "CONCLUÍDO") {
-                        textoSemestre1 = dictCountries2[0];
+
+                        dictUfms[dictCountries2[0]] = {
+                            "Atenção": "Chamada de candidatos para matrícula em 1ª Concluida."
+                        };
+
                     } else {
-                        textoSemestre1 = `${dictCountries2[0]}<br><br><i>${textoSemestre3}</i>`  
+                        dictUfms[dictCountries2[0]] = dictCountries2;  
                     }
                 } else if (semestre.includes("2")) {
                     if (condicao === "CONCLUÍDO") {
-                        textoSemestre2 = dictCountries2[0];
+                        
+                        dictUfms[dictCountries2[0]] = {
+                            "Atenção": "Chamada de candidatos para matrícula em 2ª Concluida."
+                        };
+
                     } else {
-                        textoSemestre2 = `${dictCountries2[0]}<br><br><i>${textoSemestre3}</i>` 
+
+                        for (let i = 0; i < dictCountries2.length; i++) {
+                            let dataPubli;
+
+                            const element = dictCountries2[i].split(' ');
+
+                            if ( element.length === 6 ) {
+                                dataPubli = dictCountries2[i]
+                                
+                                console.log(dataPubli)
+                            } 
+                            
+
+                        }
+                        
+                        dictUfms[dictCountries2[0]] = dictCountries2;
                     }
                 }
+
+
+
+
+
             }
         }
-        return `<p>${textoSemestre2}</p><p>${textoSemestre1}</p>`
+        
+        return dictUfms
     } catch (error) {
         return error;
     }
+
 }
 
 module.exports = { UFMS };
