@@ -64,12 +64,11 @@ async function fapec() {
             }
 
             if (itemSplitadaData.includes(hojeData) && hojeData >= itemDataAbertura || hojeData <= itemDataFechamento) {
-                dictConteudo[`${numProcessoTexto}`] = `${itemSplitada[itemSplitada.length - 1]}${itemSplitada[tamanhoItemSplitada - 2]}`.trim()
+                dictConteudo[`${numProcessoTexto}`] = `${itemSplitada[itemSplitada.length - 1]}${itemSplitada[tamanhoItemSplitada - 2]}`.trim().replace(/\s{2,}/g, ' ');
 
-            } else {
-                dictConteudo['Error'] = 'Não há processos seletivos ou concursos públicos disponíveis no momento.'
             } 
         }
+
         dictFapec['conteudo'] = dictConteudo
 
         return dictFapec
