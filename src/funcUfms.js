@@ -19,10 +19,7 @@ async function UFMS() {
         })).get();
         
         const ano = new Date().getFullYear().toString();
-        let textoSemestre1 = "";
-        let textoSemestre2 = "Aguardando...";
-        let textoSemestre3 = "";
-        
+
         for (let i = 1; i < countries.length && i < 5; i++) {
             const limpo = countries[i].texto.replace(/\t/g, '').replace(/\n/, '').split('\n');
             const dictCountries2 = limpo.filter((item) => item !== '');
@@ -87,10 +84,6 @@ async function UFMS() {
                         dictUfms[dictCountries2[0]] = dictUfms2Sem;
                     }
                 }
-
-
-
-
 
             }
         }
