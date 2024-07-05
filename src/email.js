@@ -21,6 +21,8 @@ async function run(nome,mail,conteudo=true) {
 
     let listaFiems = '';
 
+    let listaUFMS = '';
+
     let documentoGeradoDOE = await DOE(nome);
     let documentoGeradoUFMS = await UFMS();
     let documentoGeradoExercito = await Exercito();
@@ -77,11 +79,24 @@ async function run(nome,mail,conteudo=true) {
         }
     }
 
+    for ( let i in documentoGeradoUFMS ) {
+        const item = documentoGeradoUFMS[i]
+        if (typeof(item) !== 'string') {
+            for ( let linha in item ) {
+                if ( !item[linha].includes('Chamada de candidatos para matrícula - Concluida.') ) {
+                    listaUFMS += `<p>${item[linha]}</p>`
+                }
+            }
+        } else {
+            listaUFMS += `<h4>${item}</h4>`
+        }
+    }
+
     const corpoEmail = `<p>Prezado(a),</p>
     <p>Aqui estão as análises solicitadas:</p>
     ${conteudo ? `
     <p><strong>Movimentação Interna e Reingresso UFMS ${ano}</strong></p>
-    <p>${documentoGeradoUFMS}</p>
+    <p>${listaUFMS}</p>
     <p><strong>Oficial Técnico Temporário (OTT) - PROCESSO SELETIVO ${ano}</strong></p>
     <p>${listaExercito}</p>
     ` : ''}
