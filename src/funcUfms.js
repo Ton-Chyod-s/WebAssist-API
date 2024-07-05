@@ -33,7 +33,7 @@ async function UFMS() {
                     if (condicao === "CONCLUÍDO") {
 
                         dictUfms[dictCountries2[0]] = {
-                            "Atenção": "Chamada de candidatos para matrícula em 1ª Concluida."
+                            "Atenção": "Chamada de candidatos para matrícula - Concluida."
                         };
 
                     } else {
@@ -61,7 +61,7 @@ async function UFMS() {
                     if (condicao === "CONCLUÍDO") {
                         
                         dictUfms[dictCountries2[0]] = {
-                            "Atenção": "Chamada de candidatos para matrícula em 2ª Concluida."
+                            "Atenção": "Chamada de candidatos para matrícula - Concluida."
                         };
 
                     } else {
