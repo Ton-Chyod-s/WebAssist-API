@@ -53,16 +53,22 @@ async function UFMS() {
 
                     } else {
 
+                        let dataPubli;
+
                         for (let i = 0; i < dictCountries2.length; i++) {
-                            let dataPubli;
+                            let publicacao;
 
                             const element = dictCountries2[i].split(' ');
 
                             if ( element.length === 6 ) {
                                 dataPubli = dictCountries2[i]
-                                
+
                                 console.log(dataPubli)
-                            } 
+                            } else if (dictCountries2[i] != 'EM ANDAMENTO') {
+                                publicacao = dictCountries2[i]
+
+                                console.log(publicacao)
+                            }
                             
 
                         }
