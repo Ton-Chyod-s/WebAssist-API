@@ -1,5 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const { data } = require('get-uri/dist/data');
 const { date } = require('zod');
 
 let dictUfms = new Object();
@@ -54,20 +55,21 @@ async function UFMS() {
                     } else {
 
                         let dataPubli;
+                        let publicacao;
 
                         for (let i = 0; i < dictCountries2.length; i++) {
-                            let publicacao;
 
                             const element = dictCountries2[i].split(' ');
 
                             if ( element.length === 6 ) {
+                               
                                 dataPubli = dictCountries2[i]
-
-                                console.log(dataPubli)
+                                
+                            
                             } else if (dictCountries2[i] != 'EM ANDAMENTO') {
                                 publicacao = dictCountries2[i]
 
-                                console.log(publicacao)
+                                dictUfms2Sem[`${dataPubli} ${i}`] = publicacao
                             }
                             
 
