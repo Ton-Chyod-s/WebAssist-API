@@ -39,6 +39,7 @@ async function UFMS() {
                     } else {
                         let dataPubli;
                         let publicacao;
+                        let cont = 0;
 
                         for (let i = 0; i < dictCountries2.length; i++) {
                             const element = dictCountries2[i].split(' ');
@@ -48,7 +49,8 @@ async function UFMS() {
                             } else if (dictCountries2[i] != 'EM ANDAMENTO') {
                                 publicacao = dictCountries2[i]
                                 if ( !publicacao.includes('  Ver mais Movimentação Interna') && !publicacao.includes(`Movimentação Interna e Reingresso – 1º Semestre de ${anoAtual}`)) {
-                                    dictUfms1Sem[`${dataPubli} ${i}`] = publicacao
+                                    dictUfms1Sem[`${dataPubli} ${cont}`] = publicacao
+                                    cont++;
                                 }  
                             }
                         }
@@ -66,7 +68,8 @@ async function UFMS() {
 
                         let dataPubli;
                         let publicacao;
-
+                        let cont = 0;
+                        
                         for (let i = 0; i < dictCountries2.length; i++) {
                             const element = dictCountries2[i].split(' ');
                             if ( element.length === 6 ) {
@@ -75,7 +78,8 @@ async function UFMS() {
                             } else if (dictCountries2[i] != 'EM ANDAMENTO') {
                                 publicacao = dictCountries2[i]
                                 if ( !publicacao.includes('  Ver mais Movimentação Interna') && !publicacao.includes(`Movimentação Interna e Reingresso – 2º Semestre de ${anoAtual}`)) {
-                                    dictUfms2Sem[`${dataPubli} ${i}`] = publicacao
+                                    dictUfms2Sem[`${dataPubli} ${cont}`] = publicacao
+                                    cont++;
                                 }  
                             }
                         }
