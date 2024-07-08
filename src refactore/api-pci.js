@@ -87,6 +87,13 @@ async function exam_region(source_code, uf) {
     Country = UFS_SITE[city]  
     })();
     
+
+    (function() {
+
+    
+
+    })();
+    
     
     // initial_tag = source_code.indexOf(`<${marcacao}>${region}</${marcacao}>`) + `<${marcacao}>${region}</${marcacao}>`.length;
     
