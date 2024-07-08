@@ -19,9 +19,9 @@ async function exam_region(source_code, region) {
     region = region.toUpperCase()
 
     if ( region === 'NACIONAL' ) {
-        marcacao = 'h2'
+        marcacao = 'h2';
     } else {
-        marcacao = 'div'
+        marcacao = `div class="uf"`;
     }
 
     function estadoProcura(estado) {
@@ -32,9 +32,39 @@ async function exam_region(source_code, region) {
         // }
 
         // initial_tag = $(`div[class="ca"]`)
+       
+        const region = ['NACIONAL', 'REGIÃO NORTE', 'REGIÃO NORDESTE', 'REGIÃO CENTRO-OESTE', 'REGIÃO SUDESTE', 'REGIÃO SUL']
 
-        initial_tag = source_code.indexOf('<h2>NACIONAL</h2>') + '<h2>NACIONAL</h2>'.length;
-        final_tag = source_code.indexOf('<h2>REGIÃO SUDESTE</h2>') + '<h2>REGIÃO SUDESTE</h2>'.length;
+        const UFS = {
+            'NACIONAL': 'REGIÃO SUDESTE',
+            'CEARÁ': 'MARANHÃO',
+            'SÃO PAULO': 'RIO DE JANEIRO',
+            'RIO DE JANEIRO': 'MINAS GERAIS',
+            'MINAS GERAIS': 'ESPÍRITO',
+            'ESPÍRITO SANTO': 'REGIÃO SUL',
+            'PARANÁ': 'RIO GRANDE DO SUL',
+            'SANTA CATARINA': 'REGIÃO CENTRO-OESTE',
+            'DISTRITO FEDERAL': 'GOIÁS',
+            'GOIÁS': 'MATO GROSSO DO SUL',
+            'MATO GROSSO DO SUL': 'MATO GROSSO',
+            'MATO GROSSO': 'REGIÃO NORTE',
+            'AMAZONAS': 'ACRE',
+            'ACRE': 'PARÁ',
+            'PARÁ': 'RONDÔNIA',
+            'RONDÔNIA': 'TOCANTINS',
+            'TOCANTINS': 'REGIÃO NORDESTE',
+            'ALAGOAS': 'BAHIA',
+            'BAHIA': 'CEARÁ',
+            'MARANHÃO': 'PARAÍBA',
+            'PARAÍBA': 'PERNAMBUCO',
+            'PERNAMBUCO': 'PIAUÍ',
+            'PIAUÍ': 'RIO GRANDE DO NORTE',
+            'RIO GRANDE DO NORTE': 'SERGIPE',
+            'SERGIPE': 'REGIÃO SUDESTE'
+        }
+
+        initial_tag = source_code.indexOf(`<${marcacao}>${region}</${marcacao}>`) + `<${marcacao}>${region}</${marcacao}>`.length;
+        final_tag = source_code.indexOf(`<${marcacao}>RIO DE JANEIRO</${marcacao}>`) + `<${marcacao}>RIO DE JANEIRO</${marcacao}>`.length;
     }
 
     
@@ -44,6 +74,7 @@ async function exam_region(source_code, region) {
 
     estadoProcura(region)
     
+
 
 
 
