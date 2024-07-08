@@ -71,11 +71,12 @@ function wait(time) {
 
 async function exam_region(source_code, uf) {
     uf = uf.toUpperCase()
+
     let city;
     let Country;
-    const div = `div class="uf"`;
-    const h2 = `h2`;
-
+    let prop_city;
+    let prop_Country;
+    
     (function() { if ( ESTADOS.hasOwnProperty(uf) ) {
         for ( let i in ESTADOS ) {
             if (i === uf ) {
@@ -87,13 +88,21 @@ async function exam_region(source_code, uf) {
     Country = UFS_SITE[city]  
     })();
     
+    (function() { if (BRASIL.hasOwnProperty(city)) {
+        prop_city = `h2`;
+        } else {
+            prop_city = `div class="uf"`;
+        }
+    })();
+
     (function() { if (BRASIL.hasOwnProperty(Country)) {
-        
+        prop_Country = `h2`;  
+        } else {
+            prop_Country = `div class="uf"`;
         }
     })();
     
-
-    // initial_tag = source_code.indexOf(`<${marcacao}>${region}</${marcacao}>`) + `<${marcacao}>${region}</${marcacao}>`.length;
+    initial_tag = source_code.indexOf(`<${prop_city}>${city}</${prop_city}>`) + `<${prop_city}>${city}</${prop_city}>`.length;
     
     
     // final_tag = source_code.indexOf(`<${marcacao}>RIO DE JANEIRO</${marcacao}>`) + `<${marcacao}>RIO DE JANEIRO</${marcacao}>`.length;
