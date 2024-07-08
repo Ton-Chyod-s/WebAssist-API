@@ -1,6 +1,8 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+let dictPCI = new Object();
+
 json = new Object();
 analysis = new Object();
 
@@ -118,23 +120,45 @@ async function exam_region(source_code, uf) {
     const concursos_tag = site.slice(initial_tag, final_tag);
     const $ = cheerio.load(concursos_tag);
 
-    const cardsConcurso = $(`div[class="ca"]`).map((i, item) => ({
-        texto: $(item).text().trim()
-    })).get();
 
-    const cardsSite = $(`div[class="ca"] a`).map((i, item) => ({
-        href: $(item).attr('href')
-    })).get();
+    function cardsConcurso(prop, attr) {
+        const cards = $(prop).map((i, item) => ({
+            value: $(item).attr(attr)
+        })).get();
+        return cards
+    }
 
-    console.log(cardsConcurso)
-    console.log(cardsSite)
+    function cardsConcursoText(prop) {
+        const cards = $(prop).map((i, item) => ({
+            value: $(item).text()
+        })).get();
+        return cards
+    }
 
-
-
+    const cardsTitulo = cardsConcurso(`div[class="cb"] img`, 'title');
+    const cardsSite = cardsConcurso(`div[class="ca"] a`, 'href');
+    const cardsData = cardsConcursoText(`div[class="ce"] span`);
 
 
 
     
+
+    console.log(cardsTitulo)
+    console.log(cardsSite)
+    console.log(cardsData)
+
+    for ( let i in cardsConcurso) {
+        const elements = cardsConcurso[i].texto;
+
+        const lol = 'lol'
+        
+        
+    }
+
+
+
+
+
 
     wait(1000)
 
@@ -142,4 +166,4 @@ async function exam_region(source_code, uf) {
 
 LINK = "https://www.pciconcursos.com.br/concursos/"
 
-exam_region(LINK, 'sp')
+exam_region(LINK, 'ms')
