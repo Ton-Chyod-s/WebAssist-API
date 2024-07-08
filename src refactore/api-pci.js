@@ -107,6 +107,4 @@ async function exam_region(source_code, uf) {
 
 LINK = "https://www.pciconcursos.com.br/concursos/"
 
-
-
 exam_region(LINK, 'ms')
