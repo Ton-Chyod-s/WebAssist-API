@@ -1,9 +1,10 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-let search = 0;
 json = new Object();
 analysis = new Object();
+
+const BRASIL = ['NACIONAL', 'REGIÃO NORTE', 'REGIÃO NORDESTE', 'REGIÃO CENTRO-OESTE', 'REGIÃO SUDESTE', 'REGIÃO SUL']
 
 const ESTADOS = {
     'CE': 'CEARÁ',
@@ -28,7 +29,9 @@ const ESTADOS = {
     'RJ': 'RIO DE JANEIRO',
     'RN': 'RIO GRANDE DO NORTE',
     'RS': 'RIO GRANDE DO SUL',
-    'RO': 'RONDÔNIA'
+    'RO': 'RONDÔNIA',
+    'SE': 'SERGIPE',
+    'SP': 'SÃO PAULO'
 }
 
 const UFS_SITE = {
@@ -56,10 +59,8 @@ const UFS_SITE = {
     'PERNAMBUCO': 'PIAUÍ',
     'PIAUÍ': 'RIO GRANDE DO NORTE',
     'RIO GRANDE DO NORTE': 'SERGIPE',
-    'SERGIPE': 'REGIÃO SUDESTE'
+    'SERGIPE': 'VISITE PERIODICAMENTE - ATUALIZAÇÃO DIÁRIA!!!'
 }
-
-const BRASIL = ['NACIONAL', 'REGIÃO NORTE', 'REGIÃO NORDESTE', 'REGIÃO CENTRO-OESTE', 'REGIÃO SUDESTE', 'REGIÃO SUL']
 
 function wait(time) {
     return new Promise(resolve => {
@@ -74,8 +75,9 @@ async function exam_region(source_code, uf) {
 
     let city;
     let Country;
-    let prop_city;
-    let prop_Country;
+    let propCity;
+    let propCity1;
+    let propCountry;
     
     (function() { if ( ESTADOS.hasOwnProperty(uf) ) {
         for ( let i in ESTADOS ) {
@@ -89,33 +91,55 @@ async function exam_region(source_code, uf) {
     })();
     
     (function() { if (BRASIL.hasOwnProperty(city)) {
-        prop_city = `h2`;
+        propCity = `h2`;
+        propCity1 = `h2`;
         } else {
-            prop_city = `div class="uf"`;
+            propCity = `div class="uf"`;
+            propCity1 = `div`;
         }
     })();
 
     (function() { if (BRASIL.hasOwnProperty(Country)) {
-        prop_Country = `h2`;  
+        propCountry = `h2`;
+        propCountry1 = `h2`; 
         } else {
-            prop_Country = `div class="uf"`;
+            propCountry = `div class="uf"`;
+            propCountry1 = `div`;
         }
     })();
     
-    initial_tag = source_code.indexOf(`<${prop_city}>${city}</${prop_city}>`) + `<${prop_city}>${city}</${prop_city}>`.length;
-    
-    
-    // final_tag = source_code.indexOf(`<${marcacao}>RIO DE JANEIRO</${marcacao}>`) + `<${marcacao}>RIO DE JANEIRO</${marcacao}>`.length;
-
-
     const response = await axios.get(source_code);
-    const $ = cheerio.load(response.data);
-    wait(1000)
+    const site = response.data
+
+    initial_tag = site.indexOf(`<${propCity}>${city}</${propCity1}>`) + `<${propCity}>${city}</${propCity1}>`.length;
+    
+    final_tag = site.indexOf(`<${propCountry}>${Country}</${propCountry1}>`) + `<${propCountry}>${Country}</${propCountry1}>`.length;
+
+    const concursos_tag = site.slice(initial_tag, final_tag);
+    const $ = cheerio.load(concursos_tag);
+
+    const cardsConcurso = $(`div[class="ca"]`).map((i, item) => ({
+        texto: $(item).text().trim()
+    })).get();
+
+    const cardsSite = $(`div[class="ca"] a`).map((i, item) => ({
+        href: $(item).attr('href')
+    })).get();
+
+    console.log(cardsConcurso)
+    console.log(cardsSite)
+
+
+
+
+
 
     
+
+    wait(1000)
 
 }
 
 LINK = "https://www.pciconcursos.com.br/concursos/"
 
-exam_region(LINK, 'ms')
+exam_region(LINK, 'sp')
