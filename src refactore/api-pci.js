@@ -73,22 +73,19 @@ async function exam_region(source_code, uf) {
     uf = uf.toUpperCase()
     let city;
     let Country;
-    let div = `div class="uf"`;
-    let h2 = `h2`;
+    const div = `div class="uf"`;
+    const h2 = `h2`;
 
-    let initial_tag;
-    let marcacao;
-
-    if ( ESTADOS.hasOwnProperty(uf) ) {
+    (function() { if ( ESTADOS.hasOwnProperty(uf) ) {
         for ( let i in ESTADOS ) {
             if (i === uf ) {
                 city = ESTADOS[i]
                 break;
+                }
             }
         }
-    } 
     Country = UFS_SITE[city]  
-    
+    })();
     
     
     // initial_tag = source_code.indexOf(`<${marcacao}>${region}</${marcacao}>`) + `<${marcacao}>${region}</${marcacao}>`.length;
@@ -101,7 +98,7 @@ async function exam_region(source_code, uf) {
     const $ = cheerio.load(response.data);
     wait(1000)
 
-    countrySearch(uf)
+    
 
 }
 
