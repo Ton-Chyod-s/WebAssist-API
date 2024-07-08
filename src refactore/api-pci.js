@@ -135,10 +135,21 @@ async function exam_region(source_code, uf) {
         return cards
     }
 
+    function cardsConcursoText1(prop) {
+        let textCards = '';
+        const cards = $(prop).html().replace(/<span>/g, '').replace('\n','').split('<br>');
+        for (let i = 0; i < cards.length; i++) {
+            textCards += cards[i].replace(/<\/span>/g,'') + ' '
+            
+        }
+        
+        return textCards
+    }
+
     const cardsTitulo = cardsConcurso(`div[class="cb"] img`, 'title');
     const cardsSite = cardsConcurso(`div[class="ca"] a`, 'href');
     const cardsData = cardsConcursoText(`div[class="ce"] span`);
-    const cardsVagas = cardsConcursoText(`div[class="cd"]`);
+    const cardsVagas = cardsConcursoText1(`div[class="cd"]`);
 
     console.log(cardsTitulo)
     console.log(cardsSite)
