@@ -138,22 +138,12 @@ async function exam_region(source_code, uf) {
     const cardsTitulo = cardsConcurso(`div[class="cb"] img`, 'title');
     const cardsSite = cardsConcurso(`div[class="ca"] a`, 'href');
     const cardsData = cardsConcursoText(`div[class="ce"] span`);
-
-
-
-    
+    const cardsVagas = cardsConcursoText(`div[class="cd"]`);
 
     console.log(cardsTitulo)
     console.log(cardsSite)
     console.log(cardsData)
-
-    for ( let i in cardsConcurso) {
-        const elements = cardsConcurso[i].texto;
-
-        const lol = 'lol'
-        
-        
-    }
+    console.log(cardsVagas)
 
 
 
