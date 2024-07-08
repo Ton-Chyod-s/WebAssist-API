@@ -1,8 +1,65 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+let search = 0;
 json = new Object();
 analysis = new Object();
+
+const ESTADOS = {
+    'CE': 'CEARÁ',
+    'AC': 'ACRE',
+    'AL': 'ALAGOAS',
+    'AP': 'AMAPÁ',
+    'AM': 'AMAZONAS',
+    'BA': 'BAHIA',
+    'CE': 'CEARÁ',
+    'DF': 'DISTRITO FEDERAL',
+    'ES': 'ESPÍRITO SANTO',
+    'GO': 'GOIÁS',
+    'MA': 'MARANHÃO',
+    'MT': 'MATO GROSSO',
+    'MS': 'MATO GROSSO DO SUL',
+    'MG': 'MINAS GERAIS',
+    'PA': 'PARÁ',
+    'PB': 'PARAÍBA',
+    'PR': 'PARANÁ',
+    'PE': 'PERNAMBUCO',
+    'PI': 'PIAUÍ',
+    'RJ': 'RIO DE JANEIRO',
+    'RN': 'RIO GRANDE DO NORTE',
+    'RS': 'RIO GRANDE DO SUL',
+    'RO': 'RONDÔNIA'
+}
+
+const UFS_SITE = {
+    'NACIONAL': 'REGIÃO SUDESTE',
+    'CEARÁ': 'MARANHÃO',
+    'SÃO PAULO': 'RIO DE JANEIRO',
+    'RIO DE JANEIRO': 'MINAS GERAIS',
+    'MINAS GERAIS': 'ESPÍRITO',
+    'ESPÍRITO SANTO': 'REGIÃO SUL',
+    'PARANÁ': 'RIO GRANDE DO SUL',
+    'SANTA CATARINA': 'REGIÃO CENTRO-OESTE',
+    'DISTRITO FEDERAL': 'GOIÁS',
+    'GOIÁS': 'MATO GROSSO DO SUL',
+    'MATO GROSSO DO SUL': 'MATO GROSSO',
+    'MATO GROSSO': 'REGIÃO NORTE',
+    'AMAZONAS': 'ACRE',
+    'ACRE': 'PARÁ',
+    'PARÁ': 'RONDÔNIA',
+    'RONDÔNIA': 'TOCANTINS',
+    'TOCANTINS': 'REGIÃO NORDESTE',
+    'ALAGOAS': 'BAHIA',
+    'BAHIA': 'CEARÁ',
+    'MARANHÃO': 'PARAÍBA',
+    'PARAÍBA': 'PERNAMBUCO',
+    'PERNAMBUCO': 'PIAUÍ',
+    'PIAUÍ': 'RIO GRANDE DO NORTE',
+    'RIO GRANDE DO NORTE': 'SERGIPE',
+    'SERGIPE': 'REGIÃO SUDESTE'
+}
+
+const BRASIL = ['NACIONAL', 'REGIÃO NORTE', 'REGIÃO NORDESTE', 'REGIÃO CENTRO-OESTE', 'REGIÃO SUDESTE', 'REGIÃO SUL']
 
 function wait(time) {
     return new Promise(resolve => {
@@ -12,71 +69,39 @@ function wait(time) {
     });
 }
 
-async function exam_region(source_code, region) {
+async function exam_region(source_code, uf) {
+    uf = uf.toUpperCase()
+    let city;
+    let Country;
+    let div = `div class="uf"`;
+    let h2 = `h2`;
+
     let initial_tag;
     let marcacao;
 
-    region = region.toUpperCase()
-
-    if ( region === 'NACIONAL' ) {
-        marcacao = 'h2';
-    } else {
-        marcacao = `div class="uf"`;
-    }
-
-    function estadoProcura(estado) {
-        // initial_tag = $(`div[id="${estado}"]`)
-
-        // for (let i = 0; i < initial_tag.length; i++) {
-        //     console.log(initial_tag[i].children[0].children[0].data)
-        // }
-
-        // initial_tag = $(`div[class="ca"]`)
-       
-        const region = ['NACIONAL', 'REGIÃO NORTE', 'REGIÃO NORDESTE', 'REGIÃO CENTRO-OESTE', 'REGIÃO SUDESTE', 'REGIÃO SUL']
-
-        const UFS = {
-            'NACIONAL': 'REGIÃO SUDESTE',
-            'CEARÁ': 'MARANHÃO',
-            'SÃO PAULO': 'RIO DE JANEIRO',
-            'RIO DE JANEIRO': 'MINAS GERAIS',
-            'MINAS GERAIS': 'ESPÍRITO',
-            'ESPÍRITO SANTO': 'REGIÃO SUL',
-            'PARANÁ': 'RIO GRANDE DO SUL',
-            'SANTA CATARINA': 'REGIÃO CENTRO-OESTE',
-            'DISTRITO FEDERAL': 'GOIÁS',
-            'GOIÁS': 'MATO GROSSO DO SUL',
-            'MATO GROSSO DO SUL': 'MATO GROSSO',
-            'MATO GROSSO': 'REGIÃO NORTE',
-            'AMAZONAS': 'ACRE',
-            'ACRE': 'PARÁ',
-            'PARÁ': 'RONDÔNIA',
-            'RONDÔNIA': 'TOCANTINS',
-            'TOCANTINS': 'REGIÃO NORDESTE',
-            'ALAGOAS': 'BAHIA',
-            'BAHIA': 'CEARÁ',
-            'MARANHÃO': 'PARAÍBA',
-            'PARAÍBA': 'PERNAMBUCO',
-            'PERNAMBUCO': 'PIAUÍ',
-            'PIAUÍ': 'RIO GRANDE DO NORTE',
-            'RIO GRANDE DO NORTE': 'SERGIPE',
-            'SERGIPE': 'REGIÃO SUDESTE'
+    if ( ESTADOS.hasOwnProperty(uf) ) {
+        for ( let i in ESTADOS ) {
+            if (i === uf ) {
+                city = ESTADOS[i]
+                break;
+            }
         }
-
-        initial_tag = source_code.indexOf(`<${marcacao}>${region}</${marcacao}>`) + `<${marcacao}>${region}</${marcacao}>`.length;
-        final_tag = source_code.indexOf(`<${marcacao}>RIO DE JANEIRO</${marcacao}>`) + `<${marcacao}>RIO DE JANEIRO</${marcacao}>`.length;
-    }
-
+    } 
+    Country = UFS_SITE[city]  
     
+    
+    
+    // initial_tag = source_code.indexOf(`<${marcacao}>${region}</${marcacao}>`) + `<${marcacao}>${region}</${marcacao}>`.length;
+    
+    
+    // final_tag = source_code.indexOf(`<${marcacao}>RIO DE JANEIRO</${marcacao}>`) + `<${marcacao}>RIO DE JANEIRO</${marcacao}>`.length;
+
+
     const response = await axios.get(source_code);
     const $ = cheerio.load(response.data);
     wait(1000)
 
-    estadoProcura(region)
-    
-
-
-
+    countrySearch(uf)
 
 }
 
@@ -84,4 +109,4 @@ LINK = "https://www.pciconcursos.com.br/concursos/"
 
 
 
-exam_region(LINK, 'sp')
+exam_region(LINK, 'ms')
