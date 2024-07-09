@@ -10,3 +10,4 @@ __pycache__
 .env.development.local
 .env.development.local
 src refactore
+node_modules/https/package.json
