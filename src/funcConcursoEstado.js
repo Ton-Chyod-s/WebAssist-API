@@ -1,7 +1,6 @@
 const iconv = require('iconv-lite');
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { object } = require('zod');
 
 let dictData = new Object();
 

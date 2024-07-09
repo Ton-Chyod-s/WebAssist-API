@@ -15,6 +15,8 @@ const ano = new Date().getFullYear().toString();
 async function run(nome,mail,conteudo=true,diario=true) {
     const LINK = "https://www.pciconcursos.com.br/concursos/"
 
+    let listaConcursoEstado = '';
+
     let listaConcursos = '';
 
     let listaExercito = '';
@@ -38,6 +40,12 @@ async function run(nome,mail,conteudo=true,diario=true) {
     let documentoGeradoConcursoEstado = await concursoEstado();
     let documentoGeradoFiems = await fiems();
     let documentoGeradoPCI = await exam_region(LINK, 'ms');
+
+    for ( let linha in documentoGeradoConcursoEstado ) {
+        const link = documentoGeradoConcursoEstado[linha]['site']
+        listaConcursoEstado += `${linha}<p>Link: ${link}<p><br>`
+    }
+
 
     for ( linha in documentoGeradoPCI ) {
         const vagas = documentoGeradoPCI[linha]['vagas']
@@ -125,7 +133,7 @@ async function run(nome,mail,conteudo=true,diario=true) {
     <h4>SEGES</h4>
     <p>${documentoGeradoSeges}</p>
     <h4>CONCURSOS PÚBLICOS E PROCESSOS SELETIVOS - ESTADO</h4>
-    <p>${documentoGeradoConcursoEstado}</p>
+    <p>${listaConcursoEstado}</p>
     <h3>FIEMS</h3>
     <p>${listaFiems}</p>
     <h3>PCI Concursos</h3>
@@ -162,7 +170,7 @@ module.exports = { run }
 
 if (require.main === module) {
     run("Klayton Chrysthian Oliveira Dias", "hix_x@hotmail.com");
-    run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
-    run("Ronaldo dos Santos","ronaldo.stst@gmail.com",false)
-    run('Andreza Gabriela Leão Alves','andrezagabrielaalves@gmail.com',false)
+    // run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
+    // run("Ronaldo dos Santos","ronaldo.stst@gmail.com",false)
+    // run('Andreza Gabriela Leão Alves','andrezagabrielaalves@gmail.com',false)
 }
