@@ -7,12 +7,14 @@ const { fapec } = require('./funcFapec')
 const { seges } = require('./funcSeges')
 const { concursoEstado } = require('./funcConcursoEstado')
 const { fiems } = require('./funcFiems');
-const { funcPCI } = require('./funcPCI');
+const { exam_region } = require('./funcPCI');
 
 
 const ano = new Date().getFullYear().toString();
 
 async function run(nome,mail,conteudo=true) {
+    const LINK = "https://www.pciconcursos.com.br/concursos/"
+
     let listaConcursos = '';
 
     let listaExercito = '';
@@ -31,16 +33,14 @@ async function run(nome,mail,conteudo=true) {
     let documentoGeradoSeges = await seges()
     let documentoGeradoConcursoEstado = await concursoEstado()
     let documentoGeradoFiems = await fiems()
-    let documentoGeradoPCI = await funcPCI('ms');
+    let documentoGeradoPCI = await exam_region(LINK, 'ms');
 
     for ( linha in documentoGeradoPCI ) {
-        const vagas = documentoGeradoPCI[linha]['Vagas']
-        const link = documentoGeradoPCI[linha]['Link']
-        const inscricao = documentoGeradoPCI[linha]['Inscrição Até']
-        const nivel = documentoGeradoPCI[linha]['Nível']
-        const salario = documentoGeradoPCI[linha]['Salário Até']
+        const vagas = documentoGeradoPCI[linha]['vagas']
+        const link = documentoGeradoPCI[linha]['site']
+        const inscricao = documentoGeradoPCI[linha]['data']
     
-        listaConcursos += `${linha}, Vagas: ${vagas}, Inscrição Até: ${inscricao}, Nível: ${nivel}, Salário Até: ${salario}<p>Link: ${link}<p><br>`
+        listaConcursos += `${linha}, Vagas: ${vagas}, Inscrição Até: ${inscricao}<p>Link: ${link}<p><br>`
     }
     
 
@@ -144,6 +144,6 @@ module.exports = { run }
 
 if (require.main === module) {
     run("Klayton Chrysthian Oliveira Dias", "hix_x@hotmail.com");
-    run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
-    run("Ronaldo dos Santos","ronaldo.stst@gmail.com",false)
+    // run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
+    // run("Ronaldo dos Santos","ronaldo.stst@gmail.com",false)
 }
