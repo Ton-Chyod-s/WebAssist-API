@@ -1,8 +1,14 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const { object } = require('zod');
+
+let dictData = new Object();
 
 async function concursoEstado() {
-    const response = await axios.get("http://www2.concursos.ms.gov.br/?location=editais");
+    const LINK_SITE = "http://www2.concursos.ms.gov.br/"
+
+    const LINK = "http://www2.concursos.ms.gov.br/?location=editais"
+    const response = await axios.get(LINK);
     const site = response.data
 
     initial_tag = site.indexOf(`<span class="formataTitulos"><br>"NOVO"</span>`) + `<span class="formataTitulos">"NOVO"</span>`.length;
@@ -13,16 +19,20 @@ async function concursoEstado() {
     const $ = cheerio.load(concursos_tag)
 
     const cards = $('span[class="formataCampos"] a').map((i, item) => ({
-        texto: $(item).text().trim()
+        texto: $(item).text().trim(),
+        site: $(item).attr('href')
     })).get();
 
-
     console.log(cards)
+   
+    for (let i = 0; i < cards.length; i++) {
+        const concurso = cards[i].texto
+        const link = LINK_SITE + cards[i].site
 
-
+        dictData[concurso] = {site: link}
+    }
     
-
-
+    return dictData;
 }
 
 module.exports = { concursoEstado }
