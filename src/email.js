@@ -12,7 +12,7 @@ const { exam_region } = require('./funcPCI');
 
 const ano = new Date().getFullYear().toString();
 
-async function run(nome,mail,conteudo=true) {
+async function run(nome,mail,conteudo=true,diario=true) {
     const LINK = "https://www.pciconcursos.com.br/concursos/"
 
     let listaConcursos = '';
@@ -25,14 +25,18 @@ async function run(nome,mail,conteudo=true) {
 
     let listaUFMS = '';
 
-    let documentoGeradoDOE = await DOE(nome);
-    let documentoGeradoUFMS = await UFMS();
-    let documentoGeradoExercito = await Exercito();
-    let documentoGeradoDIOGrande = await DIOGrande(nome);
-    let documentoGeradofapec = await fapec()
-    let documentoGeradoSeges = await seges()
-    let documentoGeradoConcursoEstado = await concursoEstado()
-    let documentoGeradoFiems = await fiems()
+    let documentoGeradoDOE;
+    let documentoGeradoDIOGrande;
+
+    if ( diario === true ) {
+        documentoGeradoDOE = await DOE(nome);
+        documentoGeradoDIOGrande = await DIOGrande(nome);
+    }
+
+    let documentoGeradofapec = await fapec();
+    let documentoGeradoSeges = await seges();
+    let documentoGeradoConcursoEstado = await concursoEstado();
+    let documentoGeradoFiems = await fiems();
     let documentoGeradoPCI = await exam_region(LINK, 'ms');
 
     for ( linha in documentoGeradoPCI ) {
@@ -43,19 +47,37 @@ async function run(nome,mail,conteudo=true) {
         listaConcursos += `${linha}, Vagas: ${vagas}, Inscrição Até: ${inscricao}<p>Link: ${link}<p><br>`
     }
     
+    if ( conteudo === true ) {
+        let documentoGeradoUFMS = await UFMS();
+        let documentoGeradoExercito = await Exercito();
 
-    for ( let i in documentoGeradoExercito ) {
-        const item = documentoGeradoExercito[i]
-        
-        if (typeof(item) !== 'string') {
-            for ( let linha in item ) {
-                listaExercito += `<p>${item[linha]}</p>`
+        for ( let i in documentoGeradoExercito ) {
+            const item = documentoGeradoExercito[i]
+            
+            if (typeof(item) !== 'string') {
+                for ( let linha in item ) {
+                    listaExercito += `<p>${item[linha]}</p>`
+                }
+            } else {
+                listaExercito += `<h3>${item}</h3>`
             }
-        } else {
-            listaExercito += `<h3>${item}</h3>`
+            
         }
-        
+
+        for ( let i in documentoGeradoUFMS ) {
+            const item = documentoGeradoUFMS[i]
+            if (typeof(item) !== 'string') {
+                for ( let linha in item ) {
+                    if ( !item[linha].includes('Chamada de candidatos para matrícula - Concluida.') ) {
+                        listaUFMS += `<p>${item[linha]}</p>`
+                    }
+                }
+            } else {
+                listaUFMS += `<h4>${item}</h4>`
+            }
+        }
     }
+
 
     for ( let i  in documentoGeradofapec ) {
         const item = documentoGeradofapec[i]
@@ -79,18 +101,7 @@ async function run(nome,mail,conteudo=true) {
         }
     }
 
-    for ( let i in documentoGeradoUFMS ) {
-        const item = documentoGeradoUFMS[i]
-        if (typeof(item) !== 'string') {
-            for ( let linha in item ) {
-                if ( !item[linha].includes('Chamada de candidatos para matrícula - Concluida.') ) {
-                    listaUFMS += `<p>${item[linha]}</p>`
-                }
-            }
-        } else {
-            listaUFMS += `<h4>${item}</h4>`
-        }
-    }
+    
 
     const corpoEmail = `<p>Prezado(a),</p>
     <p>Aqui estão as análises solicitadas:</p>
@@ -100,10 +111,14 @@ async function run(nome,mail,conteudo=true) {
     <p><strong>Oficial Técnico Temporário (OTT) - PROCESSO SELETIVO ${ano}</strong></p>
     <p>${listaExercito}</p>
     ` : ''}
+
+    ${diario ? `
     <p><strong>Diário Oficial do Estado de Mato Grosso do Sul (DOE)</strong></p>
     <p>${documentoGeradoDOE}</p>
     <p><strong>Diário Oficial de Campo Grande – MS (DIOGRANDE Digital)</strong></p>
     <p>${documentoGeradoDIOGrande}</p>
+    ` : ''}
+
     <h3>Ofertas de concursos</h3>
     <h4>FAPEC</h4>
     <p>${listaFapec}</p>
