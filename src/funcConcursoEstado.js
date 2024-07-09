@@ -1,4 +1,3 @@
-const iconv = require('iconv-lite');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
@@ -24,7 +23,7 @@ async function concursoEstado() {
     })).get();
 
     for (let i = 0; i < cards.length; i++) {
-        const concurso = iconv.decode(cards[i].texto, "ISO-8859-1")
+        const concurso = cards[i].texto
         const link = LINK_SITE + cards[i].site
 
         dictData[concurso] = {site: link}
