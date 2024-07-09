@@ -138,6 +138,9 @@ async function run(nome,mail,conteudo=true) {
     documentoGeradoDIOGrande = null;
     documentoGeradofapec = null;
     documentoGeradoSeges = null;
+    documentoGeradoConcursoEstado = null;
+    documentoGeradoFiems = null;
+    documentoGeradoPCI = null;
 }
 
 module.exports = { run }
