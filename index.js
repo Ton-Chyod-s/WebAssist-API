@@ -81,15 +81,8 @@ server.get('/fapec', async (req, res) => {
 
 server.get('/concursoEstado', async (req, res) => {
     const concursoEstadoLista = await concursoEstado();
-    const startIndex = concursoEstadoLista.split('<br><br>');
-    const dicionario = new Object();
     
-    for (let i = 0; i < startIndex.length; i++) {
-        const start = startIndex[i].replace('\u003Cstrong\u003E','').replace('\u003C/strong\u003E','').replace('Site:','').replace(' ','');
-        if (start !== '') {
-            dicionario[`index ${i}`] = start;
-        }}
-    return res.json(dicionario);
+    return res.json(concursoEstadoLista);
 });
 
 server.get('/Exercito', async (req, res) => {

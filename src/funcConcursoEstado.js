@@ -1,3 +1,4 @@
+const iconv = require('iconv-lite');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const { object } = require('zod');
@@ -23,15 +24,13 @@ async function concursoEstado() {
         site: $(item).attr('href')
     })).get();
 
-    console.log(cards)
-   
     for (let i = 0; i < cards.length; i++) {
-        const concurso = cards[i].texto
+        const concurso = iconv.decode(cards[i].texto, "ISO-8859-1")
         const link = LINK_SITE + cards[i].site
 
         dictData[concurso] = {site: link}
     }
-    
+
     return dictData;
 }
 

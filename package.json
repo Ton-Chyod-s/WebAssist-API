@@ -181,6 +181,7 @@
     "universalify": "^2.0.1",
     "unpipe": "^1.0.0",
     "urlpattern-polyfill": "^10.0.0",
+    "utf8": "^3.0.0",
     "utils-merge": "^1.0.1",
     "vary": "^1.1.2",
     "wrap-ansi": "^7.0.0",
