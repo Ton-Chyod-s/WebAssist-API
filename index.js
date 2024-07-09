@@ -6,6 +6,7 @@ const { Exercito } = require('./src/funcExercito');
 const { UFMS } = require('./src/funcUfms');
 const { seges } = require('./src/funcSeges');
 const { fiems } = require('./src/funcFiems');
+const { exam_region } = require('./src/funcPCI');
 const express = require('express');
 const server = express();
 const PORT = 3000;
@@ -20,7 +21,8 @@ server.get('/', (req, res) => {
         'EXERCITO': '/Exercito',
         'UFMS': '/UFMS',
         'SEGES': '/seges',
-        'FIEMS': '/fiems'
+        'FIEMS': '/fiems',
+        'PCI': '/PCI/:id {nome do usuario}'
     });
 });
 
@@ -120,6 +122,11 @@ server.get('/fiems', async (req, res) => {
     const texto = await fiems();
 
     return res.json(texto);
+});
+
+
+server.get('/PCI/:id', async (req, res) => {
+
 });
 
 server.get('*', (req, res) => {
