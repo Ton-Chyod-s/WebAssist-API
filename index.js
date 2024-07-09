@@ -126,7 +126,10 @@ server.get('/fiems', async (req, res) => {
 
 
 server.get('/PCI/:id', async (req, res) => {
-
+    LINK = "https://www.pciconcursos.com.br/concursos/"
+    const pci = exam_region(LINK, req.params.id);
+    
+    return res.json(pci);
 });
 
 server.get('*', (req, res) => {
