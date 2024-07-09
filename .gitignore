@@ -9282,3 +9282,5 @@ ConcursosAtivos.csv
 __pycache__/api.cpython-312.pyc
 
 .vercel
+.env.development.local
+.env.development.local
