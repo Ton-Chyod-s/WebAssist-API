@@ -22,7 +22,7 @@ server.get('/', (req, res) => {
         'UFMS': '/UFMS',
         'SEGES': '/seges',
         'FIEMS': '/fiems',
-        'PCI': '/PCI/:id {nome do usuario}'
+        'PCI': '/PCI/:id {nome do estado}'
     });
 });
 
