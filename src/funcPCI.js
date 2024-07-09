@@ -1,9 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-
-let dictPCI = new Object();
-
 json = new Object();
 analysis = new Object();
 
@@ -174,9 +171,7 @@ async function exam_region(source_code, uf) {
             'vagas': cardsVagas[i]
         }
     }
-
     return dictPCI 
-    // wait(1000)
 }
 
 LINK = "https://www.pciconcursos.com.br/concursos/"
