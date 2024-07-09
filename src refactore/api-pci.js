@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { text } = require('body-parser');
 const cheerio = require('cheerio');
 
 let dictPCI = new Object();
@@ -129,42 +130,69 @@ async function exam_region(source_code, uf) {
     }
 
     function cardsConcursoText(prop) {
+        let dictData = [];
+        let data = '';
         const cards = $(prop).map((i, item) => ({
             value: $(item).text()
         })).get();
-        return cards
+        for (let i = 0; i < cards.length; i++) {
+            data += cards[i].value
+            dictData.push(data);
+            data = '';
+        }
+        return dictData
     }
 
     function cardsConcursoText1(prop) {
+        let dictVagas = [];
         let textCards = '';
-        const cards = $(prop).html().replace(/<span>/g, '').replace('\n','').split('<br>');
+
+        const cards = $(prop);
         for (let i = 0; i < cards.length; i++) {
-            textCards += cards[i].replace(/<\/span>/g,'') + ' '
-            
+            let info1 = cards[i].children;
+            for (let i = 0; i < info1.length; i++) {
+                if ( info1[i].data !== undefined ) {
+                    textCards += info1[i].data + ' '
+                }
+                if ( i === 2 ) {
+                    let info2 = info1[i].children[0].data;
+                    textCards += info2
+                    break;
+                }
+                
+            }
+            dictVagas.push(textCards);
+            textCards = '';
         }
         
-        return textCards
+        return dictVagas
     }
 
     const cardsTitulo = cardsConcurso(`div[class="cb"] img`, 'title');
     const cardsSite = cardsConcurso(`div[class="ca"] a`, 'href');
     const cardsData = cardsConcursoText(`div[class="ce"] span`);
     const cardsVagas = cardsConcursoText1(`div[class="cd"]`);
+ 
+    for (let i = 0; i < cardsTitulo.length; i++) {
+        dictPCI[cardsTitulo[i].value] = {
+            'site': cardsSite[i].value,
+            'data': cardsData[i],
+            'vagas': cardsVagas[i]
+        }
+    }
 
-    console.log(cardsTitulo)
-    console.log(cardsSite)
-    console.log(cardsData)
-    console.log(cardsVagas)
-
-
-
-
-
-
-    wait(1000)
-
+    return dictPCI 
+    // wait(1000)
 }
 
 LINK = "https://www.pciconcursos.com.br/concursos/"
 
-exam_region(LINK, 'ms')
+module.exports = { exam_region };
+
+if (require.main === module) {
+    async function Testando () {
+        const haha = await exam_region(LINK, 'ms')
+        console.log(haha)
+    }
+    Testando()
+}
