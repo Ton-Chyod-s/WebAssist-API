@@ -1,6 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+
 let dictPCI = new Object();
 
 json = new Object();
@@ -64,15 +65,8 @@ const UFS_SITE = {
     'SERGIPE': 'VISITE PERIODICAMENTE - ATUALIZAÇÃO DIÁRIA!!!'
 }
 
-function wait(time) {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve();
-        }, time);
-    });
-}
-
 async function exam_region(source_code, uf) {
+    let dictPCI = new Object();
     uf = uf.toUpperCase()
 
     let city;
