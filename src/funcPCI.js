@@ -34,7 +34,8 @@ const ESTADOS = {
     'RS': 'RIO GRANDE DO SUL',
     'RO': 'RONDÔNIA',
     'SE': 'SERGIPE',
-    'SP': 'SÃO PAULO'
+    'SP': 'SÃO PAULO',
+    'SC': 'SANTA CATARINA'
 }
 
 const UFS_SITE = {
