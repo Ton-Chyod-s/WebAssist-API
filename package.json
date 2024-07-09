@@ -4,6 +4,7 @@
   "description": "&emsp;&emsp;&emsp;Este projeto é um aplicativo de webscraping construído com Node.js, que utiliza as bibliotecas axios, cheerio e puppeteer para extrair dados de páginas web. Além disso, emprega a biblioteca nodemailer para enviar os resultados do webscraping por email. O objetivo é fornecer uma ferramenta eficiente e fácil de usar para coletar informações específicas da Internet e compartilhá-las automaticamente.",
   "main": "index.js",
   "dependencies": {
+    "@vercel/postgres": "^0.9.0",
     "accepts": "^1.3.8",
     "agent-base": "^7.1.1",
     "ansi-regex": "^5.0.1",
