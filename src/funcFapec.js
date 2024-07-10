@@ -20,21 +20,30 @@ async function fapec() {
         const cards = $('button[data-toggle="collapse"]').map((i, item) => ({
             texto: $(item).text().trim()
         })).get();
-        
+
         for (let i = 0; i < cards.length; i++) {
             const element = cards[i].texto
             if ( cards[i].texto.includes('Inscrições abertas') && cards[i].texto.includes(hojeData) ) {
-                console.log(element)
+                const elementSplit = element.split('-');
+                const element0 = elementSplit[0];
+                const element1 = elementSplit[1];
+                const element2 = elementSplit[2];
+
+                dictConteudo['tempo'] = element1;
+                dictConteudo['cargo-data'] = element2;
+
+                dictFapec[element0] = dictConteudo;
+
+                dictConteudo = {};
+                
 
             } 
         }
 
-        if ( dictConteudo.length !== 0 ) {
-            dictConteudo['Erro!'] = 'Não há concursos abertos'
+        if ( Object.keys(dictFapec).length === 1 ) {
+            dictConteudo['cargo-data'] = 'Não há concursos abertos';
+            dictFapec['Erro!'] = dictConteudo;
         }
-        
-        dictFapec['conteudo'] = dictConteudo
-        
         
         return dictFapec;
     }
