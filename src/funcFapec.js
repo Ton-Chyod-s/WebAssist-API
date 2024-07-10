@@ -10,15 +10,21 @@ let dictFapec = {};
 let dictConteudo = {};
 
 async function fapec() {
+    
     const site = "https://fapec.org/processo-seletivo/";
     dictFapec['site'] = site
 
-    const response = await axios.get(site);
+    try {
+        const response = await axios.get(site);
         const $ = cheerio.load(response.data);
         const cards = $('button[data-toggle="collapse"]').map((i, item) => ({
             texto: $(item).text().trim()
         })).get();
-
+    } catch (error) {
+        dictConteudo['cargo-data'] = 'Erro ao acessar o site';
+        dictFapec['Erro!'] = dictConteudo;
+        return dictFapec;
+    }
         for (let i = 0; i < cards.length; i++) {
             const element = cards[i].texto
             if ( cards[i].texto.includes('Inscrições abertas') && cards[i].texto.includes(hojeData) ) {
