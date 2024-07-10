@@ -22,20 +22,34 @@ async function fapec() {
         for (let i = 0; i < cards.length; i++) {
             const element = cards[i].texto
             if ( cards[i].texto.includes('Inscrições abertas') && cards[i].texto.includes(hojeData) ) {
-                const elementSplit = element.split('-');
-                const element0 = elementSplit[0];
-                const element1 = elementSplit[1];
-                const element2 = elementSplit[2];
+                const elementSplit = element.split(' – ');
+                let processo;
+                let cargo;
+                let data;
 
-                dictConteudo['tempo'] = element1;
-                dictConteudo['cargo-data'] = element2;
-                dictFapec[element0] = dictConteudo;
+                if ( elementSplit.length === 2) {
+                    const element0Split = elementSplit[1].split('-');
+
+                    processo = elementSplit[0];
+                    cargo = element0Split[0];
+                    data = element0Split[1];
+                } else {
+
+                    processo = elementSplit[0];
+                    cargo = elementSplit[1];
+                    data = elementSplit[2];
+                }
+                
+
+                dictConteudo['tempo'] = data;
+                dictConteudo['cargo'] = cargo;
+                dictFapec[processo] = dictConteudo;
                 dictConteudo = {};
             } 
         }
 
         if ( Object.keys(dictFapec).length === 1 ) {
-            dictConteudo['cargo-data'] = 'Não há concursos abertos';
+            dictConteudo['unknown'] = 'Não há concursos abertos';
             dictFapec['Erro!'] = dictConteudo;
         }
         return dictFapec;
