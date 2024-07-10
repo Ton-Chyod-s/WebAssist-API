@@ -1,31 +1,51 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-async function seges() {
-    let resposta = "";
-    const site = 'https://www.campogrande.ms.gov.br/seges/processoseletivo/ <br><br>'
+const ano = new Date().getFullYear().toString();
+const mes = new Date().getMonth().toString();
+const dia = new Date().getDate().toString();
+const data = `${dia}/${mes}/${ano}`;
 
-    const response = await axios.get("https://www.campogrande.ms.gov.br/seges/processoseletivo/");
-    const $ = cheerio.load(response.data);
-    const cards = $('h4').map((i, item) => ({
-        texto: $(item).text().trim()
-    })).get();
+async function seges() {
+
+    const LINK = 'https://www.campogrande.ms.gov.br/seges/processoseletivo/'
+    let response;
+    let site;
+
+    try {
+        response = await axios.get(LINK);
+        site = response.data
+    } catch (error) {
+
+    }
+    initial_tag = site.indexOf(`<h2 style="text-align: center"><strong>      PROCESSOS SELETIVOS EM ANDAMENTO</strong></h2>`) + `<h2 style="text-align: center"><strong>      PROCESSOS SELETIVOS EM ANDAMENTO</strong></h2>`.length;
+
+    final_tag = site.indexOf(`<h4 style="line-height: 33.599998px;font-family: Overpass, sans-serif"><strong>Processos Seletivos Encerrados – 2024:</strong></h4>`) + 
+        `<h4 style="line-height: 33.599998px;font-family: Overpass, sans-serif"><strong>Processos Seletivos Encerrados – 2024:</strong></h4>`.length;
+
+    const concursos_tag = site.slice(initial_tag, final_tag);
+    const $ = cheerio.load(concursos_tag);
+
     const liCards = $('ul').map((i, item) => ({
         texto: $(item).text().trim()
-    })).get();    
+    })).get(); 
+
     for (let i = 0; i < liCards.length; i++) {
-        for (const key in liCards[i]) {
-            const element = liCards[i][key];
-            if (element.includes('Edital Processo Seletivo') && !element.includes('Inscrições encerradas')) {
-                const elementObjt = element.split(' – ')
-                resposta += `${elementObjt[0]} - ${elementObjt[1]}<br>`
-            } 
+        const element = liCards[i].texto;
+        if ( element.includes(ano) ) {
+            console.log(element)
         }
     }
-    if (resposta === "") {
-        resposta += `Infelizmente, após minhas buscas, não foram encontradas ofertas.`
-    }
-    return `<strong>Site:</strong> ${site + resposta}`
+    
+    
+
+
+
+
+    
+    
+   
+
 }
 
 module.exports = { seges }
