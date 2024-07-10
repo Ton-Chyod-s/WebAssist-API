@@ -40,9 +40,8 @@ async function fapec() {
                     data = elementSplit[2];
                 }
                 
-
-                dictConteudo['tempo'] = data;
                 dictConteudo['cargo'] = cargo;
+                dictConteudo['tempo'] = data;
                 dictFapec[processo] = dictConteudo;
                 dictConteudo = {};
             } 

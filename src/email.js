@@ -105,7 +105,6 @@ async function run(nome,mail,conteudo=true,diario=true) {
         }
     }
 
-
     for ( let i  in documentoGeradofapec ) {
         const item = documentoGeradofapec[i]
         if (typeof(item) !== 'string') {
