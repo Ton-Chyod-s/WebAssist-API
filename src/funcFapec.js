@@ -11,7 +11,6 @@ let dictConteudo = {};
 
 async function fapec() {
     const site = "https://fapec.org/processo-seletivo/";
-    let novaListaConteudo = []
 
     dictFapec['site'] = site
 
