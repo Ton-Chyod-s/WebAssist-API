@@ -8,7 +8,7 @@ const { seges } = require('./funcSeges')
 const { concursoEstado } = require('./funcConcursoEstado')
 const { fiems } = require('./funcFiems');
 const { exam_region } = require('./funcPCI');
-import { SpeedInsights } from "@vercel/speed-insights/next"
+const { funcUfmsGeral } = require('./funcUfmsGeral');
 
 const ano = new Date().getFullYear().toString();
 
@@ -22,6 +22,7 @@ async function run(nome,mail,conteudo=true,diario=true) {
     let listaFapec = '';
     let listaFiems = '';
     let listaUFMS = '';
+    let listaUFMSGeral = '';
 
     let documentoGeradoDOE;
     let documentoGeradoDIOGrande;
@@ -36,6 +37,19 @@ async function run(nome,mail,conteudo=true,diario=true) {
     let documentoGeradoConcursoEstado = await concursoEstado();
     let documentoGeradoFiems = await fiems();
     let documentoGeradoPCI = await exam_region(LINK, 'ms');
+
+    let documentoUfmsGeral = await funcUfmsGeral();
+    for ( let i in documentoUfmsGeral ) {
+        const item = documentoUfmsGeral[i]
+        if (typeof(item) !== 'string') {
+            for ( let linha in item ) {
+                listaUFMSGeral += `<p>${item[linha]}</p>`
+            }
+        } else {
+            listaUFMSGeral += `<h4>${item}</h4>`
+        }
+    }
+
 
     for (let i in documentoGeradoSeges) {
         const concurso = i
@@ -136,7 +150,8 @@ async function run(nome,mail,conteudo=true,diario=true) {
     <p><strong>Diário Oficial de Campo Grande – MS (DIOGRANDE Digital)</strong></p>
     <p>${documentoGeradoDIOGrande}</p>
     ` : ''}
-
+    <h3>Noticias UFMS-Ingresso</h3>
+    <p>${listaUFMSGeral}</p>
     <h3>Ofertas de concursos</h3>
     <h4>FAPEC</h4>
     <p>${listaFapec}</p>
