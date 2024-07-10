@@ -109,8 +109,6 @@ async function run(nome,mail,conteudo=true,diario=true) {
         }
     }
 
-    
-
     const corpoEmail = `<p>Prezado(a),</p>
     <p>Aqui estão as análises solicitadas:</p>
     ${conteudo ? `
