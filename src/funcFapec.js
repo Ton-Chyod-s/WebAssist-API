@@ -11,12 +11,10 @@ let dictConteudo = {};
 
 async function fapec() {
     const site = "https://fapec.org/processo-seletivo/";
-
     dictFapec['site'] = site
 
     const response = await axios.get(site);
         const $ = cheerio.load(response.data);
-
         const cards = $('button[data-toggle="collapse"]').map((i, item) => ({
             texto: $(item).text().trim()
         })).get();
@@ -31,12 +29,8 @@ async function fapec() {
 
                 dictConteudo['tempo'] = element1;
                 dictConteudo['cargo-data'] = element2;
-
                 dictFapec[element0] = dictConteudo;
-
                 dictConteudo = {};
-                
-
             } 
         }
 
@@ -44,7 +38,6 @@ async function fapec() {
             dictConteudo['cargo-data'] = 'Não há concursos abertos';
             dictFapec['Erro!'] = dictConteudo;
         }
-        
         return dictFapec;
     }
 
