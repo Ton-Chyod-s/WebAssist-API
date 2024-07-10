@@ -29,7 +29,8 @@ async function seges() {
 
 
     const liCards = $('ul').map((i, item) => ({
-        texto: $(item).text().trim()
+        texto: $(item).text().trim(),
+        href: $(item).find('a').attr('href')
     })).get(); 
 
     for (let i = 0; i < liCards.length; i++) {
@@ -38,7 +39,7 @@ async function seges() {
         if ( element.length > 1) {
             element1 = element[0].split('–');
             concursos['vaga'] = (element1[1].trim())
-            concursos['site'] = 'unknown'
+            concursos['site'] = liCards[i].href
             dictSeges[element1[0]] = concursos
         }
     }
