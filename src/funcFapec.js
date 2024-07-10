@@ -1,9 +1,10 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+const ano = new Date().getFullYear().toString();
 const mes = '0' + (new Date().getMonth() + 1).toString();
 const dia = new Date().getDate().toString();
-const hojeData = `${dia}/${mes}`
+const hojeData = `${dia}/${mes}/${ano}`
 
 let dictFapec = {};
 let dictConteudo = {};
