@@ -21,6 +21,8 @@ async function fapec() {
 
         for (let i = 0; i < cards.length; i++) {
             const element = cards[i].texto
+
+            // verifica se a string contém "Inscrições abertas", data de hoje e se o dia de hoje é o menor que o maior dia do concurso
             if ( cards[i].texto.includes('Inscrições abertas') && cards[i].texto.includes(hojeData) ) {
                 const elementSplit = element.split(' – ');
                 let processo;
