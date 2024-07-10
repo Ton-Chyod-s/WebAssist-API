@@ -13,19 +13,21 @@ async function fapec() {
     
     const site = "https://fapec.org/processo-seletivo/";
     dictFapec['site'] = site
-
+    let response;
+    
     try {
-        const response = await axios.get(site);
-        const $ = cheerio.load(response.data);
-        const cards = $('button[data-toggle="collapse"]').map((i, item) => ({
-            texto: $(item).text().trim()
-        })).get();
+        response = await axios.get(site);
         
     } catch (error) {
         dictConteudo['cargo-data'] = 'Erro ao acessar o site';
         dictFapec['Erro!'] = dictConteudo;
         return dictFapec;
     }
+        const $ = cheerio.load(response.data);
+        const cards = $('button[data-toggle="collapse"]').map((i, item) => ({
+            texto: $(item).text().trim()
+        })).get();
+
         for (let i = 0; i < cards.length; i++) {
             const element = cards[i].texto
 

@@ -7,6 +7,7 @@ const { UFMS } = require('./src/funcUfms');
 const { seges } = require('./src/funcSeges');
 const { fiems } = require('./src/funcFiems');
 const { exam_region } = require('./src/funcPCI');
+const { funcUfmsGeral } = require('./src/funcUfmsGeral');
 const express = require('express');
 const server = express();
 const PORT = 3000;
@@ -22,7 +23,8 @@ server.get('/', (req, res) => {
         'UFMS': '/UFMS',
         'SEGES': '/seges',
         'FIEMS': '/fiems',
-        'PCI': '/PCI/:id {nome do estado}'
+        'PCI': '/PCI/:id {nome do estado}',
+        'UFMSGeral': '/ufmsGeral'
     });
 });
 
@@ -96,6 +98,13 @@ server.get('/UFMS', async (req, res) => {
     
     return res.json(texto);
 });
+
+server.get('/ufmsGeral', async (req, res) => {
+    const texto = await funcUfmsGeral();
+
+    return res.json(texto);
+});
+
 
 server.get('/seges', async (req, res) => {
     const texto = await seges();
