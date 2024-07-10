@@ -1,18 +1,12 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { object } = require('zod');
-
-const ano = new Date().getFullYear().toString();
-const mes = new Date().getMonth().toString();
-const dia = new Date().getDate().toString();
-const data = `${dia}/${mes}/${ano}`;
 
 let dictSeges = new Object();
 let concursos = new Object();
 
 async function seges() {
-
     const LINK = 'https://www.campogrande.ms.gov.br/seges/processoseletivo/'
+    dictSeges['site'] = LINK;
     let response;
     let site;
 
@@ -30,42 +24,24 @@ async function seges() {
     const concursos_tag = site.slice(initial_tag, final_tag);
     const $ = cheerio.load(concursos_tag);
 
+
+
+
+
     const liCards = $('ul').map((i, item) => ({
         texto: $(item).text().trim()
     })).get(); 
 
-    
     for (let i = 0; i < liCards.length; i++) {
         const element = liCards[i].texto.split(' – Inscrição');
         let element1;
         if ( element.length > 1) {
             element1 = element[0].split('–');
-            concursos['vaga'] = (element1[1])
+            concursos['vaga'] = (element1[1].trim())
+            concursos['site'] = 'unknown'
             dictSeges[element1[0]] = concursos
         }
-
-     
-
     }
-
-
-    // for (let i = 0; i < liCards.length; i++) {
-    //     const element = liCards[i].texto;
-        
-    //     if ( element.includes(ano) ) {
-    //         console.log(element)
-            
-    //     }
-    // }
-    
-    
-
-
-
-
-    
-    
-   
     return dictSeges;
 }
 
