@@ -8,7 +8,7 @@ const { seges } = require('./funcSeges')
 const { concursoEstado } = require('./funcConcursoEstado')
 const { fiems } = require('./funcFiems');
 const { exam_region } = require('./funcPCI');
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const ano = new Date().getFullYear().toString();
 
