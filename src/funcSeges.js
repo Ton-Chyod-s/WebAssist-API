@@ -1,31 +1,49 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-async function seges() {
-    let resposta = "";
-    const site = 'https://www.campogrande.ms.gov.br/seges/processoseletivo/ <br><br>'
+let dictSeges = new Object();
+let concursos = new Object();
 
-    const response = await axios.get("https://www.campogrande.ms.gov.br/seges/processoseletivo/");
-    const $ = cheerio.load(response.data);
-    const cards = $('h4').map((i, item) => ({
-        texto: $(item).text().trim()
-    })).get();
+async function seges() {
+    const LINK = 'https://www.campogrande.ms.gov.br/seges/processoseletivo/'
+    dictSeges['site'] = LINK;
+    let response;
+    let site;
+
+    try {
+        response = await axios.get(LINK);
+        site = response.data
+    } catch (error) {
+
+    }
+    initial_tag = site.indexOf(`<h2 style="text-align: center"><strong>      PROCESSOS SELETIVOS EM ANDAMENTO</strong></h2>`) + `<h2 style="text-align: center"><strong>      PROCESSOS SELETIVOS EM ANDAMENTO</strong></h2>`.length;
+
+    final_tag = site.indexOf(`<h4 style="line-height: 33.599998px;font-family: Overpass, sans-serif"><strong>Processos Seletivos Encerrados – 2024:</strong></h4>`) + 
+        `<h4 style="line-height: 33.599998px;font-family: Overpass, sans-serif"><strong>Processos Seletivos Encerrados – 2024:</strong></h4>`.length;
+
+    const concursos_tag = site.slice(initial_tag, final_tag);
+    const $ = cheerio.load(concursos_tag);
+
+
+
+
+
     const liCards = $('ul').map((i, item) => ({
-        texto: $(item).text().trim()
-    })).get();    
+        texto: $(item).text().trim(),
+        href: $(item).find('a').attr('href')
+    })).get(); 
+
     for (let i = 0; i < liCards.length; i++) {
-        for (const key in liCards[i]) {
-            const element = liCards[i][key];
-            if (element.includes('Edital Processo Seletivo') && !element.includes('Inscrições encerradas')) {
-                const elementObjt = element.split(' – ')
-                resposta += `${elementObjt[0]} - ${elementObjt[1]}<br>`
-            } 
+        const element = liCards[i].texto.split(' – Inscrição');
+        let element1;
+        if ( element.length > 1) {
+            element1 = element[0].split('–');
+            concursos['vaga'] = (element1[1].trim())
+            concursos['site'] = liCards[i].href
+            dictSeges[element1[0]] = concursos
         }
     }
-    if (resposta === "") {
-        resposta += `Infelizmente, após minhas buscas, não foram encontradas ofertas.`
-    }
-    return `<strong>Site:</strong> ${site + resposta}`
+    return dictSeges;
 }
 
 module.exports = { seges }

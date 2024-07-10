@@ -15,16 +15,12 @@ const ano = new Date().getFullYear().toString();
 async function run(nome,mail,conteudo=true,diario=true) {
     const LINK = "https://www.pciconcursos.com.br/concursos/"
 
+    let listaSeges = '';    
     let listaConcursoEstado = '';
-
     let listaConcursos = '';
-
     let listaExercito = '';
-
     let listaFapec = '';
-
     let listaFiems = '';
-
     let listaUFMS = '';
 
     let documentoGeradoDOE;
@@ -40,6 +36,23 @@ async function run(nome,mail,conteudo=true,diario=true) {
     let documentoGeradoConcursoEstado = await concursoEstado();
     let documentoGeradoFiems = await fiems();
     let documentoGeradoPCI = await exam_region(LINK, 'ms');
+
+    for (let i in documentoGeradoSeges) {
+        const concurso = i
+        const item = documentoGeradoSeges[i]
+        if (typeof(item) !== 'string') {
+            for ( let linha in item ) {
+                if ( linha !== 'site' ) {
+                    listaSeges += `<p>${concurso} - ${item[linha]}</p>`
+                } else {
+                    listaSeges += `<p>Link: ${item[linha]}</p>`
+                }
+            }
+        } else {
+            listaSeges += item
+        }
+        
+    }
 
     for ( let linha in documentoGeradoConcursoEstado ) {
         const link = documentoGeradoConcursoEstado[linha]['site']
@@ -86,7 +99,6 @@ async function run(nome,mail,conteudo=true,diario=true) {
         }
     }
 
-
     for ( let i  in documentoGeradofapec ) {
         const item = documentoGeradofapec[i]
         if (typeof(item) !== 'string') {
@@ -129,7 +141,7 @@ async function run(nome,mail,conteudo=true,diario=true) {
     <h4>FAPEC</h4>
     <p>${listaFapec}</p>
     <h4>SEGES</h4>
-    <p>${documentoGeradoSeges}</p>
+    <p>${listaSeges}</p>
     <h4>CONCURSOS PÚBLICOS E PROCESSOS SELETIVOS - ESTADO</h4>
     <p>${listaConcursoEstado}</p>
     <h3>FIEMS</h3>
