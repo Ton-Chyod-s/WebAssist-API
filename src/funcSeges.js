@@ -1,10 +1,14 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const { object } = require('zod');
 
 const ano = new Date().getFullYear().toString();
 const mes = new Date().getMonth().toString();
 const dia = new Date().getDate().toString();
 const data = `${dia}/${mes}/${ano}`;
+
+let dictSeges = new Object();
+let concursos = new Object();
 
 async function seges() {
 
@@ -30,12 +34,29 @@ async function seges() {
         texto: $(item).text().trim()
     })).get(); 
 
+    
     for (let i = 0; i < liCards.length; i++) {
-        const element = liCards[i].texto;
-        if ( element.includes(ano) ) {
-            console.log(element)
+        const element = liCards[i].texto.split(' – Inscrição');
+        let element1;
+        if ( element.length > 1) {
+            element1 = element[0].split('–');
+            concursos['vaga'] = (element1[1])
+            dictSeges[element1[0]] = concursos
         }
+
+     
+
     }
+
+
+    // for (let i = 0; i < liCards.length; i++) {
+    //     const element = liCards[i].texto;
+        
+    //     if ( element.includes(ano) ) {
+    //         console.log(element)
+            
+    //     }
+    // }
     
     
 
@@ -45,7 +66,7 @@ async function seges() {
     
     
    
-
+    return dictSeges;
 }
 
 module.exports = { seges }
