@@ -20,6 +20,7 @@ async function fapec() {
         const cards = $('button[data-toggle="collapse"]').map((i, item) => ({
             texto: $(item).text().trim()
         })).get();
+        
     } catch (error) {
         dictConteudo['cargo-data'] = 'Erro ao acessar o site';
         dictFapec['Erro!'] = dictConteudo;
