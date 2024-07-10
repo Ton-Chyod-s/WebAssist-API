@@ -16,17 +16,11 @@ async function run(nome,mail,conteudo=true,diario=true) {
     const LINK = "https://www.pciconcursos.com.br/concursos/"
 
     let listaSeges = '';    
-
     let listaConcursoEstado = '';
-
     let listaConcursos = '';
-
     let listaExercito = '';
-
     let listaFapec = '';
-
     let listaFiems = '';
-
     let listaUFMS = '';
 
     let documentoGeradoDOE;
