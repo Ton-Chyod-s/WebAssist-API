@@ -1,13 +1,10 @@
 const puppeteer = require('puppeteer');
-const axios = require('axios');
-const cheerio = require('cheerio');
-
-let diarioOficial = new Object();
-let diarioAtual = new Object();
 
 const ano = new Date().getFullYear().toString();
 
 async function DIOGrande(nome) {
+    let diarioOficial = new Object();
+    let diarioAtual = new Object();
 
     const NOME = nome.replace(/\s/g, "%20").toUpperCase();
     const LINK = `https://diogrande.campogrande.ms.gov.br/edicoes/?palavra=${NOME}&numero=&de=&ate=`
@@ -63,8 +60,8 @@ module.exports = { DIOGrande };
 if (require.main === module) {
     (async () => {
         // const nome = "delmar silva dias";
-        // const nome = "silvianny aparecida faria camilo"
-        const nome = "klayton chrysthian oliveira dias";
+        const nome = "silvianny aparecida faria camilo"
+        // const nome = "klayton chrysthian oliveira dias";
         // const nome = "Andreza Gabriela Leão Alves";
         // const nome = "Ronaldo dos Santos";
         const diario = await DIOGrande(nome);

@@ -57,18 +57,9 @@ server.get('/DIOGRANDE/:id', async (req, res) => {
     const id = req.params.id;
     try {
         let documentoGeradoDIOGrande = await DIOGrande(id);
-        if (documentoGeradoDIOGrande.includes('Lamento informar que não foram encontrados Diários Oficiais Digitais')) {
-            return res.json({
-                'Nome': id, 
-                error: 'Nenhum Diário Oficial Digital foi encontrado' 
-            })} else {
-                const startIndex = documentoGeradoDIOGrande.indexOf('</p>') + '</p>'.length;
-                const diarioOficialDigital = documentoGeradoDIOGrande.substring(startIndex);
-                return res.json({
-                    'Nome': id, 
-                    'Diário Oficial Digital': diarioOficialDigital
-                })
-            }
+        
+        return res.json(documentoGeradoDIOGrande);
+        
     } catch (error) {
         // Handle any errors that may occur during the asynchronous operation
         return res.status(500).json({ 'error DIOGRANDE': 'Ocorreu um erro ao buscar os dados' });
