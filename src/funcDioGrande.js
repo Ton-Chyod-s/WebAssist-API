@@ -50,7 +50,6 @@ async function DIOGrande(nome) {
         diarioOficial['diario Oficial'] = diarioAtual;
     }
     
-
     await browser.close();
     return diarioOficial;
 }
