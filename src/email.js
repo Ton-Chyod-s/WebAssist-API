@@ -73,7 +73,7 @@ async function run(nome,mail,conteudo=true,diario=true) {
                 if ( linha !== 'site' ) {
                     listaSeges += `<p>${concurso} - ${item[linha]}</p>`
                 } else {
-                    listaSeges += `<p>Link: ${item[linha]}</p>`
+                    listaSeges += `<p><strong>Link:</strong> ${item[linha]}</p>`
                 }
             }
         } else {
