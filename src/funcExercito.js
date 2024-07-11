@@ -8,6 +8,7 @@ let dictCorpo = {};
 async function Exercito() {
     try{
         const response = await axios.get("https://9rm.eb.mil.br/index.php/oficial-tecnico-temporario");
+        dictAnalise['site'] = 'https://9rm.eb.mil.br/index.php/oficial-tecnico-temporario';
         const $ = cheerio.load(response.data);
         const countries = $('p').map((i, item) => ({
             texto: $(item).text().trim()

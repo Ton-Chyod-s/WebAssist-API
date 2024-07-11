@@ -13,6 +13,7 @@ const anoAtual = new Date().getFullYear().toString();
 async function UFMS() {
     try {
         const response = await axios.get("https://ingresso.ufms.br/publicacao/movimentacao-interna/");
+        dictUfms['site'] = 'https://ingresso.ufms.br/publicacao/movimentacao-interna/';
         const $ = cheerio.load(response.data);
         const countries = $('div[class="box-border"]').map((i, item) => ({
             texto: $(item).text().trim()
