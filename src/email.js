@@ -149,40 +149,129 @@ async function run(nome,mail,conteudo=true,diario=true) {
         }
     }
 
-    const corpoEmail = `<p>Prezado(a),</p>
-    <p>Aqui estão as análises solicitadas:</p>
-    ${conteudo ? `
-    <p><strong>Movimentação Interna e Reingresso UFMS ${ano}</strong></p>
-    <p>${listaUFMS}</p>
-    <p><strong>Oficial Técnico Temporário (OTT) - PROCESSO SELETIVO ${ano}</strong></p>
-    <p>${listaExercito}</p>
-    ` : ''}
+    const corpoEmail = `
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
 
-    ${diario ? `
-    <p><strong>Diário Oficial do Estado de Mato Grosso do Sul (DOE)</strong></p>
-    <p>${documentoGeradoDOE}</p>
-    <p><strong>Diário Oficial de Campo Grande – MS (DIOGRANDE Digital)</strong></p>
-    <p>${listaDioGrande}</p>
-    ` : ''}
-    <h3>Noticias UFMS-Ingresso</h3>
-    <p>${listaUFMSGeral}</p>
-    <h3>Ofertas de concursos</h3>
-    <h4>FAPEC</h4>
-    <p>${listaFapec}</p>
-    <h4>SEGES</h4>
-    <p>${listaSeges}</p>
-    <h4>CONCURSOS PÚBLICOS E PROCESSOS SELETIVOS - ESTADO</h4>
-    <p>${listaConcursoEstado}</p>
-    <h3>FIEMS</h3>
-    <p>${listaFiems}</p>
-    <h3>PCI Concursos</h3>
-    <p>${listaConcursos}</p>
-   
-    <h3>Ofertas de estágio</h3>
+            body {
+                font-family: Arial, sans-serif;
+                font-size: 1.1em;
+                background-color: #f4f4f4;
+                padding: 20px;
+                border-radius: 5px;
+            }
+
+            h3 {
+                color: black;
+                display: flex;
+                justify-content: center;
+            }
+            
+            div #cards {
+                background-color: white;
+                padding: 0px 5px 5px 10px;
+                border-radius: 5px;
+                border : 0.05px solid #dbdbdb;
+            }
+
+
+        </style>
+
+    </head>
+    <body>
+
+        <p>Prezado(a),</p>
+        <p>Aqui estão as análises solicitadas:</p>
+
+        ${conteudo ? `
+        <h3><strong>Movimentação Interna e Reingresso UFMS ${ano}</strong></h3>
+        <p>
+            <div id="cards">
+                ${listaUFMS}
+            </div>
+        </p>
+
+        <h3><strong>Oficial Técnico Temporário (OTT) - PROCESSO SELETIVO ${ano}</strong></h3>
+        <p>
+            <div id="cards">
+                ${listaExercito}
+            </div>
+        </p>
+        ` : ''}
+
+        ${diario ? `
+
+        <h3><strong>Diário Oficial do Estado de Mato Grosso do Sul (DOE)</strong></h3>
+        <p>
+            <div id="cards">
+                ${documentoGeradoDOE}
+            </div>
+        </p>
+        <h3><strong>Diário Oficial de Campo Grande – MS (DIOGRANDE Digital)</strong></h3>
+        <p>
+            <div id="cards">
+                ${listaDioGrande}
+            </div>
+        </p>
+        ` : ''}
+
+        <h3>Noticias UFMS-Ingresso</h3>
+        <p>
+            <div id="cards">
+                ${listaUFMSGeral}
+            </div>
+        </p>
+        <h4>Ofertas de concursos</h4>
+        <h3>FAPEC</h3>
+        <p>
+            <div id="cards">
+                ${listaFapec}
+            </div>
+        </p>
+
+        <h3>SEGES</h3>
+        <p>
+            <div id="cards">
+                ${listaSeges}
+            </div>
+        </p>
+
+        <h3>CONCURSOS PÚBLICOS E PROCESSOS SELETIVOS - ESTADO</h3>
+        <p>
+            <div id="cards">
+                ${listaConcursoEstado}
+            </div>
+        </p>
+
+        <h3>FIEMS</h3>
+        <p>
+            <div id="cards">
+                ${listaFiems}
+            </div>
+        </p>
+
+        <h3>PCI Concursos</h3>
+        <p>
+            <div id="cards">
+                ${listaConcursos}
+            </div>
+        </p>
     
-    <p><i>Por favor, mantenha-se informado sobre possíveis atualizações.<br>
-    Atenciosamente,</i></p>
-    <p><i>PerinDevBoot~</i></p>`
+        </section>
+
+        
+    </body>
+    <footer id="footer">
+        <p><i>Por favor, mantenha-se informado sobre possíveis atualizações.<br><br>
+            Atenciosamente, PerinDevBoot~<br>
+        <div id=informativo>Este é um e-mail automático, favor não responder.</div></i></p>
+    </footer>
+    </html>`
 
     let headCorpo = (() => {
          if (conteudo) {
