@@ -5,7 +5,7 @@ const ano = new Date().getFullYear().toString();
 async function DIOGrande(nome) {
     let diarioOficial = ""
     const browser = await puppeteer.launch({
-        // headless: false,
+        headless: false,
     });
     const page = await browser.newPage();
     await page.goto('https://diogrande.campogrande.ms.gov.br/');
@@ -54,3 +54,11 @@ async function DIOGrande(nome) {
 }
     
 module.exports = { DIOGrande };
+
+if (require.main === module) {
+    (async () => {
+        const nome = "delmar silva dias";
+        const diario = await DIOGrande(nome);
+        console.log(diario);
+    })();
+}
