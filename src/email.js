@@ -23,6 +23,7 @@ async function run(nome,mail,conteudo=true,diario=true) {
     let listaFiems = '';
     let listaUFMS = '';
     let listaUFMSGeral = '';
+    let listaDioGrande = '';
 
     let documentoGeradoDOE;
     let documentoGeradoDIOGrande;
@@ -30,6 +31,19 @@ async function run(nome,mail,conteudo=true,diario=true) {
     if ( diario === true ) {
         documentoGeradoDOE = await DOE(nome);
         documentoGeradoDIOGrande = await DIOGrande(nome);
+        for ( let i in documentoGeradoDIOGrande ) {
+            const item = documentoGeradoDIOGrande[i]
+            if (typeof(item) !== 'string') {
+                const data = item.data
+                const link = item.link
+                const tipo = item.tipo
+
+                listaDioGrande += `<p>${'test'} ${data} ${tipo} <br>${link}</p>`
+                
+            } else {
+                listaDioGrande += `<p>${item}</p>`
+            }
+        }
     }
 
     let documentoGeradofapec = await fapec();
@@ -148,7 +162,7 @@ async function run(nome,mail,conteudo=true,diario=true) {
     <p><strong>Diário Oficial do Estado de Mato Grosso do Sul (DOE)</strong></p>
     <p>${documentoGeradoDOE}</p>
     <p><strong>Diário Oficial de Campo Grande – MS (DIOGRANDE Digital)</strong></p>
-    <p>${documentoGeradoDIOGrande}</p>
+    <p>${listaDioGrande}</p>
     ` : ''}
     <h3>Noticias UFMS-Ingresso</h3>
     <p>${listaUFMSGeral}</p>

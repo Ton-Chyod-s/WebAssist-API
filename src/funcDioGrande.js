@@ -57,8 +57,7 @@ async function DIOGrande(nome) {
     }
 
     if (Object.keys(diarioOficial).length === 1) {
-        diarioAtual['erro'] = 'Lamento informar que não foram encontrados Diários Oficiais Digitais associados ao seu nome até a presente data.';
-        diarioOficial['diario Oficial'] = diarioAtual;
+        diarioOficial['diario Oficial'] = 'Lamento informar que não foram encontrados Diários Oficiais Digitais associados ao seu nome até a presente data.';
     }
     
     await browser.close();
