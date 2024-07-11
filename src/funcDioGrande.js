@@ -6,6 +6,8 @@ async function DIOGrande(nome) {
     let diarioOficial = new Object();
     let diarioAtual = new Object();
 
+    const LINK_DOWNLOAD = "https://diogrande.campogrande.ms.gov.br";
+
     const NOME = nome.replace(/\s/g, "%20").toUpperCase();
     const LINK = `https://diogrande.campogrande.ms.gov.br/edicoes/?palavra=${NOME}&numero=&de=&ate=`
     diarioOficial['link'] = LINK;
@@ -15,11 +17,11 @@ async function DIOGrande(nome) {
     });
     const page = await browser.newPage();
     await page.goto(LINK);
-    let spansText;
+    let data;
     let spansHref;
 
     while (true) {
-        const data = await page.$$eval('table > tbody > tr', rows => {
+        data = await page.$$eval('table > tbody > tr', rows => {
             return rows.map(row => {
               const anchor = row.querySelector('a'); // Assuming you want the first <a> element in each row
               return {
@@ -36,15 +38,19 @@ async function DIOGrande(nome) {
     }
     
 
-    for (let i = 0; i < spansText.length; i++) {
-        const element = spansText[i].split('\t');
+    for (let i = 0; i < data.length; i++) {
+        const link = data[i].href;
+        const element = data[i].text.split('\t');
         for (let j = 0; j < element.length; j++) {
             if ( element[j].trim().includes(ano) ) {
                 const numero = element[0];
                 const tipo = element[1];
                 const data = element[2];
+                
+
                 diarioAtual['tipo'] = tipo;
                 diarioAtual['data'] = data;
+                diarioAtual['link'] = LINK_DOWNLOAD+link;
 
                 diarioOficial[numero] = diarioAtual;
                 diarioAtual = {};
