@@ -84,7 +84,7 @@ async function run(nome,mail,conteudo=true,diario=true) {
 
     for ( let linha in documentoGeradoConcursoEstado ) {
         const link = documentoGeradoConcursoEstado[linha]['site']
-        listaConcursoEstado += `${linha}<p>Link: ${link}<p><br>`
+        listaConcursoEstado += `${linha}<p><strong>Link:</strong> ${link}<p><br>`
     }
 
 
@@ -93,7 +93,7 @@ async function run(nome,mail,conteudo=true,diario=true) {
         const link = documentoGeradoPCI[linha]['site']
         const inscricao = documentoGeradoPCI[linha]['data']
     
-        listaConcursos += `${linha}, Vagas: ${vagas}, Inscrição Até: ${inscricao}<p>Link: ${link}<p><br>`
+        listaConcursos += `${linha}, Vagas: ${vagas}, Inscrição Até: ${inscricao}<p><strong>Link:</strong> ${link}<p><br>`
     }
     
     if ( conteudo === true ) {
@@ -179,6 +179,15 @@ async function run(nome,mail,conteudo=true,diario=true) {
                 border : 0.5px solid #dbdbdb;
             }
 
+            div #footer {
+                font-size: 0.8em;
+            }
+
+            div #informativo {
+                font-size: 0.7em;
+                text-italic: true;
+            }
+
         </style>
 
     </head>
@@ -188,14 +197,14 @@ async function run(nome,mail,conteudo=true,diario=true) {
         <p>Aqui estão as análises solicitadas:</p>
 
         ${conteudo ? `
-        <h3><strong>Movimentação Interna e Reingresso UFMS ${ano}</strong></h3>
+        <h3><strong>❕ Movimentação Interna e Reingresso UFMS ${ano}</strong></h3>
         <p>
             <div id="cards">
                 ${listaUFMS}
             </div>
         </p>
 
-        <h3><strong>Oficial Técnico Temporário (OTT) - PROCESSO SELETIVO ${ano}</strong></h3>
+        <h3><strong>❕ Oficial Técnico Temporário (OTT) - PROCESSO SELETIVO ${ano}</strong></h3>
         <p>
             <div id="cards">
                 ${listaExercito}
@@ -205,13 +214,13 @@ async function run(nome,mail,conteudo=true,diario=true) {
 
         ${diario ? `
 
-        <h3><strong>Diário Oficial do Estado de Mato Grosso do Sul (DOE)</strong></h3>
+        <h3><strong>❕ Diário Oficial do Estado de Mato Grosso do Sul (DOE)</strong></h3>
         <p>
             <div id="cards">
                 ${documentoGeradoDOE}
             </div>
         </p>
-        <h3><strong>Diário Oficial de Campo Grande – MS (DIOGRANDE Digital)</strong></h3>
+        <h3><strong>❕ Diário Oficial de Campo Grande – MS (DIOGRANDE Digital)</strong></h3>
         <p>
             <div id="cards">
                 ${listaDioGrande}
@@ -219,42 +228,42 @@ async function run(nome,mail,conteudo=true,diario=true) {
         </p>
         ` : ''}
 
-        <h3>Noticias UFMS-Ingresso</h3>
+        <h3>❕ Noticias UFMS-Ingresso</h3>
         <p>
             <div id="cards">
                 ${listaUFMSGeral}
             </div>
         </p>
         <h4>~Ofertas de concursos~</h4>
-        <h3>FAPEC</h3>
+        <h3>❕ FAPEC</h3>
         <p>
             <div id="cards">
                 ${listaFapec}
             </div>
         </p>
 
-        <h3>SEGES</h3>
+        <h3>❕ SEGES</h3>
         <p>
             <div id="cards">
                 ${listaSeges}
             </div>
         </p>
 
-        <h3>CONCURSOS PÚBLICOS E PROCESSOS SELETIVOS - ESTADO</h3>
+        <h3>❕ CONCURSOS PÚBLICOS E PROCESSOS SELETIVOS - ESTADO</h3>
         <p>
             <div id="cards">
                 ${listaConcursoEstado}
             </div>
         </p>
 
-        <h3>FIEMS</h3>
+        <h3>❕ FIEMS</h3>
         <p>
             <div id="cards">
                 ${listaFiems}
             </div>
         </p>
 
-        <h3>PCI Concursos</h3>
+        <h3>❕ PCI Concursos</h3>
         <p>
             <div id="cards">
                 ${listaConcursos}
@@ -264,12 +273,13 @@ async function run(nome,mail,conteudo=true,diario=true) {
         </section>
 
     </body>
-    <footer id="footer">
-        <p><i>Por favor, mantenha-se informado sobre possíveis atualizações.</br></br>
+    <div id="footer">
+        <p>Por favor, mantenha-se informado sobre possíveis atualizações.</br></br>
             Atenciosamente, <strong>PerinDevBoot~</strong></br>
-        <div id=informativo>Este é um e-mail automático, favor não responder.</div></i></p>
-    </footer>
-    </html>`
+        <div id=informativo>Este é um e-mail automático, favor não responder.</div></p>
+    </div>
+    </html>
+    `
 
     let headCorpo = (() => {
          if (conteudo) {
@@ -295,8 +305,8 @@ async function run(nome,mail,conteudo=true,diario=true) {
 module.exports = { run }
 
 if (require.main === module) {
-    run("Klayton Chrysthian Oliveira Dias", "hix_x@hotmail.com");
-    // run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
+    // run("Klayton Chrysthian Oliveira Dias", "hix_x@hotmail.com");
+    run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
     // run("Ronaldo dos Santos","ronaldo.stst@gmail.com",false)
     // run('Andreza Gabriela Leão Alves','andrezagabrielaalves@gmail.com',false)
     // run('delmar silva dias','sdiascx@hotmail.com', true, false)
