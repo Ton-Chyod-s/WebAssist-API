@@ -226,7 +226,7 @@ async function run(nome,mail,conteudo=true,diario=true) {
                 ${listaUFMSGeral}
             </div>
         </p>
-        <h4>Ofertas de concursos</h4>
+        <h4>~Ofertas de concursos~</h4>
         <h3>FAPEC</h3>
         <p>
             <div id="cards">
@@ -297,8 +297,8 @@ async function run(nome,mail,conteudo=true,diario=true) {
 module.exports = { run }
 
 if (require.main === module) {
-    run("Klayton Chrysthian Oliveira Dias", "hix_x@hotmail.com");
-    // run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
+    //run("Klayton Chrysthian Oliveira Dias", "hix_x@hotmail.com");
+    run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
     // run("Ronaldo dos Santos","ronaldo.stst@gmail.com",false)
     // run('Andreza Gabriela Leão Alves','andrezagabrielaalves@gmail.com',false)
     // run('delmar silva dias','sdiascx@hotmail.com', true, false)
