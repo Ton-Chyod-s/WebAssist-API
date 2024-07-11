@@ -19,15 +19,23 @@ async function DIOGrande(nome) {
     let spansHref;
 
     while (true) {
-        // await page.waitForSelector('table > tbody > tr');
-        spansText = await page.$$eval('table > tbody > tr', spans => spans.map(span => span.innerText));
+        const data = await page.$$eval('table > tbody > tr', rows => {
+            return rows.map(row => {
+              const anchor = row.querySelector('a'); // Assuming you want the first <a> element in each row
+              return {
+                text: row.innerText.trim(), // Get the innerText of the row and trim any extra whitespace
+                href: anchor ? anchor.getAttribute('href') : null // Get the href attribute of the <a> element, if exists
+              };
+            });
+          });
 
-        if ( spansText[0].includes('DOWNLOAD') ) {
+        if ( data[0].text.includes('DOWNLOAD') ) {
             console.log("Tabela encontrada, analisando dados...");
             break;
         }
     }
     
+
     for (let i = 0; i < spansText.length; i++) {
         const element = spansText[i].split('\t');
         for (let j = 0; j < element.length; j++) {
