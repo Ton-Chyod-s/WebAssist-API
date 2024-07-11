@@ -108,7 +108,12 @@ async function run(nome,mail,conteudo=true,diario=true) {
                     listaExercito += `<p>${item[linha]}</p>`
                 }
             } else {
-                listaExercito += `<h3 id="exercito">${item}</h3>`
+                if ( item.includes('Prepare-se e leia') ) {
+                    listaExercito += `<div id="exercito">${item}</div>`
+                } else {
+                    listaExercito += `<h4>${item}</h4>`
+                }
+                
             }
             
         }
@@ -186,6 +191,11 @@ async function run(nome,mail,conteudo=true,diario=true) {
             div #informativo {
                 font-size: 0.7em;
                 text-italic: true;
+            }
+
+            div #exercito {
+                color: red;
+                font-size: 1.2em;
             }
 
         </style>
