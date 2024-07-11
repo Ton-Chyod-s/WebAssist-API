@@ -18,7 +18,6 @@ async function DIOGrande(nome) {
     const page = await browser.newPage();
     await page.goto(LINK);
     let data;
-    let spansHref;
 
     while (true) {
         data = await page.$$eval('table > tbody > tr', rows => {
@@ -37,7 +36,6 @@ async function DIOGrande(nome) {
         }
     }
     
-
     for (let i = 0; i < data.length; i++) {
         const link = data[i].href;
         const element = data[i].text.split('\t');
@@ -47,7 +45,6 @@ async function DIOGrande(nome) {
                 const tipo = element[1];
                 const data = element[2];
                 
-
                 diarioAtual['tipo'] = tipo;
                 diarioAtual['data'] = data;
                 diarioAtual['link'] = LINK_DOWNLOAD+link;
