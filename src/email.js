@@ -108,7 +108,7 @@ async function run(nome,mail,conteudo=true,diario=true) {
                     listaExercito += `<p>${item[linha]}</p>`
                 }
             } else {
-                listaExercito += `<h3>${item}</h3>`
+                listaExercito += `<h3 id="exercito">${item}</h3>`
             }
             
         }
@@ -176,7 +176,7 @@ async function run(nome,mail,conteudo=true,diario=true) {
                 background-color: white;
                 padding: 0px 5px 5px 10px;
                 border-radius: 5px;
-                border : 0.05px solid #dbdbdb;
+                border : 0.5px solid #dbdbdb;
             }
 
         </style>
@@ -265,8 +265,8 @@ async function run(nome,mail,conteudo=true,diario=true) {
 
     </body>
     <footer id="footer">
-        <p><i>Por favor, mantenha-se informado sobre possíveis atualizações.<br><br>
-            Atenciosamente, PerinDevBoot~<br>
+        <p><i>Por favor, mantenha-se informado sobre possíveis atualizações.</br></br>
+            Atenciosamente, <strong>PerinDevBoot~</strong></br>
         <div id=informativo>Este é um e-mail automático, favor não responder.</div></i></p>
     </footer>
     </html>`
