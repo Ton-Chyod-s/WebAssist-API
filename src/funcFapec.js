@@ -14,7 +14,10 @@ async function fapec() {
     const site = "https://fapec.org/processo-seletivo/";
     dictFapec['site'] = site
     let response;
-    
+    let diaConcurso;
+    let mesConcurso;
+    let anoConcurso;
+
     try {
         response = await axios.get(site);
         
@@ -30,9 +33,26 @@ async function fapec() {
 
         for (let i = 0; i < cards.length; i++) {
             const element = cards[i].texto
+            if ( element === '' ) {
+                continue;
+            }
+            const elementSplit = element.split(' ');
+            for ( let j in elementSplit ) {
+                const newElement = elementSplit[j].replace(/\n/g, '');
+                if ( newElement.includes('/') && newElement.length === 10 ) {
+                    const dataSplit = newElement.split('/');
+                    if ( dataSplit[0] > dia ) {
+                        diaConcurso = dataSplit[0];
+                        mesConcurso = dataSplit[1];
+                        anoConcurso = dataSplit[2];
+                        break;
+                    }
+                }
+            }
+
 
             // verifica se a string contém "Inscrições abertas", data de hoje e se o dia de hoje é o menor que o maior dia do concurso
-            if ( cards[i].texto.includes('Inscrições abertas') && cards[i].texto.includes(hojeData) ) {
+            if ( cards[i].texto.includes('Inscrições abertas') && cards[i].texto.includes(hojeData) || diaConcurso > dia && mesConcurso === mes && anoConcurso === ano) {
                 const elementSplit = element.split(' – ');
                 let processo;
                 let cargo;
