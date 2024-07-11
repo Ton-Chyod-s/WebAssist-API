@@ -309,5 +309,5 @@ if (require.main === module) {
     run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
     run("Ronaldo dos Santos","ronaldo.stst@gmail.com",false)
     run('Andreza Gabriela Leão Alves','andrezagabrielaalves@gmail.com',false)
-    run('delmar silva dias','sdiascx@hotmail.com', true, false)
+    run('delmar silva dias','sdiascx@hotmail.com')
 }
