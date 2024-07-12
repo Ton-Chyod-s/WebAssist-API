@@ -112,16 +112,16 @@ async function run(nome,mail,conteudo=true,diario=true) {
 
     }
 
-    for ( let linha in documentoGeradoPCI ) {
-        const item = documentoGeradoPCI[linha]
+    for ( let i in documentoGeradoPCI ) {
+        const item = documentoGeradoPCI[i]
         if (typeof(item) !== 'string') {
-            const vagas = documentoGeradoPCI[linha]['vagas']
-            const link = documentoGeradoPCI[linha]['site']
-            const inscricao = documentoGeradoPCI[linha]['data']
+            const vagas = documentoGeradoPCI[i]['vagas']
+            const link = documentoGeradoPCI[i]['site']
+            const inscricao = documentoGeradoPCI[i]['data']
 
             for ( let linha in item ) {
                 // listaConcursos += `<p>${item[linha]}</p>`
-                listaConcursos += `${item}, ${vagas} Inscrição Até: ${inscricao}<p><strong>Link:</strong> ${link}<p><br>`
+                listaConcursos += `${i}, ${vagas} Inscrição Até: ${inscricao}<p><strong>Link:</strong> ${link}<p><br>`
             }
         } else {
             listaConcursos += `<h4>${item}</h4>`
