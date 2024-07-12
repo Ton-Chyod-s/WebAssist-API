@@ -152,9 +152,11 @@ async function run(nome,mail,conteudo=true,diario=true) {
     for ( let i  in documentoGeradofapec ) {
         const item = documentoGeradofapec[i]
         if (typeof(item) !== 'string') {
+            let constSTR = '';
             for ( let linha in item ) {
-                listaFapec += `<p>${item[linha]}</p>`
+                constSTR += ` ${item[linha]}`
             }
+            listaFapec += `<p>${constSTR}</p>`
         } else {
             listaFapec += `<h4>${item}</h4>`
         }
@@ -163,9 +165,11 @@ async function run(nome,mail,conteudo=true,diario=true) {
     for ( let i in documentoGeradoFiems ) {
         const item = documentoGeradoFiems[i]
         if (typeof(item) !== 'string') {
+            let constSTR = '';
             for ( let linha in item ) {
-                listaFiems += `<p>${item[linha]}</p>`
+                constSTR += ` ${item[linha]}`
             }
+            listaFiems += `${constSTR}`
         } else {
             listaFiems += `<h4>${item}</h4>`
         }
