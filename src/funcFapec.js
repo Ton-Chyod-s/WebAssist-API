@@ -14,9 +14,7 @@ async function fapec() {
     const site = "https://fapec.org/processo-seletivo/";
     dictFapec['site'] = site
     let response;
-    let diaConcurso;
-    let mesConcurso;
-    let anoConcurso;
+    
 
     try {
         response = await axios.get(site);
@@ -38,6 +36,9 @@ async function fapec() {
             }
             const elementSplit = element.split(' ');
             for ( let j in elementSplit ) {
+                let diaConcurso;
+                let mesConcurso;
+                let anoConcurso;
                 const newElement = elementSplit[j].replace(/\n/g, '');
                 if ( newElement.includes('/') && newElement.length === 10 ) {
                     const dataSplit = newElement.split('/');
@@ -45,38 +46,43 @@ async function fapec() {
                         diaConcurso = dataSplit[0];
                         mesConcurso = dataSplit[1];
                         anoConcurso = dataSplit[2];
-                        break;
+                        
                     }
+                    // verifica se a string contém "Inscrições abertas", data de hoje e se o dia de hoje é o menor que o maior dia do concurso
+                    if ( cards[i].texto.includes('Inscrições abertas') && newElement > hojeData ) {
+                        const elementSplit = element.split(' – ');
+                        let processo;
+                        let cargo;
+                        let data;
+
+                        if ( elementSplit.length === 2) {
+                            const element0Split = elementSplit[1].split('-');
+
+                            processo = elementSplit[0];
+                            cargo = element0Split[0];
+                            data = element0Split[1];
+                        } else {
+
+                            processo = elementSplit[0];
+                            cargo = elementSplit[1];
+                            data = elementSplit[2];
+                        }
+                        
+                        dictConteudo['cargo'] = cargo;
+                        dictConteudo['tempo'] = data;
+                        dictFapec[processo] = dictConteudo;
+                        dictConteudo = {};
+                    } 
+                }
+
+
+                    
                 }
             }
 
+            
 
-            // verifica se a string contém "Inscrições abertas", data de hoje e se o dia de hoje é o menor que o maior dia do concurso
-            if ( cards[i].texto.includes('Inscrições abertas') && cards[i].texto.includes(hojeData) && diaConcurso > dia && mesConcurso === mes && anoConcurso === ano) {
-                const elementSplit = element.split(' – ');
-                let processo;
-                let cargo;
-                let data;
-
-                if ( elementSplit.length === 2) {
-                    const element0Split = elementSplit[1].split('-');
-
-                    processo = elementSplit[0];
-                    cargo = element0Split[0];
-                    data = element0Split[1];
-                } else {
-
-                    processo = elementSplit[0];
-                    cargo = elementSplit[1];
-                    data = elementSplit[2];
-                }
-                
-                dictConteudo['cargo'] = cargo;
-                dictConteudo['tempo'] = data;
-                dictFapec[processo] = dictConteudo;
-                dictConteudo = {};
-            } 
-        }
+            
 
         if ( Object.keys(dictFapec).length === 1 ) {
             dictConteudo['unknown'] = 'Não há concursos abertos';
