@@ -241,20 +241,25 @@ async function run(nome,mail,conteudo=true,diario=true) {
                 padding-left: 5px;
                 padding-right: 5px;
                 border-radius: 5px;
-                margin: 10px
+                margin: 10px;
+                display: flex;
+                justify-content: in-line;
+
             }
             
-            div '#esquerdo' {
+            div #esquerdo {
                 border: 1px solid black;
-                height: 30px;
+                height: 40%;
             }
 
             div #meio {
-                background-color: red;
+                border: 1px solid red;
+                height: 30%;
             }
 
-            div '#direito' {
-                color: red;
+            div #direito {
+                border: 1px solid blue;
+                height: 30%;
             }
 
         </style>
@@ -267,10 +272,10 @@ async function run(nome,mail,conteudo=true,diario=true) {
                 <p>Aqui estão as análises solicitadas:</p>
             </div>
             <div id="meio">
-                <p>Nome: ${nome}</p>
+                <p>.</p>
             </div>
             <div id="direito">
-
+                <p>.</p>
             </div>
 
         </div>
