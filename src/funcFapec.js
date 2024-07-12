@@ -16,7 +16,6 @@ async function fapec() {
     dictFapec['site'] = site
     let response;
     
-
     try {
         response = await axios.get(site);
         
