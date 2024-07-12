@@ -32,6 +32,10 @@ async function fapec() {
 
         for (let i = 0; i < cards.length; i++) {
             const element = cards[i].texto
+            if ( element.includes('034/2023') ) {
+                console.log('aqui')
+            }
+
             if ( element === '' ) {
                 continue;
             }
@@ -47,40 +51,44 @@ async function fapec() {
                         diaConcurso = dataSplit[0];
                         mesConcurso = dataSplit[1];
                         anoConcurso = dataSplit[2];
-                        
                     } 
 
-                    // verifica se a string contém "Inscrições abertas", data de hoje e se o dia de hoje é o menor que o maior dia do concurso
                     const boleanMes = mesConcurso === mes;
                     const boleanDias = diaConcurso > dia;
                     const bolean = boleanMes && boleanDias
 
-                    if ( cards[i].texto.includes('Inscrições abertas') && bolean ) {
+                    if ( cards[i].texto.includes('2024') && bolean ) {
 
-                        if (diaConcurso > dia && newElement >= hojeData) {
-                            const elementSplit = element.split(' – ');
-                            let processo;
-                            let cargo;
-                            let data;
+                        dictFapec['processo'] = element;
+                        dictConteudo = {};
 
-                            if ( elementSplit.length === 2) {
-                                const element0Split = elementSplit[1].split('-');
+                        
 
-                                processo = elementSplit[0];
-                                cargo = element0Split[0];
-                                data = element0Split[1];
-                            } else {
+                        // if ( bolean ) {
+                        //     const elementSplit = element.split(' – ');
+                        //     let processo;
+                        //     let cargo;
+                        //     let data;
 
-                                processo = elementSplit[0];
-                                cargo = elementSplit[1];
-                                data = elementSplit[2];
-                            }
+                        //     if ( elementSplit.length === 2) {
+                        //         const element0Split = elementSplit[1].split('-');
+
+                        //         processo = elementSplit[0];
+                        //         cargo = element0Split[0];
+                        //         data = element0Split[1];
+                        //     } else {
+
+                        //         processo = elementSplit[0];
+                        //         cargo = elementSplit[1];
+                        //         data = elementSplit[2];
+                        //     }
                             
-                            dictConteudo['cargo'] = cargo;
-                            dictConteudo['tempo'] = data;
-                            dictFapec[processo] = dictConteudo;
-                            dictConteudo = {};
-                        }
+                        //     dictConteudo['cargo'] = cargo;
+                        //     dictConteudo['tempo'] = data;
+                        //     dictFapec[processo] = dictConteudo;
+                        //     dictConteudo = {};
+                        // }
+
                     } 
                 }}
             }
@@ -89,6 +97,7 @@ async function fapec() {
             dictConteudo['unknown'] = 'Não há concursos abertos';
             dictFapec['Erro!'] = dictConteudo;
         }
+
         return dictFapec;
     }
 
