@@ -205,7 +205,6 @@ async function run(nome,mail,conteudo=true,diario=true) {
                 background-color: #f4f4f4;
                 padding-left: 10px;
                 padding-right: 10px;
-                padding-top: 5px;
                 padding-bottom: 5px;
                 border-radius: 5px;
             }
@@ -244,21 +243,19 @@ async function run(nome,mail,conteudo=true,diario=true) {
                 margin: 10px;
                 display: flex;
                 justify-content: in-line;
-
             }
             
             div #esquerdo {
-                border: 1px solid black;
                 height: 40%;
             }
 
             div #meio {
-                border: 1px solid red;
+                padding: 5px;
                 height: 30%;
             }
 
             div #direito {
-                border: 1px solid blue;
+                padding: 5px;
                 height: 30%;
             }
 
@@ -272,10 +269,10 @@ async function run(nome,mail,conteudo=true,diario=true) {
                 <p>Aqui estão as análises solicitadas:</p>
             </div>
             <div id="meio">
-                <p>.</p>
+                <p></p>
             </div>
             <div id="direito">
-                <p>.</p>
+                <p></p>
             </div>
 
         </div>
@@ -390,8 +387,8 @@ module.exports = { run }
 
 if (require.main === module) {
     run("Klayton Chrysthian Oliveira Dias", "hix_x@hotmail.com");
-    // run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
-    // run("Ronaldo dos Santos","ronaldo.stst@gmail.com",false)
-    // run('Andreza Gabriela Leão Alves','andrezagabrielaalves@gmail.com',false)
-    // run('delmar silva dias','sdiascx@hotmail.com')
+    run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
+    run("Ronaldo dos Santos","ronaldo.stst@gmail.com",false)
+    run('Andreza Gabriela Leão Alves','andrezagabrielaalves@gmail.com',false)
+    run('delmar silva dias','sdiascx@hotmail.com')
 }
