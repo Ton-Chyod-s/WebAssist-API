@@ -267,7 +267,7 @@ async function run(nome,mail,conteudo=true,diario=true) {
                 <p>Aqui estão as análises solicitadas:</p>
             </div>
             <div id="meio">
-
+                <p>Nome: ${nome}</p>
             </div>
             <div id="direito">
 
