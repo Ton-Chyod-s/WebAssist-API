@@ -43,7 +43,7 @@ async function fapec() {
                 const newElement = elementSplit[j].replace(/\n/g, '');
                 if ( newElement.includes('/') && newElement.length === 10 ) {
                     const dataSplit = newElement.split('/');
-                    if ( dataSplit[0] > dia ) {
+                    if ( dataSplit[0] >= dia ) {
                         diaConcurso = dataSplit[0];
                         mesConcurso = dataSplit[1];
                         anoConcurso = dataSplit[2];
@@ -51,30 +51,35 @@ async function fapec() {
                     } 
 
                     // verifica se a string contém "Inscrições abertas", data de hoje e se o dia de hoje é o menor que o maior dia do concurso
-                    if ( cards[i].texto.includes('Inscrições abertas') ) {
-                        if (diaConcurso > dia && newElement > hojeData) {
+                    const boleanMes = mesConcurso === mes;
+                    const boleanDias = diaConcurso > dia;
+                    const bolean = boleanMes && boleanDias
+
+                    if ( cards[i].texto.includes('Inscrições abertas') && bolean ) {
+
+                        if (diaConcurso > dia && newElement >= hojeData) {
                             const elementSplit = element.split(' – ');
-                        let processo;
-                        let cargo;
-                        let data;
+                            let processo;
+                            let cargo;
+                            let data;
 
-                        if ( elementSplit.length === 2) {
-                            const element0Split = elementSplit[1].split('-');
+                            if ( elementSplit.length === 2) {
+                                const element0Split = elementSplit[1].split('-');
 
-                            processo = elementSplit[0];
-                            cargo = element0Split[0];
-                            data = element0Split[1];
-                        } else {
+                                processo = elementSplit[0];
+                                cargo = element0Split[0];
+                                data = element0Split[1];
+                            } else {
 
-                            processo = elementSplit[0];
-                            cargo = elementSplit[1];
-                            data = elementSplit[2];
-                        }
-                        
-                        dictConteudo['cargo'] = cargo;
-                        dictConteudo['tempo'] = data;
-                        dictFapec[processo] = dictConteudo;
-                        dictConteudo = {};
+                                processo = elementSplit[0];
+                                cargo = elementSplit[1];
+                                data = elementSplit[2];
+                            }
+                            
+                            dictConteudo['cargo'] = cargo;
+                            dictConteudo['tempo'] = data;
+                            dictFapec[processo] = dictConteudo;
+                            dictConteudo = {};
                         }
                     } 
                 }}

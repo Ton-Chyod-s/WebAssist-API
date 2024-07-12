@@ -24,12 +24,29 @@ async function run(nome,mail,conteudo=true,diario=true) {
     let listaUFMS = '';
     let listaUFMSGeral = '';
     let listaDioGrande = '';
+    let listaDOE = '';
 
     let documentoGeradoDOE;
     let documentoGeradoDIOGrande;
 
     if ( diario === true ) {
         documentoGeradoDOE = await DOE(nome);
+        for ( let i in documentoGeradoDOE ) {
+            const item = documentoGeradoDOE[i]
+            if (typeof(item) !== 'string') {
+                const data = item.data
+                const documento = item.documento
+
+                listaDOE += `<p>${data} - ${documento}</p>`
+            } else {
+                listaDOE += `<p>${item}</p>`
+            }
+        }
+
+
+
+
+
         documentoGeradoDIOGrande = await DIOGrande(nome);
         for ( let i in documentoGeradoDIOGrande ) {
             const item = documentoGeradoDIOGrande[i]
@@ -227,7 +244,7 @@ async function run(nome,mail,conteudo=true,diario=true) {
         <h3><strong>❕ Diário Oficial do Estado de Mato Grosso do Sul (DOE)</strong></h3>
         <p>
             <div id="cards">
-                ${documentoGeradoDOE}
+                ${listaDOE}
             </div>
         </p>
         <h3><strong>❕ Diário Oficial de Campo Grande – MS (DIOGRANDE Digital)</strong></h3>
@@ -316,8 +333,8 @@ module.exports = { run }
 
 if (require.main === module) {
     run("Klayton Chrysthian Oliveira Dias", "hix_x@hotmail.com");
-    run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
-    run("Ronaldo dos Santos","ronaldo.stst@gmail.com",false)
-    run('Andreza Gabriela Leão Alves','andrezagabrielaalves@gmail.com',false)
-    run('delmar silva dias','sdiascx@hotmail.com')
+    // run("Silvianny Aparecida Faria Camilo", "silvianny.faria@ufms.br", false);
+    // run("Ronaldo dos Santos","ronaldo.stst@gmail.com",false)
+    // run('Andreza Gabriela Leão Alves','andrezagabrielaalves@gmail.com',false)
+    // run('delmar silva dias','sdiascx@hotmail.com')
 }
