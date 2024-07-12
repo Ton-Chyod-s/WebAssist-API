@@ -112,15 +112,22 @@ async function run(nome,mail,conteudo=true,diario=true) {
 
     }
 
-
     for ( let linha in documentoGeradoPCI ) {
-        const vagas = documentoGeradoPCI[linha]['vagas']
-        const link = documentoGeradoPCI[linha]['site']
-        const inscricao = documentoGeradoPCI[linha]['data']
-    
-        listaConcursos += `${linha}, Vagas: ${vagas}, Inscrição Até: ${inscricao}<p><strong>Link:</strong> ${link}<p><br>`
+        const item = documentoGeradoPCI[linha]
+        if (typeof(item) !== 'string') {
+            const vagas = documentoGeradoPCI[linha]['vagas']
+            const link = documentoGeradoPCI[linha]['site']
+            const inscricao = documentoGeradoPCI[linha]['data']
+
+            for ( let linha in item ) {
+                // listaConcursos += `<p>${item[linha]}</p>`
+                listaConcursos += `${vagas} Inscrição Até: ${inscricao}<p><strong>Link:</strong> ${link}<p><br>`
+            }
+        } else {
+            listaConcursos += `<h4>${item}</h4>`
+        }
     }
-    
+
     if ( conteudo === true ) {
         let documentoGeradoUFMS = await UFMS();
         let documentoGeradoExercito = await Exercito();
