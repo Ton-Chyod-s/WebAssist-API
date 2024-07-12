@@ -43,10 +43,6 @@ async function run(nome,mail,conteudo=true,diario=true) {
             }
         }
 
-
-
-
-
         documentoGeradoDIOGrande = await DIOGrande(nome);
         for ( let i in documentoGeradoDIOGrande ) {
             const item = documentoGeradoDIOGrande[i]
@@ -362,7 +358,6 @@ async function run(nome,mail,conteudo=true,diario=true) {
     </div>
     </html>
     `
-
     let headCorpo = (() => {
          if (conteudo) {
              return `Atualizações - UFMS, OTT, DOE, DIOGrande MS ${ano}`;
