@@ -121,7 +121,7 @@ async function run(nome,mail,conteudo=true,diario=true) {
 
             for ( let linha in item ) {
                 // listaConcursos += `<p>${item[linha]}</p>`
-                listaConcursos += `${vagas} Inscrição Até: ${inscricao}<p><strong>Link:</strong> ${link}<p><br>`
+                listaConcursos += `${item}, ${vagas} Inscrição Até: ${inscricao}<p><strong>Link:</strong> ${link}<p><br>`
             }
         } else {
             listaConcursos += `<h4>${item}</h4>`
