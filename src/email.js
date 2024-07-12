@@ -234,14 +234,20 @@ async function run(nome,mail,conteudo=true,diario=true) {
                 font-size: 1.2em;
             }
 
+            div #header {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+            }
+
         </style>
 
     </head>
     <body>
-
-        <p>Prezado(a),</p>
-        <p>Aqui estão as análises solicitadas:</p>
-
+        <div id="header">
+            <p>Prezado(a),</p>
+            <p>Aqui estão as análises solicitadas:</p>
+        <div>
         ${conteudo ? `
         <h3><strong>❕ Movimentação Interna e Reingresso UFMS ${ano}</strong></h3>
         <p>
