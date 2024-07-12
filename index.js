@@ -32,20 +32,8 @@ server.get('/DOE/:id', async (req, res) => {
     const id = req.params.id;
     try {
         let documentoGeradoDOE = await DOE(id);
-        if (!documentoGeradoDOE) {
-            return res.status(404).json({
-                'Nome': id, 
-                error: 'Nenhum Diário Oficial Eletrônico (DOE) encontrado' 
-            });
-        }
         
-        const startIndex = documentoGeradoDOE.indexOf('</p>') + 4;
-        const diarioOficialEletronico = documentoGeradoDOE.substring(startIndex);
-        
-        return res.json({
-            'Nome': id, 
-            'Diário Oficial Eletrônico': diarioOficialEletronico
-        });
+        return res.json(documentoGeradoDOE);
         
     } catch (error) {
         console.error(error); // Log the error for debugging purposes

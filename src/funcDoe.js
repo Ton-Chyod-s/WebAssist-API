@@ -3,8 +3,10 @@ const puppeteer = require('puppeteer');
 const ano = new Date().getFullYear().toString();
 
 async function DOE(nome) {
-    let head = "";
-    let documento = "";
+    let dictDiario = new Object();
+    let dictDoe = new Object();
+
+    let cont = 0;
 
     const primeiroNome =  nome.split(' ')[0];
     const browser = await puppeteer.launch({
@@ -13,6 +15,8 @@ async function DOE(nome) {
     });
     const page = await browser.newPage();
     await page.goto('https://www.spdo.ms.gov.br/diariodoe');
+    dictDoe['link'] = 'https://www.spdo.ms.gov.br/diariodoe';
+    dictDoe['nome'] = nome;
 
     await page.type('[id="Filter_Texto"]', nome);
     await page.locator('button').click();
@@ -23,27 +27,40 @@ async function DOE(nome) {
 
     for (let i = 0; i < planilhaHTML.length; i++) {
         const element = planilhaHTML[i];
-        if (element.includes(ano) && element.includes(primeiroNome)) {
-        const data = element.split(' - ')[0].split('\t')[1];
-        const DOE = element.split(' - ')[1];
-        documento += `<p>${data}    ${DOE}</p>`;
+
+        let data = element.split(' - ')[0].split('\t')[1];
+        if ( data === undefined ) {
+            continue;
         }
+
+        const boolean = element.includes( primeiroNome ) || element.includes( primeiroNome.toUpperCase() )
+
+        if ( data.includes(ano) && boolean ) {
+            const DOE = element.split(' - ')[1];
+        
+            dictDiario[`documento`] = DOE
+            dictDiario[`data`] = data
+
+            dictDoe[`diario-${cont}`] = dictDiario;
+            dictDiario = new Object();
+            cont++;
+        } 
     };
-    head += `<p>Nome: ${nome}   Ano: ${ano}</p>`;
-    if (documento.length === 0) {
-        documento += `${head}Lamento informar que não foram encontrados Diários Oficiais Eletrônicos (DOEs) associados ao seu nome até a presente data.`;
-    } else {
-        documento = head + documento;
-    }
+    
+    if ( Object.keys(dictDoe).length === 2 ) {
+        dictDoe['erro!'] = `Lamento informar que não foram encontrados Diários Oficiais Eletrônicos (DOEs) associados ao seu nome até a presente data.`;
+
+    } 
+
     await browser.close();
-    return documento;
+    return dictDoe;
 }
 
 module.exports = { DOE };
 
 if (require.main === module) {
     async function Testando () {
-        const haha = await DOE('hahahaha')
+        const haha = await DOE('Andreza Gabriela Leão Alves')
         console.log(haha)
     }
     Testando()
