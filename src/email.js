@@ -249,8 +249,8 @@ async function run(nome,mail,conteudo=true,diario=true) {
                 height: 30px;
             }
 
-            div '#meio' {
-                color: black;
+            div #meio {
+                background-color: red;
             }
 
             div '#direito' {
