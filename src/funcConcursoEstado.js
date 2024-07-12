@@ -7,6 +7,8 @@ async function concursoEstado() {
     const LINK_SITE = "http://www2.concursos.ms.gov.br/"
 
     const LINK = "http://www2.concursos.ms.gov.br/?location=editais"
+    dictData['link'] = LINK;
+    
     const response = await axios.get(LINK);
     const site = response.data
 
@@ -28,7 +30,7 @@ async function concursoEstado() {
 
         dictData[concurso] = {site: link}
     }
-
+    
     return dictData;
 }
 

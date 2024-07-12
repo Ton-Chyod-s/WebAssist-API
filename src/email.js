@@ -94,14 +94,22 @@ async function run(nome,mail,conteudo=true,diario=true) {
                 }
             }
         } else {
-            listaSeges += item
+            listaSeges += `<h4>${item}</h4>`
         }
         
     }
 
-    for ( let linha in documentoGeradoConcursoEstado ) {
-        const link = documentoGeradoConcursoEstado[linha]['site']
-        listaConcursoEstado += `${linha}<p><strong>Link:</strong> ${link}<p><br>`
+    for (let i in documentoGeradoConcursoEstado ) {
+        const item = documentoGeradoConcursoEstado[i]
+        if (typeof(item) !== 'string') {
+            for ( let linha in item ) {
+                const link = documentoGeradoConcursoEstado[i]['site']
+                listaConcursoEstado += `${i}<p><strong>Link:</strong> ${link}<p><br>`
+            }
+        } else {
+            listaConcursoEstado += `<h4>${item}</h4>`
+        }
+
     }
 
 
