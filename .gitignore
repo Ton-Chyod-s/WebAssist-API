@@ -3,6 +3,7 @@ data/*.json
 node_modules
 .vscode
 .venv
+.env
 ExecuçãoPrograma.bat
 ConcursosAtivos.csv
 __pycache__
