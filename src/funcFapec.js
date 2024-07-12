@@ -49,52 +49,16 @@ async function fapec() {
                         anoConcurso = dataSplit[2];
                     } 
 
-                    const boleanMes = mesConcurso === mes;
-                    const boleanDias = diaConcurso >= dia;
-                    const bolean = boleanMes && boleanDias
+                    const bolean = mesConcurso === mes && diaConcurso >= dia;
 
                     if ( cards[i].texto.includes('2024') && bolean ) {
                         const elementSplit = element.replace(' – ', '-').replace(' – ', '-').split('-');
 
-                        processo = elementSplit[0];
-                        cargo = elementSplit[1];
-                        data = elementSplit[2];
+                        dictConteudo['cargo'] = elementSplit[1];
+                        dictConteudo['tempo'] = elementSplit[2];
 
-
-                        dictConteudo['cargo'] = cargo;
-                        dictConteudo['tempo'] = data;
-
-
-                        dictFapec[`${processo}`] = dictConteudo;
+                        dictFapec[`${elementSplit[0]}`] = dictConteudo;
                         dictConteudo = {};
-
-                       
-                       
-                        
-                        // if ( bolean ) {
-                        //     const elementSplit = element.split(' – ');
-                        //     let processo;
-                        //     let cargo;
-                        //     let data;
-
-                        //     if ( elementSplit.length === 2) {
-                        //         const element0Split = elementSplit[1].split('-');
-
-                        //         processo = elementSplit[0];
-                        //         cargo = element0Split[0];
-                        //         data = element0Split[1];
-                        //     } else {
-
-                        //         processo = elementSplit[0];
-                        //         cargo = elementSplit[1];
-                        //         data = elementSplit[2];
-                        //     }
-                            
-                        //     dictConteudo['cargo'] = cargo;
-                        //     dictConteudo['tempo'] = data;
-                        //     dictFapec[processo] = dictConteudo;
-                        //     dictConteudo = {};
-                        // }
 
                     } 
                 }}
