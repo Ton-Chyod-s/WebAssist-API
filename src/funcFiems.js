@@ -2,8 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const https = require('https');
 
-let dictFapec = {};
-let dictFapecConteudo = {};
+
 
 const meses = {1: "Janeiro", 2: "Fevereiro", 3: "Março", 4: "Abril", 5: "Maio", 6: "Junho",
   7: "Julho", 8: "Agosto", 9: "Setembro", 10: "Outubro", 11: "Novembro", 12: "Dezembro"
@@ -19,9 +18,11 @@ if (dia.length === 1) {
 const httpsAgent = new https.Agent({ rejectUnauthorized: false });
 
 async function fiems() {
- 
+    let dictFapec = {};
+    let dictFapecConteudo = {};
     const site = "https://www.fiems.com.br/trabalhe-conosco";   
     
+
     const response = await axios.get(site, { httpsAgent });
     const $ = cheerio.load(response.data);
     const cards = $('div[class="col-md-4"]').map((i, item) => ({
@@ -57,7 +58,7 @@ async function fiems() {
                 const dataSplit = dataPubliTXT.split(' ')[4];
 
                 if (dataPubliTXT.includes(dia) || dataSplit > dia && dataPubliTXT.includes(mes)) {
-                    dictFapec['site'] = site
+                    
                     dictFapecConteudo['cargo'] = conteudo[0]
                     dictFapecConteudo['dataPubli'] = dataPubliTXT
                     dictFapec[concurso] = dictFapecConteudo
@@ -67,6 +68,7 @@ async function fiems() {
         }
     }
 
+    dictFapec['site'] = site
     return dictFapec;
 
 }

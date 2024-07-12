@@ -169,7 +169,7 @@ async function run(nome,mail,conteudo=true,diario=true) {
             for ( let linha in item ) {
                 constSTR += ` ${item[linha]}`
             }
-            listaFiems += `${constSTR}`
+            listaFiems += `<p>${constSTR}</p>`
         } else {
             listaFiems += `<h4>${item}</h4>`
         }
@@ -272,7 +272,14 @@ async function run(nome,mail,conteudo=true,diario=true) {
                 ${listaFapec}
             </div>
         </p>
-
+        
+        <h3>❕ FIEMS</h3>
+        <p>
+            <div id="cards">
+                ${listaFiems}
+            </div>
+        </p>
+        
         <h3>❕ SEGES</h3>
         <p>
             <div id="cards">
@@ -280,17 +287,11 @@ async function run(nome,mail,conteudo=true,diario=true) {
             </div>
         </p>
 
+
         <h3>❕ CONCURSOS PÚBLICOS E PROCESSOS SELETIVOS - ESTADO</h3>
         <p>
             <div id="cards">
                 ${listaConcursoEstado}
-            </div>
-        </p>
-
-        <h3>❕ FIEMS</h3>
-        <p>
-            <div id="cards">
-                ${listaFiems}
             </div>
         </p>
 
