@@ -238,18 +238,23 @@ async function run(nome,mail,conteudo=true,diario=true) {
             }
 
             div #header {
-                background-color: red;
                 padding-left: 5px;
                 padding-right: 5px;
                 border-radius: 5px;
                 margin: 10px
             }
             
-            div '#esquerdo',
-            div '#meio',
-            div '#direito' {
+            div '#esquerdo' {
                 border: 1px solid black;
                 height: 30px;
+            }
+
+            div '#meio' {
+                color: black;
+            }
+
+            div '#direito' {
+                color: red;
             }
 
         </style>
