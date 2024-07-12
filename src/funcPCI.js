@@ -65,6 +65,8 @@ const UFS_SITE = {
 
 async function exam_region(source_code, uf) {
     let dictPCI = new Object();
+    dictPCI['link'] = source_code;
+    
     uf = uf.toUpperCase()
 
     let city;
