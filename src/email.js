@@ -203,7 +203,10 @@ async function run(nome,mail,conteudo=true,diario=true) {
                 font-family: Arial, sans-serif;
                 font-size: 1.1em;
                 background-color: #f4f4f4;
-                padding: 20px;
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-top: 5px;
+                padding-bottom: 5px;
                 border-radius: 5px;
             }
 
@@ -235,9 +238,18 @@ async function run(nome,mail,conteudo=true,diario=true) {
             }
 
             div #header {
-                display: flex;
-                justify-content: center;
-                flex-direction: column;
+                background-color: red;
+                padding-left: 5px;
+                padding-right: 5px;
+                border-radius: 5px;
+                margin: 10px
+            }
+            
+            div '#esquerdo',
+            div '#meio',
+            div '#direito' {
+                border: 1px solid black;
+                height: 30px;
             }
 
         </style>
@@ -245,9 +257,18 @@ async function run(nome,mail,conteudo=true,diario=true) {
     </head>
     <body>
         <div id="header">
-            <p>Prezado(a),</p>
-            <p>Aqui estão as análises solicitadas:</p>
-        <div>
+            <div id="esquerdo">
+                <p>Prezado(a),</p>
+                <p>Aqui estão as análises solicitadas:</p>
+            </div>
+            <div id="meio">
+
+            </div>
+            <div id="direito">
+
+            </div>
+
+        </div>
         ${conteudo ? `
         <h3><strong>❕ Movimentação Interna e Reingresso UFMS ${ano}</strong></h3>
         <p>
