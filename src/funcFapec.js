@@ -53,12 +53,12 @@ async function fapec() {
                     } 
 
                     const boleanMes = mesConcurso === mes;
-                    const boleanDias = diaConcurso > dia;
+                    const boleanDias = diaConcurso >= dia;
                     const bolean = boleanMes && boleanDias
 
                     if ( cards[i].texto.includes('2024') && bolean ) {
 
-                        dictFapec['processo'] = element;
+                        dictFapec[`processo-${i}`] = element;
                         dictConteudo = {};
 
                         
