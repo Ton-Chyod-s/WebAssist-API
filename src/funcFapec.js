@@ -54,7 +54,7 @@ async function fapec() {
                     const bolean = boleanMes && boleanDias
 
                     if ( cards[i].texto.includes('2024') && bolean ) {
-                        const elementSplit = element.replace(' – ', '-').split('-');
+                        const elementSplit = element.replace(' – ', '-').replace(' – ', '-').split('-');
 
                         processo = elementSplit[0];
                         cargo = elementSplit[1];
