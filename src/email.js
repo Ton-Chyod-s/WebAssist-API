@@ -206,6 +206,7 @@ async function run(nome,mail,conteudo=true,diario=true) {
                 padding-left: 10px;
                 padding-right: 10px;
                 padding-bottom: 5px;
+                padding-top: 1px;
                 border-radius: 5px;
             }
 
