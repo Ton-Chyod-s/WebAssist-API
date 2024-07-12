@@ -31,9 +31,6 @@ async function fapec() {
 
         for (let i = 0; i < cards.length; i++) {
             const element = cards[i].texto
-            if ( element.includes('034/2023') ) {
-                console.log('aqui')
-            }
 
             if ( element === '' ) {
                 continue;
@@ -57,12 +54,23 @@ async function fapec() {
                     const bolean = boleanMes && boleanDias
 
                     if ( cards[i].texto.includes('2024') && bolean ) {
+                        const elementSplit = element.replace(' – ', '-').split('-');
 
-                        dictFapec[`processo-${i}`] = element;
+                        processo = elementSplit[0];
+                        cargo = elementSplit[1];
+                        data = elementSplit[2];
+
+
+                        dictConteudo['cargo'] = cargo;
+                        dictConteudo['tempo'] = data;
+
+
+                        dictFapec[`${processo}`] = dictConteudo;
                         dictConteudo = {};
 
+                       
+                       
                         
-
                         // if ( bolean ) {
                         //     const elementSplit = element.split(' – ');
                         //     let processo;
