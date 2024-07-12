@@ -1,5 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const { date } = require('zod');
 
 const ano = new Date().getFullYear().toString();
 const mes = '0' + (new Date().getMonth() + 1).toString();
@@ -47,10 +48,12 @@ async function fapec() {
                         mesConcurso = dataSplit[1];
                         anoConcurso = dataSplit[2];
                         
-                    }
+                    } 
+
                     // verifica se a string contém "Inscrições abertas", data de hoje e se o dia de hoje é o menor que o maior dia do concurso
-                    if ( cards[i].texto.includes('Inscrições abertas') && newElement > hojeData ) {
-                        const elementSplit = element.split(' – ');
+                    if ( cards[i].texto.includes('Inscrições abertas') ) {
+                        if (diaConcurso > dia && newElement > hojeData) {
+                            const elementSplit = element.split(' – ');
                         let processo;
                         let cargo;
                         let data;
@@ -72,17 +75,10 @@ async function fapec() {
                         dictConteudo['tempo'] = data;
                         dictFapec[processo] = dictConteudo;
                         dictConteudo = {};
+                        }
                     } 
-                }
-
-
-                    
-                }
+                }}
             }
-
-            
-
-            
 
         if ( Object.keys(dictFapec).length === 1 ) {
             dictConteudo['unknown'] = 'Não há concursos abertos';
