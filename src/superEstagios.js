@@ -3,9 +3,8 @@ const axios = require('axios');
 
 const LINK="https://www.superestagios.com.br/index/processoSeletivo/processo.php?v=MTky"
 
-let listProcess = new Array();
-
 async function superEstagios() {
+    let listProcess = new Array();
     const response = await axios.get(LINK);
     const $ = cheerio.load(response.data);
     const cards = $('li').map((i, card) => {
