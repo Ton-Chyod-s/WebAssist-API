@@ -1,5 +1,5 @@
 require('dotenv').config({  
-    path: process.env.NODE_ENV !== "main" ? ".env.testing" : ".env"
+    path: process.env.NODE_ENV !== "main" ? ".env" : ".env"
   })
 
 const lista = process.env.LIST_NAME_SCRAPINING.split(',');
@@ -11,21 +11,20 @@ function func(func_test) {
         const email = lista[i + 1];
         const cond = lista[i + 2];
         const cond1 = lista[i + 3];
-        const cond2 = lista[i + 4];
-
-        if ( cond === 'false' ) {
+        
+        if ( cond === 'false' && cond1 === 'true' ) {
             (async function Testando () {
                 const test = await func_test(nome,email,false)
             })();
             
-        } else if ( cond1 === 'false' ) {
+        } else if ( cond === 'true' && cond1 === 'false' ) {
             (async function Testando () {
                 const test = await func_test(nome,email,true,false)
             })();
 
-        } else if ( cond2 === 'false' ) {
+        } else if ( cond === 'false' && cond1 === 'false' ) {
             (async function Testando () {
-                const test = await func_test(nome,email,true,true,false)
+                const test = await func_test(nome,email,false,false)
             })();
 
         } else {

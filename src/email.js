@@ -316,7 +316,6 @@ async function run(nome,mail,conteudo=true,estagio=true,diario=true) {
 
         ` : ''}
 
-        ${diario ? `
         <h3><strong>❕ Diário Oficial do Estado de Mato Grosso do Sul (DOE)</strong></h3>
         <p>
             <div id="cards">
@@ -330,8 +329,6 @@ async function run(nome,mail,conteudo=true,estagio=true,diario=true) {
             </div>
         </p>
         
-        ` : ''}
-
         <h3>❕ Noticias UFMS-Ingresso</h3>
         <p>
             <div id="cards">
@@ -359,7 +356,6 @@ async function run(nome,mail,conteudo=true,estagio=true,diario=true) {
                 ${listaSeges}
             </div>
         </p>
-
 
         <h3>❕ CONCURSOS PÚBLICOS E PROCESSOS SELETIVOS - ESTADO</h3>
         <p>
