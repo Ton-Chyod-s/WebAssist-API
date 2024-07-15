@@ -387,16 +387,12 @@ module.exports = { run }
 if (require.main === module) {
     const lista = process.env.LIST_NAME_SCRAPINING.split(',');
 
-    for (let i = 0; i < lista.length; i++) {
-        const nome = lista[i]
-        const email = lista[i + 1]
-        const cond = lista[i + 2]
+    // Iterar de 0 em 3 para processar triples (nome, email, cond)
+    for (let i = 0; i < lista.length; i += 3) {
+        const nome = lista[i];
+        const email = lista[i + 1];
+        const cond = lista[i + 2];
 
-        console.log(nome, email, cond)
-
-        run(nome,email,cond)
-
-        i += 2;
+        run(nome, email, cond);
     }
-    
 }
