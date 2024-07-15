@@ -13,13 +13,13 @@ function func(func_test) {
 
         if ( cond === 'false' ) {
             (async function Testando () {
-                const test = await func_test(nome)
+                const test = await func_test(nome,email,false)
                 console.log(test)
             })();
             
         } else {
             (async function Testando () {
-                const test = await func_test(nome)
+                const test = await func_test(nome,email)
                 console.log(test)
             })();
         }   
