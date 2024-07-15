@@ -56,6 +56,7 @@
     "domelementtype": "^2.3.0",
     "domhandler": "^5.0.3",
     "domutils": "^3.1.0",
+    "dotenv": "^16.4.5",
     "ee-first": "^1.1.1",
     "emoji-regex": "^8.0.0",
     "encodeurl": "^1.0.2",
