@@ -4,6 +4,7 @@ node_modules
 .vscode
 .venv
 .env
+.env.testing
 ExecuçãoPrograma.bat
 ConcursosAtivos.csv
 __pycache__
