@@ -1,5 +1,13 @@
+// se for true, o teste será feito, se for false, entrera em produção
+const on =  true;
+
+let arg = ".env";
+if ( on === true ) {
+    arg = ".env.testing"
+}
+
 require('dotenv').config({  
-    path: process.env.NODE_ENV !== "main" ? ".env" : ".env"
+    path: process.env.NODE_ENV !== "main" ? arg : ".env"
   })
 
 const lista = process.env.LIST_NAME_SCRAPINING.split(',');
