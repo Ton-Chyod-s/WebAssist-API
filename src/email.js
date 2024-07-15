@@ -14,7 +14,7 @@ const { superEstagios } = require('./superEstagios.js');
 
 const ano = new Date().getFullYear().toString();
 
-async function run(nome,mail,conteudo=true,diario=true) {
+async function run(nome,mail,conteudo=true,estagio=true,diario=true) {
     const LINK = "https://www.pciconcursos.com.br/concursos/"
 
     let listaSeges = '';    
@@ -69,12 +69,13 @@ async function run(nome,mail,conteudo=true,diario=true) {
     let documentoGeradoPCI = await exam_region(LINK, 'ms');
     let documentoGeradoSuperEstagios = await superEstagios();
 
-    for (let i = 0; i < documentoGeradoSuperEstagios.length; i++) {
-        const item = documentoGeradoSuperEstagios[i];
+    for (let lin in documentoGeradoSuperEstagios) {
+        const item = documentoGeradoSuperEstagios[lin];
         if (typeof(item) !== 'string') {
             for ( let linha in item ) {
-                const link = documentoGeradoSuperEstagios[i]['link']
+                const link = documentoGeradoSuperEstagios[lin]['link']
                 listaSuperEstagios += `<p>${item[linha]}</p><p><strong>Link:</strong> ${link}</p><br>`
+                break;
             }
         } else {
             listaSuperEstagios += `<h4>${item}</h4>`
@@ -305,8 +306,17 @@ async function run(nome,mail,conteudo=true,diario=true) {
         </p>
         ` : ''}
 
-        ${diario ? `
+        ${estagio ? `
+        <h3><strong>❕ PROCESSO SELETIVO ESTÁGIO TRT 24 REGIÃO MATO GROSSO DO SUL EDITAL 05/2024</strong></h3>
+        <p>
+            <div id="cards">
+                ${listaSuperEstagios}
+            </div>
+        </p>
 
+        ` : ''}
+
+        ${diario ? `
         <h3><strong>❕ Diário Oficial do Estado de Mato Grosso do Sul (DOE)</strong></h3>
         <p>
             <div id="cards">
@@ -320,12 +330,6 @@ async function run(nome,mail,conteudo=true,diario=true) {
             </div>
         </p>
         
-        <h3><strong>❕ PROCESSO SELETIVO ESTÁGIO TRT 24 REGIÃO MATO GROSSO DO SUL EDITAL 05/2024</strong></h3>
-        <p>
-            <div id="cards">
-                ${listaSuperEstagios}
-            </div>
-        </p>
         ` : ''}
 
         <h3>❕ Noticias UFMS-Ingresso</h3>
