@@ -61,6 +61,6 @@ module.exports = { DOE };
 
 if (require.main === module) {
 
-    func(DOE())
+    func(DOE)
 
 }

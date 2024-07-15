@@ -50,5 +50,5 @@ async function seges() {
 module.exports = { seges }
 
 if (require.main === module) {
-    func(seges());
+    func(seges);
 }

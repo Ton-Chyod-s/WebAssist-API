@@ -64,5 +64,5 @@ async function Exercito() {
 module.exports = { Exercito };
 
 if (require.main === module) {
-    func(Exercito());
+    func(Exercito);
 }

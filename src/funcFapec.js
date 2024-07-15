@@ -75,5 +75,5 @@ async function fapec() {
 module.exports = { fapec }
 
 if (require.main === module) {
-    func(fapec())
+    func(fapec)
 }

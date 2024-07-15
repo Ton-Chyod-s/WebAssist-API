@@ -60,5 +60,5 @@ async function funcUfmsGeral() {
 module.exports = { funcUfmsGeral };
 
 if (require.main === module) {
-    func(funcUfmsGeral());
+    func(funcUfmsGeral);
 }

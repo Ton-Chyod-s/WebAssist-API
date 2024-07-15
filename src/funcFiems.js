@@ -76,5 +76,5 @@ async function fiems() {
 module.exports = { fiems };
 
 if (require.main === module) {
-    func(fiems())
+    func(fiems)
 }

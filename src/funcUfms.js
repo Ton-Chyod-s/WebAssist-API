@@ -102,5 +102,5 @@ async function UFMS() {
 module.exports = { UFMS };
 
 if (require.main === module) {
-    func(UFMS());
+    func(UFMS);
 }
