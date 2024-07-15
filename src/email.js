@@ -10,6 +10,7 @@ const { fiems } = require('./funcFiems');
 const { exam_region } = require('./funcPCI');
 const { funcUfmsGeral } = require('./funcUfmsGeral');
 const { func } = require('./func');
+const { superEstagios } = require('./superEstagios.js');
 
 const ano = new Date().getFullYear().toString();
 
