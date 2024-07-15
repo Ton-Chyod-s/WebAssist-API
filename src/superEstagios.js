@@ -6,6 +6,8 @@ const LINK="https://www.superestagios.com.br/index/processoSeletivo/processo.php
 
 async function superEstagios() {
     let listProcess = new Array();
+    listProcess.push(LINK);
+    
     const response = await axios.get(LINK);
     const $ = cheerio.load(response.data);
     const cards = $('li').map((i, card) => {

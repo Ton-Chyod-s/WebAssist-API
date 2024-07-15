@@ -73,7 +73,7 @@ async function run(nome,mail,conteudo=true,diario=true) {
         const item = documentoGeradoSuperEstagios[i];
         if (typeof(item) !== 'string') {
             for ( let linha in item ) {
-                const link = documentoGeradoSuperEstagios[i]['site']
+                const link = documentoGeradoSuperEstagios[i]['link']
                 listaSuperEstagios += `<p>${item[linha]}</p><p><strong>Link:</strong> ${link}</p><br>`
             }
         } else {
@@ -317,6 +317,13 @@ async function run(nome,mail,conteudo=true,diario=true) {
         <p>
             <div id="cards">
                 ${listaDioGrande}
+            </div>
+        </p>
+        
+        <h3><strong>❕ PROCESSO SELETIVO ESTÁGIO TRT 24 REGIÃO MATO GROSSO DO SUL EDITAL 05/2024</strong></h3>
+        <p>
+            <div id="cards">
+                ${listaSuperEstagios}
             </div>
         </p>
         ` : ''}
