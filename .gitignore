@@ -12,3 +12,4 @@ __pycache__
 .env.development.local
 src refactore
 node_modules/https/package.json
+.env.testing
