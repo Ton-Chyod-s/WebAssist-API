@@ -132,7 +132,6 @@ async function run(nome,mail,conteudo=true,estagio=true,diario=true) {
             const inscricao = documentoGeradoPCI[i]['data']
 
             for ( let linha in item ) {
-                // listaConcursos += `<p>${item[linha]}</p>`
                 listaConcursos += `${i}, ${vagas} Inscrição Até: ${inscricao}<p><strong>Link:</strong> ${link}<p><br>`
             }
         } else {
