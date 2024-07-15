@@ -4,10 +4,11 @@ const { func } = require('./func');
 
 let dictData = new Object();
 
-async function concursoEstado() {
-    const LINK_SITE = "http://www2.concursos.ms.gov.br/"
+const LINK_SITE = "http://www2.concursos.ms.gov.br/"
 
-    const LINK = "http://www2.concursos.ms.gov.br/?location=editais"
+const LINK = "http://www2.concursos.ms.gov.br/?location=editais"
+
+async function concursoEstado() {
     dictData['link'] = LINK;
     
     const response = await axios.get(LINK);

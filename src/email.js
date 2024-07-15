@@ -14,9 +14,9 @@ const { superEstagios } = require('./func/superEstagios.js');
 
 const ano = new Date().getFullYear().toString();
 
-async function run(nome,mail,conteudo=true,estagio=true,diario=true) {
-    const LINK = "https://www.pciconcursos.com.br/concursos/"
+const LINK = "https://www.pciconcursos.com.br/concursos/"
 
+async function run(nome,mail,conteudo=true,estagio=true,diario=true) {
     let listaSeges = '';    
     let listaConcursoEstado = '';
     let listaConcursos = '';
