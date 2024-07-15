@@ -68,5 +68,5 @@ async function DIOGrande(nome) {
 module.exports = { DIOGrande };
 
 if (require.main === module) {
-    func(DIOGrande());
+    func(DIOGrande);
 }

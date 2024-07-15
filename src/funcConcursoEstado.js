@@ -38,5 +38,5 @@ async function concursoEstado() {
 module.exports = { concursoEstado }
 
 if (require.main === module) {
-    func(concursoEstado())  
+    func(concursoEstado)  
 }

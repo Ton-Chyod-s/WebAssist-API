@@ -1,6 +1,5 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { func } = require('./func');
 
 json = new Object();
 analysis = new Object();
@@ -182,5 +181,9 @@ LINK = "https://www.pciconcursos.com.br/concursos/"
 module.exports = { exam_region };
 
 if (require.main === module) {
-    func(exam_region(LINK, 'ms'))
+    async function Testando () {
+        const haha = await exam_region(LINK, 'ms')
+        console.log(haha)
+    }
+    Testando()
 }
