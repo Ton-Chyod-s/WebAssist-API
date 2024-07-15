@@ -393,6 +393,10 @@ if (require.main === module) {
         const email = lista[i + 1];
         const cond = lista[i + 2];
 
-        run(nome, email, cond);
+        if ( cond === 'false' ) {
+            run(nome, email, false);
+        } else {
+            run(nome, email, true);
+        }   
     }
 }
