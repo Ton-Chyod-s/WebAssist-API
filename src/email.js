@@ -11,10 +11,6 @@ const { exam_region } = require('./funcPCI');
 const { funcUfmsGeral } = require('./funcUfmsGeral');
 const { func } = require('./func');
 
-require('dotenv').config({  
-    path: process.env.NODE_ENV !== "main" ? ".env.testing" : ".env"
-  })
-
 const ano = new Date().getFullYear().toString();
 
 async function run(nome,mail,conteudo=true,diario=true) {
