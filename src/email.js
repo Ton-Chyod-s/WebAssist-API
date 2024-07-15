@@ -94,7 +94,6 @@ async function run(nome,mail,conteudo=true,estagio=true,diario=true) {
         }
     }
 
-
     for (let i in documentoGeradoSeges) {
         const concurso = i
         const item = documentoGeradoSeges[i]
