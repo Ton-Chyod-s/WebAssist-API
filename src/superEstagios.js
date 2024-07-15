@@ -20,7 +20,7 @@ async function superEstagios() {
             listProcess.push(cards[i]);
         }
     }
-    return console.log(listProcess);
+    return listProcess;
 }
 
 module.exports = { superEstagios }
