@@ -387,10 +387,15 @@ module.exports = { run }
 
 if (require.main === module) {
     const lista = process.env.LIST_NAME_SCRAPINING.split(',');
+    
     for (let i = 0; i < lista.length; i++) {
-        console.log(lista[i])
-        console.log(lista[i + 1])
-        i++;
+        const nome = lista[i]
+        const email = lista[i + 1]
+        const cond = lista[i + 2]
+
+        run(nome,email,cond)
+
+        i += 2;
     }
     
 }
