@@ -82,7 +82,6 @@ async function UFMS() {
                         dictUfms[dictCountries2[0]] = dictUfms2Sem;
                     }
                 }
-
             }
         }
         
