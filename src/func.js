@@ -6,7 +6,7 @@ const lista = process.env.LIST_NAME_SCRAPINING.split(',');
 
 function func(func_test) {
     // Iterar de 0 em 3 para processar triples (nome, email, cond)
-    for (let i = 0; i < lista.length; i += 5) {
+    for (let i = 0; i < lista.length; i += 4) {
         const nome = lista[i];
         const email = lista[i + 1];
         const cond = lista[i + 2];
