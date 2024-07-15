@@ -1,16 +1,16 @@
 const { main } = require('./mandarEmail');
-const { DOE } = require('./funcDoe');
-const { UFMS } = require('./funcUfms');
-const { Exercito } = require('./funcExercito');
-const { DIOGrande } = require('.//funcDioGrande');
-const { fapec } = require('./funcFapec')
-const { seges } = require('./funcSeges')
-const { concursoEstado } = require('./funcConcursoEstado')
-const { fiems } = require('./funcFiems');
-const { exam_region } = require('./funcPCI');
-const { funcUfmsGeral } = require('./funcUfmsGeral');
-const { func } = require('./func');
-const { superEstagios } = require('./superEstagios.js');
+const { DOE } = require('./func/funcDoe');
+const { UFMS } = require('./func/funcUfms');
+const { Exercito } = require('./func/funcExercito');
+const { DIOGrande } = require('./func/funcDioGrande');
+const { fapec } = require('./func/funcFapec')
+const { seges } = require('./func/funcSeges')
+const { concursoEstado } = require('./func/funcConcursoEstado')
+const { fiems } = require('./func/funcFiems');
+const { exam_region } = require('./func/funcPCI');
+const { funcUfmsGeral } = require('./func/funcUfmsGeral');
+const { func } = require('./func/func');
+const { superEstagios } = require('./func/superEstagios.js');
 
 const ano = new Date().getFullYear().toString();
 
