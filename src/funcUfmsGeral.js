@@ -1,5 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const { func } = require('./func');
 
 let dictUfmsNoticias = new Object();
 let dictUfmsEditais = new Object();
@@ -59,8 +60,5 @@ async function funcUfmsGeral() {
 module.exports = { funcUfmsGeral };
 
 if (require.main === module) {
-    (async () => {
-        console.log(await funcUfmsGeral());
-
-    })();
+    func(funcUfmsGeral());
 }

@@ -1,6 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { date } = require('zod');
+const { func } = require('./func');
 
 const ano = new Date().getFullYear().toString();
 const mes = '0' + (new Date().getMonth() + 1).toString();
@@ -75,9 +75,5 @@ async function fapec() {
 module.exports = { fapec }
 
 if (require.main === module) {
-    async function Testando () {
-        const haha = await fapec()
-        console.log(haha)
-    }
-    Testando()
+    func(fapec())
 }

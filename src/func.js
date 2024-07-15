@@ -1,3 +1,7 @@
+require('dotenv').config({  
+    path: process.env.NODE_ENV !== "main" ? ".env.testing" : ".env"
+  })
+
 const lista = process.env.LIST_NAME_SCRAPINING.split(',');
 
 function func(func_test) {
