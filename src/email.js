@@ -27,6 +27,7 @@ async function run(nome,mail,conteudo=true,diario=true) {
     let listaUFMSGeral = '';
     let listaDioGrande = '';
     let listaDOE = '';
+    let listaSuperEstagios = '';
 
     let documentoGeradoDOE;
     let documentoGeradoDIOGrande;
@@ -66,6 +67,19 @@ async function run(nome,mail,conteudo=true,diario=true) {
     let documentoGeradoConcursoEstado = await concursoEstado();
     let documentoGeradoFiems = await fiems();
     let documentoGeradoPCI = await exam_region(LINK, 'ms');
+    let documentoGeradoSuperEstagios = await superEstagios();
+
+    for (let i = 0; i < documentoGeradoSuperEstagios.length; i++) {
+        const item = documentoGeradoSuperEstagios[i];
+        if (typeof(item) !== 'string') {
+            for ( let linha in item ) {
+                const link = documentoGeradoSuperEstagios[i]['site']
+                listaSuperEstagios += `<p>${item[linha]}</p><p><strong>Link:</strong> ${link}</p><br>`
+            }
+        } else {
+            listaSuperEstagios += `<h4>${item}</h4>`
+        }
+    }
 
     let documentoUfmsGeral = await funcUfmsGeral();
     for ( let i in documentoUfmsGeral ) {
