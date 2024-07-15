@@ -9,9 +9,8 @@ const { concursoEstado } = require('./funcConcursoEstado')
 const { fiems } = require('./funcFiems');
 const { exam_region } = require('./funcPCI');
 const { funcUfmsGeral } = require('./funcUfmsGeral');
-// require('dotenv/config');
 require('dotenv').config({  
-    path: process.env.NODE_ENV === "test" ? ".env.testing" : ".env"
+    path: process.env.NODE_ENV !== "main" ? ".env.testing" : ".env"
   })
 
 const ano = new Date().getFullYear().toString();
@@ -387,11 +386,13 @@ module.exports = { run }
 
 if (require.main === module) {
     const lista = process.env.LIST_NAME_SCRAPINING.split(',');
-    
+
     for (let i = 0; i < lista.length; i++) {
         const nome = lista[i]
         const email = lista[i + 1]
         const cond = lista[i + 2]
+
+        console.log(nome, email, cond)
 
         run(nome,email,cond)
 
