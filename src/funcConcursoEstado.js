@@ -1,5 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const { func } = require('./func');
 
 let dictData = new Object();
 
@@ -37,9 +38,5 @@ async function concursoEstado() {
 module.exports = { concursoEstado }
 
 if (require.main === module) {
-    async function Testando () {
-        const haha = await concursoEstado()
-        console.log(haha)
-    }
-    Testando()
+    func(concursoEstado)  
 }

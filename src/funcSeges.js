@@ -1,5 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const { func } = require('./func');
 
 let dictSeges = new Object();
 let concursos = new Object();
@@ -49,7 +50,5 @@ async function seges() {
 module.exports = { seges }
 
 if (require.main === module) {
-    (async () => {
-        console.log(await seges());
-    })();
+    func(seges);
 }

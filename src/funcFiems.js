@@ -1,7 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const https = require('https');
-
+const { func } = require('./func');
 
 
 const meses = {1: "Janeiro", 2: "Fevereiro", 3: "Março", 4: "Abril", 5: "Maio", 6: "Junho",
@@ -76,9 +76,5 @@ async function fiems() {
 module.exports = { fiems };
 
 if (require.main === module) {
-    async function Testando () {
-        const haha = await fiems()
-        console.log(haha)
-    }
-    Testando()
+    func(fiems)
 }

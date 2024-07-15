@@ -1,4 +1,4 @@
-
+const { func } = require('./func');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
@@ -64,7 +64,5 @@ async function Exercito() {
 module.exports = { Exercito };
 
 if (require.main === module) {
-    (async () => {
-        console.log(await Exercito());
-    })();
+    func(Exercito);
 }

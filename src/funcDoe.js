@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const { func } = require('./func');
 
 const ano = new Date().getFullYear().toString();
 
@@ -59,9 +60,7 @@ async function DOE(nome) {
 module.exports = { DOE };
 
 if (require.main === module) {
-    async function Testando () {
-        const haha = await DOE('Andreza Gabriela Leão Alves')
-        console.log(haha)
-    }
-    Testando()
+
+    func(DOE)
+
 }

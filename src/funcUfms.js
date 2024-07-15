@@ -1,7 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { data } = require('get-uri/dist/data');
-const { date } = require('zod');
+const { func } = require('./func');
 
 let dictUfms = new Object();
 
@@ -103,9 +102,5 @@ async function UFMS() {
 module.exports = { UFMS };
 
 if (require.main === module) {
-    async function test() {
-        const result = await UFMS();
-        console.log(result);
-    }
-    test()
+    func(UFMS);
 }
