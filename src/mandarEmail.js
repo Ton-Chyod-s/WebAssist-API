@@ -1,22 +1,33 @@
 const nodemailer = require("nodemailer");
 
+// se for true, o teste será feito, se for false, entrera em produção
+const on =  true;
+
+let arg = ".env";
+if ( on === true ) {
+    arg = ".env.testing"
+}
+
 require('dotenv').config({  
-    path: process.env.NODE_ENV !== "main" ? ".env" : ".env"
+    path: process.env.NODE_ENV !== "main" ? arg : ".env"
   })
+
+const name = process.env.USER;
+const pass = process.env.PASS;
 
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     secure: true,
     auth: {
-        user: process.env.USER,
-        pass: process.env.PASS,
+        user: name,
+        pass: pass,
       },
     });
 
 async function main(texto,imprimirConsole,assunto,para) {
     await transporter.sendMail({
-        from: process.env.USER,
+        from: name,
         to: para,
         subject: assunto,
         html: texto
