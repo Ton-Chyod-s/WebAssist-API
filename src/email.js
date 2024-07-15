@@ -9,10 +9,10 @@ const { concursoEstado } = require('./funcConcursoEstado')
 const { fiems } = require('./funcFiems');
 const { exam_region } = require('./funcPCI');
 const { funcUfmsGeral } = require('./funcUfmsGeral');
-require('dotenv/config');
-// require('dotenv').config({  
-//     path: process.env.NODE_ENV === "test" ? ".env.testing" : ".env"
-//   })
+// require('dotenv/config');
+require('dotenv').config({  
+    path: process.env.NODE_ENV === "test" ? ".env.testing" : ".env"
+  })
 
 const ano = new Date().getFullYear().toString();
 
@@ -386,5 +386,11 @@ async function run(nome,mail,conteudo=true,diario=true) {
 module.exports = { run }
 
 if (require.main === module) {
-    console.log(process.env.SECRET_API)
+    const lista = process.env.LIST_NAME_SCRAPINING.split(',');
+    for (let i = 0; i < lista.length; i++) {
+        console.log(lista[i])
+        console.log(lista[i + 1])
+        i++;
+    }
+    
 }
