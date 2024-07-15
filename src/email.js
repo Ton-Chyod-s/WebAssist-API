@@ -379,6 +379,7 @@ async function run(nome,mail,conteudo=true,estagio=true,diario=true) {
     </div>
     </html>
     `
+    
     let headCorpo = (() => {
          if (conteudo) {
              return `Atualizações - UFMS, OTT, DOE, DIOGrande MS ${ano}`;
