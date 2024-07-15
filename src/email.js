@@ -383,7 +383,7 @@ async function run(nome,mail,conteudo=true,estagio=true,diario=true) {
          if (conteudo) {
              return `Atualizações - UFMS, OTT, DOE, DIOGrande MS ${ano}`;
          } else {
-             return `Atualizações - DOE, DIOGRANDE MS ${ano}`;
+             return `Atualizações - DOE, DIOGRANDE MS, Outros ${ano}`;
          }
      })();
 
