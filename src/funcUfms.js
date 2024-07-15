@@ -17,14 +17,12 @@ async function UFMS() {
         const countries = $('div[class="box-border"]').map((i, item) => ({
             texto: $(item).text().trim()
         })).get();
-        
         const ano = new Date().getFullYear().toString();
 
         for (let i = 1; i < countries.length && i < 5; i++) {
             const limpo = countries[i].texto.replace(/\t/g, '').replace(/\n/, '').split('\n');
             const dictCountries2 = limpo.filter((item) => item !== '');
             const semestre = countries[i].texto.split(' – ')[1].split(' ')[0];
-
             const anoSemestre = countries[i].texto.split(' – ')[1].split('\n')[0].split(' ')[3];
             const condicao = dictCountries2[1];
         
@@ -40,7 +38,6 @@ async function UFMS() {
                         let dataPubli;
                         let publicacao;
                         let cont = 0;
-
                         for (let i = 0; i < dictCountries2.length; i++) {
                             const element = dictCountries2[i].split(' ');
                             if ( element.length === 6 ) {
@@ -59,13 +56,11 @@ async function UFMS() {
                     }
                 } else if (semestre.includes("2")) {
                     if (condicao === "CONCLUÍDO") {
-                        
                         dictUfms[dictCountries2[0]] = {
                             "Atenção": "Chamada de candidatos para matrícula - Concluida."
                         };
 
                     } else {
-
                         let dataPubli;
                         let publicacao;
                         let cont = 0;
@@ -84,7 +79,6 @@ async function UFMS() {
                             }
                         }
                         
-
                         dictUfms[dictCountries2[0]] = dictUfms2Sem;
                     }
                 }
