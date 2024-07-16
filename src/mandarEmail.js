@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 
 // se for true, o teste será feito, se for false, entrera em produção
-const on =  true;
+const on =  false;
 
 let arg = ".env";
 if ( on === true ) {
