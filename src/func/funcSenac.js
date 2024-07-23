@@ -20,16 +20,19 @@ async function funcSenac() {
 
     const $ = cheerio.load(concursos_tag);
 
-    const cards = $('div').map((index, element) => {
-        const $element = $(element);
-        const text = $element.text().trim();
-        const link = $element.find('div#collapse743 .panel-body ul li a').attr('href');
-        
-        return { 
-            value: text, 
-            link: link 
-        };
-    }).get();
+    // Obtemos todos os textos dos elementos div
+    const cardValues = $('div').map((_, element) => $(element).text().trim()).get();
+
+    // Obtemos todos os links dos elementos a
+    const linkValues = $('a').map((_, element) => $(element).attr('href')).get();
+
+    // Associamos cada card ao próximo link na lista
+    const cardsWithLinks = cardValues.map((text, index) => ({
+        value: text,
+        link: linkValues[index] || null // Usa o link correspondente ou null se não houver link suficiente
+    }));
+
+    console.log(cardsWithLinks);
 
     for (let i = 0; i < cards.length; i++) {
         const element = cards[i];
