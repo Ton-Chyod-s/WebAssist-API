@@ -374,7 +374,7 @@ async function run(nome,mail,conteudo=true,estagio=true,diario=true) {
     </body>
     <div id="footer">
         <p>Por favor, mantenha-se informado sobre possíveis atualizações.</br></br>
-            Atenciosamente, <strong>PerinDevBoot~</strong></br>
+            Atenciosamente, <strong>DevBoot~</strong></br>
         <div id=informativo>Este é um e-mail automático, favor não responder.</div></p>
     </div>
     </html>
