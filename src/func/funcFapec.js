@@ -61,8 +61,16 @@ async function fapec() {
                         dictConteudo = {};
 
                     } 
-                }}
-            }
+                } else {
+                    for (let i = 0; i < newElement.length; i++) {
+                        const element = array[i];
+                        
+                    }
+                }
+            
+            
+            }}
+            
 
         if ( Object.keys(dictFapec).length === 1 ) {
             dictConteudo['unknown'] = 'Não há concursos abertos';
