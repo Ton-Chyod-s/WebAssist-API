@@ -2,86 +2,59 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const { func } = require('./func');
 
-const ano = new Date().getFullYear().toString();
-const mes = '0' + (new Date().getMonth() + 1).toString();
-const dia = new Date().getDate().toString();
-const hojeData = `${dia}/${mes}/${ano}`
+const ano = new Date().getFullYear();
+const mes = (new Date().getMonth() + 1).toString().padStart(2, '0');
+const dia = new Date().getDate().toString().padStart(2, '0');
+const hojeData = `${dia}/${mes}/${ano}`;
 
 let dictFapec = {};
-let dictConteudo = {};
 
 async function fapec() {
-    
     const site = "https://fapec.org/processo-seletivo/";
-    dictFapec['site'] = site
+    dictFapec['site'] = site;
     let response;
-    
+
     try {
         response = await axios.get(site);
-        
     } catch (error) {
-        dictConteudo['cargo-data'] = 'Erro ao acessar o site';
-        dictFapec['Erro!'] = dictConteudo;
+        dictFapec['Erro!'] = { 'cargo-data': 'Erro ao acessar o site' };
         return dictFapec;
     }
-        const $ = cheerio.load(response.data);
-        const cards = $('button[data-toggle="collapse"]').map((i, item) => ({
-            texto: $(item).text().trim()
-        })).get();
 
-        for (let i = 0; i < cards.length; i++) {
-            const element = cards[i].texto
+    const $ = cheerio.load(response.data);
+    const cards = $('button[data-toggle="collapse"]').map((i, item) => ({
+        texto: $(item).text().trim()
+    })).get();
 
-            if ( element === '' ) {
-                continue;
+    cards.forEach(card => {
+        const element = card.texto;
+
+        if (element === '') return;
+
+        const elementSplit = element.split(' – ').join('-').split('-');
+
+        if (elementSplit.length >= 3) {
+            const dataConcurso = elementSplit[0];
+            const [diaConcurso, mesConcurso, anoConcurso] = dataConcurso.split('/').map(Number);
+
+            if (anoConcurso === ano && mesConcurso === Number(mes) && diaConcurso >= Number(dia)) {
+                dictFapec[`${elementSplit[0]}`] = {
+                    cargo: elementSplit[1] || 'N/A',
+                    tempo: elementSplit[2] || 'N/A'
+                };
             }
-            const elementSplit = element.split(' ');
-            for ( let j in elementSplit ) {
-                let diaConcurso;
-                let mesConcurso;
-                let anoConcurso;
-                const newElement = elementSplit[j].replace(/\n/g, '');
-                if ( newElement.includes('/') && newElement.length === 10 ) {
-                    const dataSplit = newElement.split('/');
-                    if ( dataSplit[0] >= dia ) {
-                        diaConcurso = dataSplit[0];
-                        mesConcurso = dataSplit[1];
-                        anoConcurso = dataSplit[2];
-                    } 
-
-                    const bolean = mesConcurso === mes && diaConcurso >= dia;
-
-                    if ( cards[i].texto.includes('2024') && bolean ) {
-                        const elementSplit = element.replace(' – ', '-').replace(' – ', '-').split('-');
-
-                        dictConteudo['cargo'] = elementSplit[1];
-                        dictConteudo['tempo'] = elementSplit[2];
-
-                        dictFapec[`${elementSplit[0]}`] = dictConteudo;
-                        dictConteudo = {};
-
-                    } 
-                } else {
-                    for (let i = 0; i < newElement.length; i++) {
-                        const element = array[i];
-                        
-                    }
-                }
-            
-            
-            }}
-            
-
-        if ( Object.keys(dictFapec).length === 1 ) {
-            dictConteudo['unknown'] = 'Não há concursos abertos';
-            dictFapec['Erro!'] = dictConteudo;
         }
+    });
 
-        return dictFapec;
+    if (Object.keys(dictFapec).length === 1 && dictFapec['site']) {
+        dictFapec['Erro!'] = { 'unknown': 'Não há concursos abertos' };
     }
 
-module.exports = { fapec }
+    return dictFapec;
+}
+
+module.exports = { fapec };
 
 if (require.main === module) {
-    func(fapec)
+    func(fapec);
 }
