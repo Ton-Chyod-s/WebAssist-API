@@ -28,6 +28,7 @@ async function vestDigital() {
     const cardAnoAtual = cardAnoAnalisado(anoAtual);
     const cardAnoPosterior = cardAnoAnalisado(anoPosterior);
 
+    // elaborar a logica para verificar se há informações para o ano posterior
     if ( cardAnoPosterior.length != 0 ) {
         console.log('Não há informações para o ano posterior.')
     } else {
@@ -39,7 +40,7 @@ async function vestDigital() {
     console.log(cards)
 
 
-
+    // verificar o conteudo do site
     // let cards = $('div[class="col-md-12"]').map(
     //     (i, item) => ({
     //         texto: $(item).text().trim().replace(/\t/g, '').replace(/\n/g, ''),
@@ -47,11 +48,7 @@ async function vestDigital() {
     //     })).get()
 
    
-    
 
-
-
-    
 }
 
 
