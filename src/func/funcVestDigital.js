@@ -49,20 +49,24 @@ async function vestDigital() {
     if ( cardAnoPosterior.length !== null ) {
         (async function () {
             situacao = await status(cardAnoPosterior)
-            console.log(situacao)
+            if (situacao.includes('EM ANDAMENTO')) {
+                console.log('Em andamento')
 
+            } 
 
         })();
 
     } else {
-        situacao = status(cardAnoAtual)
+        (async function () {
+            situacao = status(cardAnoAtual)
+            if (situacao.includes('EM ANDAMENTO')) {
+                console.log('Em andamento')
 
+            }
 
-
+        })();
 
     }
-
- 
 
     // verificar o conteudo do site
     // let cards = $('div[class="col-md-12"]').map(
@@ -70,8 +74,6 @@ async function vestDigital() {
     //         texto: $(item).text().trim().replace(/\t/g, '').replace(/\n/g, ''),
     //         link: $(item).find('a').attr('href')
     //     })).get()
-
-   
 
 }
 
