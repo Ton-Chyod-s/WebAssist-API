@@ -65,7 +65,7 @@ async function vestDigital() {
         return cardsConteudo;
     }
 
-    if ( cardAnoPosterior.length !== null ) {
+    if ( cardAnoPosterior.length > 0 ) {
         (async function () {
             const cardsConteudo = await conteudo(cardAnoPosterior);
             console.log(cardsConteudo)
