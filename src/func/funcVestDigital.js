@@ -65,8 +65,6 @@ async function vestDigital() {
         return cardsConteudo;
     }
 
-
-    // elaborar a logica para verificar se há informações para o ano posterior
     if ( cardAnoPosterior.length !== null ) {
         (async function () {
             const cardsConteudo = await conteudo(cardAnoPosterior);
