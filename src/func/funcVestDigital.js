@@ -55,6 +55,10 @@ async function vestDigital() {
                     texto: $Status(item).text().replace(/\t/g, '').replace(/\n/g, ''),
                 })).get()
 
+        } else {
+            cardsConteudo = {
+                "Atenção": "Chamada de candidatos para matrícula - Concluida."
+            }
         }
 
         return cardsConteudo;
@@ -81,15 +85,7 @@ async function vestDigital() {
 
     }
 
-    // verificar o conteudo do site
-    // let cards = $('div[class="col-md-12"]').map(
-    //     (i, item) => ({
-    //         texto: $(item).text().trim().replace(/\t/g, '').replace(/\n/g, ''),
-    //         link: $(item).find('a').attr('href')
-    //     })).get()
-
 }
-
 
 
 if (require.main === module) {
