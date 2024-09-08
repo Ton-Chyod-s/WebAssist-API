@@ -28,20 +28,41 @@ async function vestDigital() {
     const cardAnoAtual = cardAnoAnalisado(anoAtual);
     const cardAnoPosterior = cardAnoAnalisado(anoPosterior);
 
+    async function status(ano) {
+        try {
+            const responseStatus = await axios.get(ano[0].link);
+            const $Status = cheerio.load(responseStatus.data);
+            const cardsStatus = $Status('span.label.label-warning').map((i, item) => ({
+                texto: $Status(item).text(),
+            })).get();
+    
+            return cardsStatus.map(card => card.texto);
+        } catch (error) {
+            console.error('Error fetching status:', error);
+            return [];
+        }
+    }
+
+    let situacao;
+
     // elaborar a logica para verificar se há informações para o ano posterior
     if ( cardAnoPosterior.length !== null ) {
-        console.log(cardAnoPosterior)
+        (async function () {
+            situacao = await status(cardAnoPosterior)
+            console.log(situacao)
 
 
+        })();
 
     } else {
-        console.log(cardAnoAtual)
+        situacao = status(cardAnoAtual)
+
 
 
 
     }
-    
-    console.log(cards)
+
+ 
 
     // verificar o conteudo do site
     // let cards = $('div[class="col-md-12"]').map(
