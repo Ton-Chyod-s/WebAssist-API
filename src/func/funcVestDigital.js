@@ -53,6 +53,7 @@ async function vestDigital() {
             cardsConteudo = $Status('div[class="col-md-12"]').map(
                 (i, item) => ({
                     texto: $Status(item).text().replace(/\t/g, '').replace(/\n/g, ''),
+                    link: $Status(item).find('a').attr('href')
                 })).get()
 
         } else {
