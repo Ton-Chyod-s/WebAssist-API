@@ -47,28 +47,36 @@ async function vestDigital() {
     let situacao;
     let cardsConteudo;
 
+    async function conteudo(ano) {
+        situacao = await status(ano)
+        if (situacao.includes('EM ANDAMENTO')) {
+            cardsConteudo = $Status('div[class="col-md-12"]').map(
+                (i, item) => ({
+                    texto: $Status(item).text().replace(/\t/g, '').replace(/\n/g, ''),
+                })).get()
+
+        }
+
+        return cardsConteudo;
+    }
+
+
     // elaborar a logica para verificar se há informações para o ano posterior
     if ( cardAnoPosterior.length !== null ) {
         (async function () {
-            situacao = await status(cardAnoPosterior)
-            if (situacao.includes('EM ANDAMENTO')) {
-                cardsConteudo = $Status('div[class="col-md-12"]').map(
-                    (i, item) => ({
-                        texto: $Status(item).text().replace(/\t/g, '').replace(/\n/g, ''),
-                    })).get()
+            const cardsConteudo = await conteudo(cardAnoPosterior);
+            console.log(cardsConteudo)
 
-            } 
-
+            
         })();
+        
 
     } else {
         (async function () {
-            situacao = status(cardAnoAtual)
-            if (situacao.includes('EM ANDAMENTO')) {
-                console.log('Em andamento')
+            const cardsConteudo = await conteudo(cardAnoAtual);
+            console.log(cardsConteudo)
 
-            }
-
+            
         })();
 
     }
