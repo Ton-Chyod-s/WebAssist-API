@@ -27,11 +27,12 @@ async function vestDigital() {
 
     const cardAnoAtual = cardAnoAnalisado(anoAtual);
     const cardAnoPosterior = cardAnoAnalisado(anoPosterior);
+    let $Status;
 
     async function status(ano) {
         try {
             const responseStatus = await axios.get(ano[0].link);
-            const $Status = cheerio.load(responseStatus.data);
+            $Status = cheerio.load(responseStatus.data);
             const cardsStatus = $Status('span.label.label-warning').map((i, item) => ({
                 texto: $Status(item).text(),
             })).get();
@@ -44,13 +45,17 @@ async function vestDigital() {
     }
 
     let situacao;
+    let cardsConteudo;
 
     // elaborar a logica para verificar se há informações para o ano posterior
     if ( cardAnoPosterior.length !== null ) {
         (async function () {
             situacao = await status(cardAnoPosterior)
             if (situacao.includes('EM ANDAMENTO')) {
-                console.log('Em andamento')
+                cardsConteudo = $Status('div[class="col-md-12"]').map(
+                    (i, item) => ({
+                        texto: $Status(item).text().replace(/\t/g, '').replace(/\n/g, ''),
+                    })).get()
 
             } 
 
