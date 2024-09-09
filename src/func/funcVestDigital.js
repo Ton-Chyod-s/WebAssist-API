@@ -86,6 +86,7 @@ async function vestDigital() {
 
 }
 
+module.exports = { vestDigital };
 
 if (require.main === module) {
     vestDigital();
