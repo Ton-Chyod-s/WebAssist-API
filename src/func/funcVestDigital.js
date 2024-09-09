@@ -1,6 +1,5 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { func } = require('./func');
 
 const anoAtual = new Date().getFullYear();
 const anoPosterior = anoAtual + 1;
