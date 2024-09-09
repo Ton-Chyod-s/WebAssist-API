@@ -9,7 +9,7 @@ const { concursoEstado } = require('./func/funcConcursoEstado')
 const { fiems } = require('./func/funcFiems');
 const { exam_region } = require('./func/funcPCI');
 // const { funcUfmsGeral } = require('./func/funcUfmsGeral');
-const { funcVestDigital } = require('./func/funcVestDigital');
+const { vestDigital } = require('./func/funcVestDigital');
 const { func } = require('./func/func');
 const { superEstagios } = require('./func/superEstagios.js');
 
@@ -85,9 +85,10 @@ async function run(nome,mail,conteudo=true,estagio=true,diario=true) {
 
 
 
-    let documentoUfmsGeral = await funcVestDigital();
+    let documentoUfmsGeral = await vestDigital();
     for ( let i in documentoUfmsGeral ) {
         const item = documentoUfmsGeral[i]
+        
         if (typeof(item) !== 'string') {
             for ( let linha in item ) {
                 listaUFMSGeral += `<p>${item[linha]}</p>`
@@ -96,6 +97,7 @@ async function run(nome,mail,conteudo=true,estagio=true,diario=true) {
             listaUFMSGeral += `<h4>${item}</h4>`
         }
     }
+
 
 
 
