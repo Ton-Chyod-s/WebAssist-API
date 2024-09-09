@@ -9,6 +9,7 @@ const { concursoEstado } = require('./func/funcConcursoEstado')
 const { fiems } = require('./func/funcFiems');
 const { exam_region } = require('./func/funcPCI');
 // const { funcUfmsGeral } = require('./func/funcUfmsGeral');
+const { funcVestDigital } = require('./func/funcVestDigital');
 const { func } = require('./func/func');
 const { superEstagios } = require('./func/superEstagios.js');
 
@@ -82,17 +83,21 @@ async function run(nome,mail,conteudo=true,estagio=true,diario=true) {
         }
     }
 
-    // let documentoUfmsGeral = await funcUfmsGeral();
-    // for ( let i in documentoUfmsGeral ) {
-    //     const item = documentoUfmsGeral[i]
-    //     if (typeof(item) !== 'string') {
-    //         for ( let linha in item ) {
-    //             listaUFMSGeral += `<p>${item[linha]}</p>`
-    //         }
-    //     } else {
-    //         listaUFMSGeral += `<h4>${item}</h4>`
-    //     }
-    // }
+
+
+    let documentoUfmsGeral = await funcVestDigital();
+    for ( let i in documentoUfmsGeral ) {
+        const item = documentoUfmsGeral[i]
+        if (typeof(item) !== 'string') {
+            for ( let linha in item ) {
+                listaUFMSGeral += `<p>${item[linha]}</p>`
+            }
+        } else {
+            listaUFMSGeral += `<h4>${item}</h4>`
+        }
+    }
+
+
 
     for (let i in documentoGeradoSeges) {
         const concurso = i
@@ -161,18 +166,18 @@ async function run(nome,mail,conteudo=true,estagio=true,diario=true) {
             
         }
 
-        // for ( let i in documentoGeradoUFMS ) {
-        //     const item = documentoGeradoUFMS[i]
-        //     if (typeof(item) !== 'string') {
-        //         for ( let linha in item ) {
-        //             if ( !item[linha].includes('Chamada de candidatos para matrícula - Concluida.') ) {
-        //                 listaUFMS += `<p>${item[linha]}</p>`
-        //             }
-        //         }
-        //     } else {
-        //         listaUFMS += `<h4>${item}</h4>`
-        //     }
-        // }
+        for ( let i in documentoGeradoUFMS ) {
+            const item = documentoGeradoUFMS[i]
+            if (typeof(item) !== 'string') {
+                for ( let linha in item ) {
+                    if ( !item[linha].includes('Chamada de candidatos para matrícula - Concluida.') ) {
+                        listaUFMS += `<p>${item[linha]}</p>`
+                    }
+                }
+            } else {
+                listaUFMS += `<h4>${item}</h4>`
+            }
+        }
     }
 
     for ( let i  in documentoGeradofapec ) {
@@ -327,7 +332,7 @@ async function run(nome,mail,conteudo=true,estagio=true,diario=true) {
             </div>
         </p>
         
-        <h3>❕ Noticias UFMS-Ingresso</h3>
+        <h3>❕ Noticias UFMS-Vestibular Digital</h3>
         <p>
             <div id="cards">
                 ${listaUFMSGeral}
