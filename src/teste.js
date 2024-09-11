@@ -1,4 +1,4 @@
-const { vestDigital } = require('./func/funcVestDigital');
+const { vestDigital } = require('./func/funcVestDigital.js');
 
 (async function() {
     let documentoUfmsGeral = await vestDigital();

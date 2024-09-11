@@ -67,18 +67,14 @@ async function vestDigital() {
     if ( cardAnoPosterior.length > 0 ) {
         (async function () {
             const cardsConteudo = await conteudo(cardAnoPosterior);
-            console.log(cardsConteudo)
-
-            
+            return cardsConteudo;
         })();
         
 
     } else {
         (async function () {
             const cardsConteudo = await conteudo(cardAnoAtual);
-            console.log(cardsConteudo)
-
-            
+            return cardsConteudo;
         })();
 
     }
@@ -88,5 +84,8 @@ async function vestDigital() {
 module.exports = { vestDigital };
 
 if (require.main === module) {
-    vestDigital();
+    (async function() {
+        console.log(await vestDigital());
+    })();
+    
 }
