@@ -37,8 +37,20 @@ async function fapec() {
         if (elementSplit.length >= 3) {
             const dataConcurso = elementSplit[2];
             const lol = dataConcurso.split(' ')
+            let diaConcurso;
+            let mesConcurso;
+            let anoConcurso;
 
-            const [diaConcurso, mesConcurso, anoConcurso] = dataConcurso.split('/').map(Number);
+            for (let i = 0; i < lol.length; i++) {
+                const data = lol[i];
+                if ( data.includes('/') ) {
+                    const dataSplitada = data.split('/')
+                    diaConcurso = dataSplitada[0];
+                    mesConcurso = dataSplitada[1];
+                    anoConcurso = dataSplitada[2];
+                }
+                
+            }
 
             if (anoConcurso === ano && mesConcurso === Number(mes) && diaConcurso >= Number(dia)) {
                 dictFapec[`${elementSplit[0]}`] = {
