@@ -83,8 +83,6 @@ async function run(nome,mail,conteudo=true,estagio=true,diario=true) {
         }
     }
 
-
-
     let documentoUfmsGeral = await vestDigital();
     for ( let i in documentoUfmsGeral ) {
         const item = documentoUfmsGeral[i]
@@ -97,9 +95,6 @@ async function run(nome,mail,conteudo=true,estagio=true,diario=true) {
             listaUFMSGeral += `<h4>${item}</h4>`
         }
     }
-
-
-
 
     for (let i in documentoGeradoSeges) {
         const concurso = i
