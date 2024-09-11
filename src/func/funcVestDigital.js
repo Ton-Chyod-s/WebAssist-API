@@ -50,10 +50,11 @@ async function vestDigital() {
         }
     }
 
-    let cardsConteudo;
+    let cardsConteudo = [];
 
     async function conteudo(ano) {
         const situacao = await status(ano)
+        
         if (situacao.includes('EM ANDAMENTO')) {
             cardsConteudo = $Status('div[class="col-md-12"]').map(
                 (i, item) => ({
@@ -67,9 +68,10 @@ async function vestDigital() {
             }
         }
 
+        cardsConteudo['site'] = site;
         return cardsConteudo;
     }
-
+    
     // Escolhe o conjunto de dados a ser analisado
     const anoEscolhido = cardAnoPosterior.length > 0 ? cardAnoPosterior : cardAnoAtual;
     return await conteudo(anoEscolhido);

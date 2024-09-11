@@ -1,8 +1,8 @@
 const { vestDigital } = require('./func/funcVestDigital.js');
+let listaUFMSGeral;
 
 (async function() {
     let documentoUfmsGeral = await vestDigital();
-    console.log(documentoUfmsGeral)
 
     for ( let i in documentoUfmsGeral ) {
         const item = documentoUfmsGeral[i]
@@ -15,6 +15,8 @@ const { vestDigital } = require('./func/funcVestDigital.js');
             listaUFMSGeral += `<h4>${item}</h4>`
         }
     }
+
+    console.log(listaUFMSGeral)
 })();
 
 
