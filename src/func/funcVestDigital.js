@@ -8,7 +8,13 @@ async function vestDigital() {
     const site = "https://ingresso.ufms.br/processo/vestibular-ufms-digital/"
     let response;
 
-    response = await axios.get(site);
+    try {
+        response = await axios.get(site);
+    } catch (error) {
+        console.error('Error fetching the main page:', error);
+        return [];
+    }
+
     const $ = cheerio.load(response.data)
     const cards = $('div[class="btn-group"]').map(
         (i, item) => ({
@@ -26,6 +32,7 @@ async function vestDigital() {
 
     const cardAnoAtual = cardAnoAnalisado(anoAtual);
     const cardAnoPosterior = cardAnoAnalisado(anoPosterior);
+
     let $Status;
 
     async function status(ano) {
@@ -43,11 +50,10 @@ async function vestDigital() {
         }
     }
 
-    let situacao;
     let cardsConteudo;
 
     async function conteudo(ano) {
-        situacao = await status(ano)
+        const situacao = await status(ano)
         if (situacao.includes('EM ANDAMENTO')) {
             cardsConteudo = $Status('div[class="col-md-12"]').map(
                 (i, item) => ({
@@ -64,20 +70,9 @@ async function vestDigital() {
         return cardsConteudo;
     }
 
-    if ( cardAnoPosterior.length > 0 ) {
-        (async function () {
-            const cardsConteudo = await conteudo(cardAnoPosterior);
-            return cardsConteudo;
-        })();
-        
-
-    } else {
-        (async function () {
-            const cardsConteudo = await conteudo(cardAnoAtual);
-            return cardsConteudo;
-        })();
-
-    }
+    // Escolhe o conjunto de dados a ser analisado
+    const anoEscolhido = cardAnoPosterior.length > 0 ? cardAnoPosterior : cardAnoAtual;
+    return await conteudo(anoEscolhido);
 
 }
 
@@ -87,5 +82,4 @@ if (require.main === module) {
     (async function() {
         console.log(await vestDigital());
     })();
-    
 }
