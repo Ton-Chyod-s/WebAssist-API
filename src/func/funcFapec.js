@@ -48,11 +48,14 @@ async function fapec() {
                     diaConcurso = dataSplitada[0];
                     mesConcurso = dataSplitada[1];
                     anoConcurso = dataSplitada[2];
+                    if ( diaConcurso >= dia ) {
+                        break;
+                    }
                 }
                 
             }
 
-            if (anoConcurso === ano && mesConcurso === Number(mes) && diaConcurso >= Number(dia)) {
+            if (Number(anoConcurso) === ano && mesConcurso === mes && diaConcurso >= dia ) {
                 dictFapec[`${elementSplit[0]}`] = {
                     cargo: elementSplit[1] || 'N/A',
                     tempo: elementSplit[2] || 'N/A'
