@@ -31,10 +31,13 @@ async function fapec() {
 
         if (element === '') return;
 
-        const elementSplit = element.split(' – ').join('-').split('-');
+        const elementSplitReplace = element.replace(' -', '-');
+        const elementSplit = elementSplitReplace.split(' – ').join('-').split('-');
 
         if (elementSplit.length >= 3) {
-            const dataConcurso = elementSplit[0];
+            const dataConcurso = elementSplit[2];
+            const lol = dataConcurso.split(' ')
+
             const [diaConcurso, mesConcurso, anoConcurso] = dataConcurso.split('/').map(Number);
 
             if (anoConcurso === ano && mesConcurso === Number(mes) && diaConcurso >= Number(dia)) {
