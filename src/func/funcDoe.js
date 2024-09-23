@@ -52,7 +52,7 @@ async function DOE(nome) {
         dictDoe['erro!'] = `Lamento informar que não foram encontrados Diários Oficiais Eletrônicos (DOEs) associados ao seu nome até a presente data.`;
 
     } 
-
+    
     await browser.close();
     return dictDoe;
 }

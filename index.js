@@ -1,14 +1,14 @@
-const { DOE } = require('./src/funcDoe');
-const { DIOGrande } = require('./src/funcDioGrande');
-const { fapec } = require('./src/funcFapec');
-const { concursoEstado } = require('./src/funcConcursoEstado');
-const { Exercito } = require('./src/funcExercito');
-const { UFMS } = require('./src/funcUfms');
-const { seges } = require('./src/funcSeges');
-const { fiems } = require('./src/funcFiems');
-const { exam_region } = require('./src/funcPCI');
-const { funcUfmsGeral } = require('./src/funcUfmsGeral');
-const { superEstagios } = require('./src/superEstagios');
+const { DOE } = require('./src/func/funcDoe');
+const { DIOGrande } = require('./src/func/funcDioGrande');
+const { fapec } = require('./src/func/funcFapec');
+const { concursoEstado } = require('./src/func/funcConcursoEstado');
+const { Exercito } = require('./src/func/funcExercito');
+const { UFMS } = require('./src/func/funcUfms');
+const { seges } = require('./src/func/funcSeges');
+const { fiems } = require('./src/func/funcFiems');
+const { exam_region } = require('./src/func/funcPCI');
+const { funcUfmsGeral } = require('./src/func/funcUfmsGeral');
+const { superEstagios } = require('./src/func/superEstagios');
 
 const express = require('express');
 const server = express();
