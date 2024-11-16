@@ -80,7 +80,7 @@
     "fd-slicer": "^1.1.0",
     "finalhandler": "^1.2.0",
     "follow-redirects": "^1.15.6",
-    "form-data": "^4.0.0",
+    "form-data": "^4.0.1",
     "forwarded": "^0.2.0",
     "fresh": "^0.5.2",
     "fs-extra": "^11.2.0",
