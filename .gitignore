@@ -14,3 +14,4 @@ __pycache__
 src refactore
 node_modules/https/package.json
 .env.testing
+.env.exemplo
